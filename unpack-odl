@@ -1,3 +1,8 @@
 #!/bin/bash
 
-tar -xzf images/*
+./stop-odl
+echo "Removing current ODL"
+rm -rf ./distribution/*
+echo "Unpacking ODL.."
+tar -xzf images/*.tar.gz -C ./distribution
+mv ./distribution/* ./distribution/odl

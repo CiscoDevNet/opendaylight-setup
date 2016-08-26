@@ -1,7 +1,14 @@
 #!/bin/bash
 source ./parameters
 echo $DISTRO
-$DISTRO/bin/stop
+STOP_CMD="$DISTRO/bin/stop"
+
+if [ -f "$STOP_CMD" ]; then
+        $STOP_CMD
+else
+        echo "ODL hasn't been unpacked."
+        exit 1
+fi
 
 while true;
 do

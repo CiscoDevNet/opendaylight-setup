@@ -1,0 +1,4 @@
+images/*
+distribution/*
+*.log
+!.gitignore
