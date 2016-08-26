@@ -1,3 +1,5 @@
+DISTRIBUTION_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/opendaylight.snapshot/org/opendaylight/integration/distribution-karaf/0.6.0-SNAPSHOT/distribution-karaf-0.6.0-20160826.211023-360.tar.gz'
+
 DISTRO=distribution/odl
 
 ODL_USER=admin
