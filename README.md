@@ -4,6 +4,10 @@ This directory contains setup scripts for ODL.
 Start with a Linux host or VM with git and java installed (at a minimum - ideally mininet, openconnect, pip, pyang etc. too, depending on what features you plan to test).
 Installation Instructions:
 
+0.  Setup your local environment with script:
+
+  bin/setup-env
+
 1.  Clone this repo:
 
   git clone https://github.com/kevinxw/opendaylight-setup.git ODL
