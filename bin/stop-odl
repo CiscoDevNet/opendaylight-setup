@@ -1,6 +1,8 @@
 #!/bin/bash
-source ./parameters
-echo $DISTRO
+
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
+
 STOP_CMD="$DISTRO/bin/stop"
 
 if [ -f "$STOP_CMD" ]; then
@@ -10,6 +12,7 @@ else
         exit 1
 fi
 
+echo "Stopping ODL."
 while true;
 do
         up=$(/bin/ps -ef | grep karaf | wc -l)
@@ -18,8 +21,8 @@ do
                 echo "ODL has stopped"
                 exit 0
         else
-                echo "waiting for ODL to stop"
-                sleep 5
+                printf "."
+		sleep 2
         fi
 done
 

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
+
+bash $APP_ROOT/bin/delete-odl
+
+echo "Unpacking ODL.."
+tar -xzf $APP_ROOT/images/*.tar.gz -C $DISTRO_ROOT
+mv $DISTRO_ROOT/* $DISTRO

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
+
+if [ "$1" == "release" ]; then
+	version="$DISTRIBUTION_RELEASE_DOWNLOAD_URL"
+elif [ "$1" == "snapshot" ]; then
+	version="$DISTROBUTION_SNAPSHOT_DOWNLOAD_URL"
+else
+	echo "Usage: $0 snapshot|release"
+	exit 1
+fi
+
+rm -rf "$APP_ROOT/images"
+mkdir -p "$APP_ROOT/iamges"
+
+echo "Downloading $version"
+wget -P "$APP_ROOT/images" "$version"
+

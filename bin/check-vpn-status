@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -e ">> Tunnel info should be displayed if VPN is up\n"
+
+ifconfig dcloud-tun

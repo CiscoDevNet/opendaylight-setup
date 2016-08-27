@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./parameters
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
 
 mkdir -p $DISTRO/etc/opendaylight/karaf
 
@@ -8,7 +9,7 @@ if grep -q "1MB" $DISTRO/etc/org.ops4j.pax.logging.cfg;
 then
 	echo "configuring logging and features"
 	sed -i 's/1MB/10000MB/' $DISTRO/etc/org.ops4j.pax.logging.cfg
-	cat logs >> $DISTRO/etc/org.ops4j.pax.logging.cfg 	
+	cat $APP_ROOT/log4j.conf >> $DISTRO/etc/org.ops4j.pax.logging.cfg 	
 
 	# add features
 	sed -i '/^featuresBoot=/ s/$/,'$FEATURES'/' $DISTRO/etc/org.apache.karaf.features.cfg

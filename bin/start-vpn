@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
+source $PARENT_DIR/vpn_credential
+
+if [[ -z "$DCLOUD_VPN_SITE" || -z "$DCLOUD_VPN_USRNAME" || -z "$DCLOUD_VPN_PASSWD" ]]; then
+	show_usage 
+fi
+
+show_usage() {
+	echo "Please configure the vpn_credential file"
+	exit 1
+}
+
+echo "Starting VPN.. Please wait. Check vpn.log for output"
+echo $DCLOUD_VPN_PASSWD | sudo openconnect -u $DCLOUD_VPN_USRNAME -b --pid-file=${DCLOUD_VPN_PID} -i dcloud-tun --passwd-on-stdin https://dcloud-${DCLOUD_VPN_SITE}-anyconnect.cisco.com > $APP_ROOT/logs/vpn.log 2>&1 
+

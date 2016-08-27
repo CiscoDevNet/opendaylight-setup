@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source ./parameters
+
+if [ -f "$DCLOUD_VPN_PID" ]; then
+	pid=$(cat "${DCLOUD_VPN_PID}")
+else
+	pid=$(pidof openconnect)
+fi
+
+if [ ! -z "$pid" ]; then sudo kill -9 $pid; fi
+

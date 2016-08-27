@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
+
+bash $APP_ROOT/bin/stop-odl
+rm -rf $DISTRO_ROOT/*

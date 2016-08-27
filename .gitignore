@@ -1,5 +1,4 @@
 images/*
 distribution/*
-vpn_credential
 *.log
 !.gitignore

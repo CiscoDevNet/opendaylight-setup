@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ./parameters
+PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
+source $PARENT_DIR/parameters
+
 rm -rf $DISTRO/data
 rm -rf $DISTRO/etc/opendaylight/current
 rm -rf $DISTRO/cache
@@ -9,6 +11,7 @@ rm -rf $DISTRO/snapshots
 rm -rf $DISTRO/instances
 
 source $DISTRO/bin/setenv
+export KARAF_OPTS=-Dorg.apache.sshd.registerBouncyCastle=false
 $DISTRO/bin/start
 
 while true;
@@ -16,7 +19,7 @@ do
 	up=$(netstat -an | grep 127.0.0.1:1830 | wc -l)
 	if [ $up == 2 ]
 	then
-		echo "ODL is nearly ready"
+		printf ">"
 		break
 	else
 		echo "ODL is starting"
@@ -26,13 +29,13 @@ done
 
 while true;
 do
-	ready=$(curl http://admin:admin@localhost:8181/restconf/operational/network-topology:network-topology/topology/topology-netconf/node/controller-config 2>&1)
+	ready=$(curl http://${ODL_USER}:${ODL_PASS}@localhost:8181/restconf/operational/network-topology:network-topology/ 2>&1)
 	if echo $ready | grep -q "connected";
 	then
 		echo "ODL is ready!"
 		exit 0
 	else
-		echo "ODL is almost ready"
+		echo ">>"
 		sleep 5
 	fi
 done
