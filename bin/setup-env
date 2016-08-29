@@ -1,4 +1,5 @@
 #!/bin/bash
 
+echo "Install system environment requirements"
 sudo apt-get update
-sudo apt-get install -y python-requests openconnect openjdk-8-jre zip
+sudo apt-get install -y openconnect openjdk-8-jre

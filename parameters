@@ -27,4 +27,4 @@ PORT_PREFIX=90
 DCLOUD=YES
 DCLOUD_VPN_PID='/var/run/dcloud-vpn.pid'
 
-FEATURES=odl-dlux-all,odl-restconf-all,odl-netconf-all,odl-bgpcep-bgp-all,odl-bgpcep-pcep-all,odl-netconf-connector-all
+FEATURES=odl-mdsal-apidocs,odl-bgpcep-bgp,odl-bgpcep-pcep
