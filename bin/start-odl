@@ -14,18 +14,7 @@ source $DISTRO/bin/setenv
 export KARAF_OPTS=-Dorg.apache.sshd.registerBouncyCastle=false
 $DISTRO/bin/start
 
-while true;
-do
-	up=$(netstat -an | grep 127.0.0.1:1830 | wc -l)
-	if [ $up == 2 ]
-	then
-		printf ">"
-		break
-	else
-		echo "ODL is starting"
-		sleep 5
-	fi 
-done
+echo "ODL is starting"
 
 while true;
 do

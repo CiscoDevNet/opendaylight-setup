@@ -2,8 +2,8 @@
 
 REPO_URL='https://github.com/kevinxw/opendaylight-setup.git'
 
-apt-get -qq update
-echo Y | apt-get -qq install git
+sudo apt-get update
+sudo apt-get install -y git
 git clone -q ${REPO_URL} ODL
 cd ODL
 ./bin/setup-env

@@ -1,12 +1,10 @@
 # opendaylight-setup
 This directory contains setup scripts for ODL.
 
-Start with a Linux host or VM with git and java installed (at a minimum - ideally mininet, openconnect, pip, pyang etc. too, depending on what features you plan to test).
+Start with a Linux host or VM with git installed (at a minimum).  Ubuntu 14.04 is recommended.  You can also choose to use other version of Linux if you wish.
+However, you may want to turn a few scripts such as bin/setup-env to make them work on your version of Linux.
+
 Installation Instructions:
-
-0.  Setup your local environment with script:
-
-  bin/setup-env
 
 1.  Clone this repo:
 
@@ -14,13 +12,17 @@ Installation Instructions:
 
 2.  Download the appropriate OpenDaylight distribution file (.tar.gz) from https://www.opendaylight.org/downloads (or other location) to images directory:
 
-  Example: (Assumes you are downloading the "0.3.3-Lithium-SR3" release.)
+  Example: (Assumes you are downloading the "Beryllium-SR3" release.)
 
-  wget -P images https://nexus.opendaylight.org/content/groups/public/org/opendaylight/integration/distribution-karaf/0.3.3-Lithium-SR3/distribution-karaf-0.3.3-Lithium-SR3.tar.gz
+  wget -P images https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz
 
     Optionally, you can use the script provided to download default ODL version:
-    bin/download_distro release   # to download the latest release version
-    bin/download_distro snapshot    # to download the lastest snapshot version
+
+    * to download the latest release version (recommended):
+    bin/download_distro release
+
+    * to download the lastest snapshot version:
+    bin/download_distro snapshot
 
 3.  Unpack ODL using
 
@@ -58,6 +60,7 @@ Installation Instructions:
 
   You can find a list of all other routers avaiable in the nodes file
 
+## Vagrant
  
 The repository also contains a subdirectory "vagrant" which contains a Vagrantfile and bootstrap.sh script.
 
