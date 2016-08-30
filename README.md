@@ -93,7 +93,7 @@ If you have Vagrant and VirtualBox or VMWare Workstation/Fusion installed you ca
 
 Note that the Vagrantfile is currently configured to allocate 2 vCPUs and 8GB of RAM to the VM.   If your machine only has 8GB of RAM then you may wish to allocate 4GB of RAM.  Likewise if you only have 2 CPU cores you may wish to allocate 1 vCPU.   Equally if you want to use a different hypervisor you will need to edit the Vagrantfile.
 
-### Scripts are:
+## Scripts Included
 
 **config-odl** sets up logging/features for ODL
 
@@ -119,7 +119,7 @@ Note that the Vagrantfile is currently configured to allocate 2 vCPUs and 8GB of
 
 **karaf-client** shortcut to access karaf console
 
-### Additional files are:
+## Additional Files
 
 **parameters** parameters - encoded as environment vars:
 
@@ -132,6 +132,6 @@ Note that the Vagrantfile is currently configured to allocate 2 vCPUs and 8GB of
 * DCLOUD (YES or NO)
 * FEATURES (list of features to add to ODL's default set)
 
-**logs** extra logs to activate
+**log4j.conf** log4j configuration, used to override ODL's default log4j config
 
 **nodes** list of router nodes exist in dCloud (each line consists of a node name which indicating site name and node IP address)
