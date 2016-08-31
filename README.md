@@ -56,6 +56,8 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
   You want to do this step everytime you changed the *parameters* file or *log4j.conf* file.
    
 7. Change *vpn\_credential* file to reflect your dCloud credential
+
+   * There is a *vpn_credential.example* file in root directory. You should copy that file with command `cp vpn_credential.example vpn_credential` and then change the parameters in *vpn_credential* file.
 	
 	* *DCLOUD\_VPN\_SITE* is one of *rtp*, *lon*, *sng* or *chi*. For North America, by default the site is *rtp*.
 	* username and password can be found in your dCloud session details
@@ -74,7 +76,7 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
 
   ```
   source ./parameters
-  telnet $BGP\_PEER
+  telnet $BGP_PEER
   ```
 
   You can find a list of all other routers avaiable in the *nodes* file

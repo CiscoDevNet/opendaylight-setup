@@ -1,5 +1,6 @@
 images/*
 distribution/*
+vpn_credential
 *.log
 *.swp
 !.gitignore
