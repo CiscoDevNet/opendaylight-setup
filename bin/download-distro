@@ -3,6 +3,15 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
+while true; do
+    read -p "Existing distros under images folder will be removed before downloading new distro. Please backup the existing distro if you want to. Do you want to continue? " yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 if [[ $? == 0 || "$1" == "release" ]]; then
 	version="$DISTRIBUTION_RELEASE_DOWNLOAD_URL"
 elif [ "$1" == "snapshot" ]; then
