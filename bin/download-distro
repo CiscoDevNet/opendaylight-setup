@@ -24,6 +24,6 @@ fi
 rm -rf "$APP_ROOT/images"
 mkdir -p "$APP_ROOT/iamges"
 
-echo "Downloading $version"
-wget -P "$APP_ROOT/images" "$version"
-
+echo "Downloading ODL $version distro.."
+wget -nv -P "$APP_ROOT/images" "$version"
+echo "ODL distro downloaded!"

@@ -7,8 +7,8 @@ This project is forked from [CiscoDevNet](https://github.com/CiscoDevNet/openday
 ## Preparation
 * Start with a Linux host or VM with git installed (at a minimum).  Vim is also recommended for editing ODL config files, but it's up to your needs. 
 
- > **Ubuntu 14.04** or **Ubuntu 16.10** is recommended.  You can also choose to use other version of Linux if you wish.
-However, you may want to tweak a few scripts such as `bin/setup-env` to make them work on your version of Linux.
+ > **Ubuntu 14.04** is recommended, as it has been well tested on.  You can also choose to use other version of Linux if you wish.
+However, you may want to tweak a few scripts such as `bin/setup-env` to make them work on your version of Linux.  OpenDayLight **may not may** not work properly on other Linux distribution.
 
 * Clone this repo to a working directory:
 
@@ -85,7 +85,7 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
  
 The repository also contains a subdirectory *vagrant* which contains a Vagrantfile and bootstrap.sh script.
 
-If you have Vagrant and VirtualBox or VMWare Workstation/Fusion installed you can do a "vagrant up" from that directory and a VirtualBox VM will be created consisting of:
+If you have [Vagrant](https://www.vagrantup.com/downloads.html) and VirtualBox or VMWare Workstation/Fusion installed you can do a "vagrant up" from that directory and a VirtualBox VM will be created consisting of:
 
 * Ubuntu 14.04
 * git
