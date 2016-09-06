@@ -26,6 +26,7 @@ fi
 rm -rf "$APP_ROOT/images"
 mkdir -p "$APP_ROOT/iamges"
 
-echo "Downloading ODL $version distro.."
+echo "Downloading ODL distro from $version .."
+echo "Please wait patiently, it may take a while"
 wget -nv -P "$APP_ROOT/images" "$version"
 echo "ODL distro downloaded!"
