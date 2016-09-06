@@ -1,5 +1,6 @@
-images/*
-distribution/*
+.DS_Store
+images
+distribution
 vpn_credential
 *.log
 *.swp

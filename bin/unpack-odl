@@ -17,5 +17,7 @@ fi
 tar -xzf "$IMAGE_LOCATION" -C $DISTRO_ROOT
 
 if [ ! -z "$DISTRO_ROOT" ]; then
+	# in case we move the / when DISTRO_ROOT is empty
+	mkdir -p $DISTRO_ROOT
 	mv -f $DISTRO_ROOT/* $DISTRO
 fi
