@@ -12,9 +12,9 @@ computing environment connected to Cisco Virtual Internet Routing Lab
 (VIRL) based network simulation running in Cisco dCloud environment,
 over Anyconnect VPN
 
-![Network Topology](./media/image1.png)
+![Network Topology](./images/image1.png)
 
-![Componets](./media/image2.png)
+![Componets](./images/image2.png)
 
 ## Start Cisco dCloud environment
 
@@ -25,55 +25,52 @@ Follow below steps to launch the network simulation
 1.  Open <https://dcloud.cisco.com/> in your browser and click on
     **Login** button
     
-	![](./media/image3.png)
+	![](./images/image3.png)
 	
 2.  If you already have a Cisco account, login using that and start [scheduling a ODL lab](#schedule)
-	![](./media/image4.png)
+	![](./images/image4.png)
 	
 	> Optionally click on **Register Now** button to get a free account
     
 	> Enter required details and create new account. Login to dCloud
     portal using the new account details
 
-	> ![](./media/image5.png)
+	> ![](./images/image5.png)
 
 ### <a name="schedule">Find and schedule the OpenDaylight lab</a>
 
 1.  Navigate to **Dashboard** **My Sessions** and click on **find
     content**
 
-	![](./media/image6.png)
+	![](./images/image6.png)
 
-2.  Search Catalog for “OpenDaylight Beryllium SR2 with Apps with 8
-    Nodes v1”
+2.  Search Catalog for “OpenDaylight Beryllium SR2 with Apps with 8 Nodes v1”
 
-	![](./media/image7.png)
+	![](./images/image7.png)
 
 3.  Click on **Schedule** button of the lab displayed
 
-	![](./media/image8.png)
+	![](./images/image8.png)
 	
-4.  Click on **Now** button. By default, the scheduled duration will be
-    4 hours. Adjust the end time for the desired duration **(min. 5
-    hours recommended)**. Go to bottom of page and click on **Next**
+4.  Click on **Now** button. By default, the scheduled duration will be 4 hours. Adjust the end time for the desired duration **(min. 5 hours recommended)**. Go to bottom of page and click on **Next**
 
-	![](./media/image9.png)
+	![](./images/image9.png)
 
 5.  Enter the drop-down values appropriately and click on **Schedule**
 
-	![](./media/image10.png)
+	![](./images/image10.png)
 
 6.  The session should start within few minutes
 
-	![](./media/image11.png)
+	![](./images/image11.png)
 
 7.  Click on **View** button to see session details
 
-	![](./media/image12.png)
+	![](./images/image12.png)
 
 8.  Click on **Details** tab and note down the Anyconnect details, which will be used when connecting Controller VM to the dCloud environment
 
-	![](./media/image13.png)
+	![](./images/image13.png)
 
 ## Setup Controller VM
 
@@ -128,11 +125,7 @@ the one which is best suited for your environment
 1.  This method requires Vagrant and Virtual Box to be pre-installed on
     your laptop. Install them if you don’t have them already
 
-2.  Copy Vagrant folder from
-    <https://github.com/kevinxw/opendaylight-setup/tree/master/vagrant>
-    (final repo URL TBD) into a local folder on your laptop (needs
-    update – should launch a Desktop version, default credentials should
-    be `odlsummit`/`odlsummit`)
+2.  Copy *vagrant* folder from [this repository](../../vagrant) to a local folder on your laptop
 
 3.  Open a terminal and cd to the local folder directory
 
@@ -143,16 +136,16 @@ the one which is best suited for your environment
     access Desktop)
 
 6.  ODL setup scripts will be available under */home/odlsummit/ODL*
-    directory and OpenDaylight Controller (default: Beryllium
-    SR3 version) will be installed under
+    directory and OpenDaylight Controller (default: Beryllium SR3 version) will be installed under
     */home/odlsummit/ODL/distribution-karaf-0.4.3-Beryllium-SR3* directory
 
 ### <a name="vanilla_vm">Use any vanilla VM and configure manually</a>
 
-1.  Ubuntu (recommend 14.04) or CentOS VM with any recent version can be used to host the
-    ODL Controller.
+1.  You need to prepare Ubuntu 14.04 or CentOS 7 VM to host the ODL Controller.  
+   
+    > * If you do not want to use Ubuntu or CentOS, remember ODL **may or may not** work properly with other versions of operating system, so try them at your own risk.
     
-    > Minimum specs are 2 CPU, 4 GB RAM and 20 GB of free
+    > * Minimum specs are 2 CPU, 4 GB RAM and 20 GB of free
     disk space
 
 2.  Login to your VM and install git package using appropriate commands
@@ -184,26 +177,26 @@ instructors to debug the issue, before proceeding further
 
 1.  Go to dCloud session details page and click on Workstation icon
 
-	![](./media/image14.png)
+	![](./images/image14.png)
 
 2.  Use the listed IP address and credentials with a local RDP client,
     or use the Remote Desktop web-client link provided to access the
     Workstation desktop. Chrome browser should open automatically with 3
     tabs, one of them being the status page with Launch Progress
 
-	![](./media/image15.png)
+	![](./images/image15.png)
 
 3.  Lab is fully initialized when steps 1 through 9 show up in
     green color. It may take up to 30 minutes for this to happen
 
-	![](./media/image16.png)
+	![](./images/image16.png)
 
 ### Verification of Controller VM
 
 1.  In Controller VM terminal, execute command ps -ef |grep karaf. It
     should display one entry showing the Controller process
 
-	![](./media/image17.png)
+	![](./images/image17.png)
 
 ### Verification of connectivity between dCloud network simulation and Controller VM
 
@@ -214,4 +207,4 @@ instructors to debug the issue, before proceeding further
 2.  Ping IP address of SJC XRv router using command `source ./parameters
     && ping $BGP_PEER` and it should return success
 
-	![](./media/image18.png)
+	![](./images/image18.png)

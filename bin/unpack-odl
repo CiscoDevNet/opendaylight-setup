@@ -9,12 +9,14 @@ IMAGE_LOCATION="$APP_ROOT/images/*.tar.gz"
 
 echo "Unpacking ODL.."
 
-if [ ! -f "$IMAGE_LOCATION" ]; then
+IMAGE_FILE="$(ls $IMAGE_LOCATION 2>/dev/null)"
+
+if [ -z "$IMAGE_FILE" ]; then
 	echo "There is no distro exists under images directory"
 	exit 1
 fi
 
-tar -xzf "$IMAGE_LOCATION" -C $DISTRO_ROOT
+tar -xzf "$IMAGE_FILE" -C $DISTRO_ROOT
 
 if [ ! -z "$DISTRO_ROOT" ]; then
 	# in case we move the / when DISTRO_ROOT is empty

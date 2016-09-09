@@ -24,7 +24,7 @@ do
 		echo "ODL is ready!"
 		exit 0
 	else
-		echo ">>"
+		echo ">> waiting for RESTCONF.."
 		sleep 5
 	fi
 done

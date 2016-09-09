@@ -24,7 +24,6 @@ else
 fi
 
 rm -rf "$APP_ROOT/images"
-mkdir -p "$APP_ROOT/iamges"
 
 echo "Downloading ODL distro from $version .."
 echo "Please wait patiently, it may take a while"

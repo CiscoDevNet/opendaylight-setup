@@ -1,0 +1,43 @@
+
+# Configure Postman
+Postman is a free tool helping user generate HTTP requests. This guide introduces the basic steps to set up the Postman for accessing ODL Restconf.
+
+## Install Postman
+You will need to go to [Postman's official website](https://www.getpostman.com) to download it.  There are multiple versions available on the website.  Choose the one suites your need most.
+
+It is recommend to install the [Postman as Chrome App](https://chrome.google.com/webstore/detail/postman-rest-client/fhbjgbiflinjbdggehcddcbncdddomop), as it is platform unrelated.
+
+After downloading Postman, you either choose to sign up an account or start to use it immediately.
+
+![Sign up screen](./images/postman/signup.png)
+
+## Import BGPCEP Postman Collection
+You can custom your own HTTP request with Postman.  To save your time, we provide a complete BGPCEP Postman collection with this repository.  The collection can be found under [postman-collection folder](../../postman-collection).
+
+There are two files provided:
+
+ * [bgpcep.collection.json](../../postman-collection/bgpcep.collection.json) is a HTTP request collection containing most of the HTTP requests related to OpenDayLight BGP/PCEP project.
+ 
+ * [bgpcep.postman_environment.json](../../postman-collection/bgpcep.postman_environment.json) is a Postman environment file pairing with the *bgpcep.collection.json* .  It is used to configure the environment variables of HTTP requests.
+
+To import the two files, click on the **Import** button on the top-left corner of Postman.
+
+![Import button](./images/postman/import.png) 
+
+After importing, you should be able to see a collection of BGP/PCEP HTTP requests listed.
+
+![After Import](./images/postman/after-import.png)
+
+## Change Postman Environment Variables
+To start to use the provided Postman BGP/PCEP collection, you will need to change the environment variables first.
+
+Find the **gear** button on the top-right corner of Postman, click on it and you will see a list of all the available environments.
+
+![Gear button](./images/postman/env-gear.png)
+
+![Environment List](./images/postman/env-list.png)
+
+Choose the BGP/PCEP one which you just imported and change the variables to meet your needs.  Then click on **Update**.
+
+![Gear button](./images/postman/env-var.png)
+

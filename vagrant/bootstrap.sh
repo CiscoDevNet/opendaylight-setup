@@ -9,5 +9,7 @@ cd ODL
 cd ..
 sudo apt-get install -y vim
 chown -R vagrant:vagrant *
+# now create a shortcut to Desktop
+ln -s $(pwd)/ODL $(pwd)/Desktop/ODL
 echo "ready!"
 echo "please change parameters to reflect your setting ups"

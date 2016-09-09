@@ -12,14 +12,23 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  # here we use the desktop version of ubuntu
+  config.vm.box = "box-cutter/ubuntu1404-desktop"
+  # uncomment the following line if you wish to use ubuntu server version (without gui)
+  # config.vm.box = "ubuntu/trusty64"
   config.vm.provision :shell, path: "bootstrap.sh"
 
-  config.vm.network "private_network", type: "dhcp"  
+  config.vm.network "private_network", type: "dhcp"
+
+  # enable X forwarding in case user wants X-display with 'vagrant -Y ssh'
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
   
   config.vm.provider "virtualbox" do |v|
     v.memory = 4096 
     v.cpus = 2
+    # comment out the following line to disable gui
+    v.gui = true
   end
   config.vm.provider "vmware_fusion" do |v|
     v.vmx["memsize"] = "4096"
