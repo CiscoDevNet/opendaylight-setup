@@ -61,6 +61,9 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
 	
 	* *DCLOUD\_VPN\_SITE* is one of *rtp*, *lon*, *sng* or *chi*. For North America, by default the site is *rtp*.
 	* username and password can be found in your dCloud session details
+	* You can find your dCloud credential under the **Session Details** of the dCloud dashboard.  Click on the **Workstation** icon to reveal it.
+
+	![Session Details](docs/tutorial/images/dcloud/session-details.png)
 
 	(note that your unix account will need sudo privileges)
 

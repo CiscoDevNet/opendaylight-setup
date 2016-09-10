@@ -13,6 +13,8 @@ show_usage() {
 	exit 1
 }
 
+mkdir -p $APP_ROOT/logs
+
 echo "Starting VPN.. Please wait. Check vpn.log for output"
 echo $DCLOUD_VPN_PASSWD | sudo openconnect -u $DCLOUD_VPN_USRNAME -b --pid-file=${DCLOUD_VPN_PID} -i dcloud-tun --passwd-on-stdin https://dcloud-${DCLOUD_VPN_SITE}-anyconnect.cisco.com > $APP_ROOT/logs/vpn.log 2>&1 
 

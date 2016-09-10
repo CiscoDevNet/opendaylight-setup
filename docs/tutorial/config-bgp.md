@@ -34,3 +34,25 @@ To let ODL reload the config xml files, you will have to restart OpenDayLight.  
 ./bin/stop-odl
 ./bin/start-odl
 ```
+### Debug
+
+### Peer with XRv in dCloud Lab
+
+![Change XRv Config](./images/bgp/change-xrv-config.png)
+
+```
+ neighbor 198.18.1.80
+  remote-as 65504
+  update-source MgmtEth0/0/CPU0/0
+  address-family ipv4 unicast
+   route-reflector-client
+  !
+  address-family link-state link-state
+   route-reflector-client
+  !       
+ !
+```
+
+198.18.1.80 is the IP of the OpenDayLight controller hosted in Cisco dCloud.  As we are using our own controller for the tutorial, we want to replace the IP with our own controller's IP.
+
+`./bin/check-vpn-status`
