@@ -19,7 +19,7 @@ echo "ODL is starting"
 while true;
 do
 	ready=$(curl http://${ODL_USER}:${ODL_PASS}@localhost:8181/restconf/operational/network-topology:network-topology/ 2>&1)
-	if echo $ready | grep -q "connected";
+	if echo $ready | grep -q "network-topology";
 	then
 		echo "ODL is ready!"
 		exit 0
