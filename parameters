@@ -10,6 +10,7 @@ DISTRIBUTION_RELEASE_DOWNLOAD_URL='https://nexus.opendaylight.org/content/reposi
 
 DISTRO_ROOT=$APP_ROOT/distribution
 DISTRO=$DISTRO_ROOT/odl
+DISTRO_IMG=$APP_ROOT/distro-image
 
 ODL_USER=admin
 ODL_PASS=admin

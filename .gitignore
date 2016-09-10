@@ -1,5 +1,5 @@
 .DS_Store
-images
+distro-image
 distribution
 vpn_credential
 *.log

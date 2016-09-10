@@ -34,7 +34,7 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
 
   >Example: (Assumes you are downloading the "**Beryllium-SR3**" release.)
 
-  >`wget -P images https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz`
+  >`wget -P distro-image https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz`
 
 3.  Unpack ODL using
 

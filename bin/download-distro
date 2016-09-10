@@ -5,7 +5,7 @@ source $PARENT_DIR/parameters
 
 if [[ "$2" != "-f" ]]; then
 while true; do
-    read -p "Existing distros under images folder will be removed before downloading new distro. Please backup the existing distro if you want to. Do you want to continue? " yn
+    read -p "Existing distros under $DISTRO_IMG folder will be removed before downloading new distro. Please backup the existing distro if you want to. Do you want to continue? " yn
     case $yn in
         [Yy]* ) make install; break;;
         [Nn]* ) exit;;
@@ -23,9 +23,9 @@ else
 	exit 1
 fi
 
-rm -rf "$APP_ROOT/images"
+rm -rf "$DISTRO_IMG"
 
 echo "Downloading ODL distro from $version .."
 echo "Please wait patiently, it may take a while"
-wget -nv -P "$APP_ROOT/images" "$version"
+wget -nv -P "$DISTRO_IMG" "$version"
 echo "ODL distro downloaded!"
