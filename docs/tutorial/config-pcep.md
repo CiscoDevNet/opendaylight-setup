@@ -76,11 +76,86 @@ mpls traffic-eng
 
 > Note the **node-id** will be shown as **192.19.1.30**, which is the Loopback0 address of the XRv.  You can configure XRv to overwrite the node-id with command: `mpls traffic-eng pce peer source ipv4 198.18.1.37`
 
+## Topology
+
+In the following examples, we are going to establish LSP from SJC site to POR site.  There are two routes from SJC site (198.19.1.30) to POR site (198.19.1.26):
+
+* SJC (*55.0.0.30* | GigabitEthernet0/0/0/3) -> SEA (**55.0.0.28** | GigabitEthernet0/0/0/3) -> SEA (*53.0.0.28* | GigabitEthernet0/0/0/2) -> POR (**53.0.0.26** | GigabitEthernet0/0/0/1) -> POR (*198.19.1.26* | Loopback0)
+
+* SJC (*56.0.0.30* | GigabitEthernet0/0/0/4) -> SFC (**56.0.0.29** | GigabitEthernet0/0/0/2) -> SFC (*54.0.0.29* | GigabitEthernet0/0/0/1) -> POR (**54.0.0.26** | GigabitEthernet0/0/0/2) -> POR (*198.19.1.26* | Loopback0)
+
 ## Create PCE-initiated LSP
 
-`telnet $ROUTER_NODE_POR`
+![Create PCE-init LSP](./images/pcep/create-pce-init-lsp.png)
+
+
+![Create PCE-init LSP](./images/pcep/pcep-topology-pce-init-1.png)
+![Create PCE-init LSP](./images/pcep/pcep-topology-pce-init-2.png)
+
+```
+Name: tunnel-te1  Destination: 198.19.1.26  Ifhandle:0x880 (auto-tunnel pcc)
+  Signalled-Name: foo
+  Status:
+    Admin:    up Oper:   up   Path:  valid   Signalling: connected
+
+    path option 10, (verbatim) type explicit (autopcc_te1) (Basis for Setup, path weight 0)
+    G-PID: 0x0800 (derived from egress interface properties)
+    Bandwidth Requested: 0 kbps  CT0
+    Creation Time: Sun Sep 11 09:40:49 2016 (00:08:28 ago)
+  Config Parameters:
+    Bandwidth:        0 kbps (CT0) Priority:  7  7 Affinity: 0x0/0xffff
+    Metric Type: TE (default)
+    Path Selection:
+      Tiebreaker: Min-fill (default)
+    Hop-limit: disabled
+    Cost-limit: disabled
+    Path-invalidation timeout: 10000 msec (default), Action: Tear (default)
+    AutoRoute: disabled  LockDown: disabled   Policy class: not set
+    Forward class: 0 (default)
+    Forwarding-Adjacency: disabled
+    Loadshare:          0 equal loadshares
+    Auto-bw: disabled
+    Fast Reroute: Disabled, Protection Desired: None
+    Path Protection: Not Enabled
+    BFD Fast Detection: Disabled
+    Reoptimization after affinity failure: Enabled
+    Soft Preemption: Disabled
+  Auto PCC: 
+    Symbolic name: foo
+    PCEP ID: 2
+    Delegated to: 10.16.22.180
+    Created by: 10.16.22.180
+  History:
+    Tunnel has been up for: 00:08:27 (since Sun Sep 11 09:40:50 UTC 2016)
+    Current LSP:
+      Uptime: 00:08:27 (since Sun Sep 11 09:40:50 UTC 2016)
+
+  Path info (PCE controlled):
+  Hop0: 56.0.0.29
+  Hop1: 54.0.0.26
+Displayed 1 (of 1) heads, 0 (of 0) midpoints, 0 (of 0) tails
+Displayed 1 up, 0 down, 0 recovering, 0 recovered heads
+```
+
+You can see from the **Auto PCC** section, this tunnel is **Delegated to** and **Created by** the controller (PCE).  At last, the path information is listed.
+
+You should also pay attention to the **Status** at the top.  A properly created LSP should have a **valid** path and **connected** signalling, which means the path is usable.
+
+## Verify Tunnel Connectivity
+
+`mpls traffic-eng auto-bw collect frequency 1`
+
+`ping 198.19.1.26 source 198.19.1.30 count 10000 size 18024`
+
+![Verify Connectivity](./images/pcep/verify-connectivity.png)
+
+## Remove PCE-initiated LSP
+
+![Remove LSP](./images/pcep/remove-lsp.png)
 
 ## Create PCC-initiated LSP
+
+`telnet $ROUTER_NODE_SJC`
 
 ```
 interface tunnel-te100
@@ -230,6 +305,19 @@ The **Path info** at the bottom also shows **PCE controlled**.
 
 ### Update LSP Information
 
+When the LSP is delegated, we can update the path via controller.  Since in the above PCC-inited LSP, PCE selected the path **56.0.0.29** -> **54.0.0.26**, we can update the LSP to use the alternate path **55.0.0.28** -> **53.0.0.26** in the update request.
+> PCE may select a different path for you due to different runtime condition. To experiment with the update LSP request, you should choose to update LSP with a different path.
+> **Note** Remember to change the **node** id in the request if you did not announce `pce peer source ipv4 address` in the previous configuration.
 
+![Update LSP](./images/pcep/update-lsp.png)
+
+![Update LSP](./images/pcep/xrv-update-lsp-after.png)
+
+![Update LSP](./images/pcep/pcep-topology-update-lsp-after.png)
 
 ### Revoke LSP Delegation
+
+![Delegation Revoked](./images/pcep/xrv-delegation-revoked.png)
+
+You should see the **PCE Delegation** is not there anymore.
+
