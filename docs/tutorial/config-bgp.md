@@ -49,6 +49,9 @@ log:set DEBUG org.opendaylight.protocol.bgp
 
 ### Peer with XRv in dCloud Lab
 
+
+![Login to BGP Peer](./images/bgp/telnet-xrv.png)
+
 ![Change XRv Config](./images/bgp/change-xrv-config.png)
 
 ```
@@ -107,13 +110,15 @@ Restconf response (the response could be big, so actual text response is not pas
 
 ## Inject Route
 ### Inject Unicast Route
-Inject IPv4 unicast routes
+* Inject IPv4 unicast routes
 
-`<path-id>0</path-id>`
+![Inject IPv4 Unicast Route](./images/bgp/insert-ipv4-route.png)
+
+![Display Injected IPv4 Unicast Route](./images/bgp/display-ipv4-route.png)
+
+* Inject IPv6 unicast routes
+![Inject IPv6 Unicast Route](./images/bgp/insert-ipv6-route.png)
+
+![Display Injected IPv6 Unicast Route](./images/bgp/display-ipv6-route.png)
 
 ### Delete Injected Route
-
-### Inject L3VPN Route
-Inject L3VPN IPv4 Routes
-
-### Inject EVPN Routes
