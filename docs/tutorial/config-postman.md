@@ -14,17 +14,17 @@ After downloading Postman, you either choose to sign up an account or start to u
 ## Import BGPCEP Postman Collection
 You can custom your own HTTP request with Postman.  To save your time, we provide a complete BGPCEP Postman collection with this repository.  The collection can be found under [postman-collection folder](../../postman-collection).
 
-There are two files provided:
+There are three files provided:
 
- * [bgpcep.collection.json](../../postman-collection/bgpcep.collection.json) is a HTTP request collection containing most of the HTTP requests related to OpenDayLight BGP/PCEP project.
+ * [bgpcep.beryllium.postman_collection.json](../../postman-collection/bgpcep.beryllium.postman_collection.json) and [bgpcep.boron.postman_collection.json](../../postman-collection/bgpcep.boron.postman_collection.json) are HTTP request collections containing most of the HTTP requests related to OpenDayLight BGP/PCEP project.
  
- * [bgpcep.postman_environment.json](../../postman-collection/bgpcep.postman_environment.json) is a Postman environment file pairing with the *bgpcep.collection.json* .  It is used to configure the environment variables of HTTP requests.
+ * [bgpcep.dCloud.postman_environment.json](../../postman-collection/bgpcep.dCloud.postman_environment.json) is a Postman environment file pairing with the provided BGPCEP Postman collections.  It is used to configure the environment variables of HTTP requests.
 
-To import the two files, click on the **Import** button on the top-left corner of Postman.
+To import the files, click on the **Import** button on the top-left corner of Postman.
 
 ![Import button](./images/postman/import.png) 
 
-After importing, you should be able to see a collection of BGP/PCEP HTTP requests listed.
+After importing, you should be able to see a collection of BGP/PCEP HTTP requests listed (name may vary).
 
 ![After Import](./images/postman/after-import.png)
 

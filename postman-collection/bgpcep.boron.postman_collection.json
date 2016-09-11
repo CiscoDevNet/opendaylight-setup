@@ -1,0 +1,1742 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BGP/PCEP - Boron",
+		"_postman_id": "2540c83a-665d-610b-b41a-0b7a6a5dedec",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BMP",
+			"description": "",
+			"item": [
+				{
+					"name": "BGP Monitor Potocol",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bmp-monitor:bmp-monitor",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Config",
+			"description": "",
+			"item": [
+				{
+					"name": "BGP RIB",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n  <name>{{bgp-rib-name}}</name>\r\n  <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-impl</type>\r\n  <codec-tree-factory xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">x:binding-codec-tree-factory</type>\r\n    <name>runtime-mapping-singleton</name>\r\n  </codec-tree-factory>\r\n  <dom-data-provider xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom\">x:dom-async-data-broker</type>\r\n    <name>inmemory-data-broker</name>\r\n  </dom-data-provider>\r\n  <extensions xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi\">x:extensions</type>\r\n    <name>global-rib-extensions</name>\r\n  </extensions>\r\n  <local-as xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-local-as}}</local-as>\r\n  <data-provider xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">x:binding-async-data-broker</type>\r\n    <name>pingpong-binding-data-broker</name>\r\n  </data-provider>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv4-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv6-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>linkstate</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv4-flowspec</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv6-flowspec</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv4-labeled-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv6-labeled-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n     <type>bgp-table-type</type>\r\n     <name>ipv4-l3vpn</name>\r\n  </local-table>\r\n  <local-table>\r\n    <type xmlns:prefix=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">prefix:bgp-table-type</type>\r\n    <name>evpn</name>\r\n </local-table>\r\n  <!--\r\n  <rib-path-selection-mode xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:prefix=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">prefix:bgp-path-selection-mode</type>\r\n    <name>ipv4-unicast-path-selection-mode</name>\r\n   </rib-path-selection-mode>\r\n   -->\r\n  <bgp-rib-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-rib-id}}</bgp-rib-id>\r\n  <rib-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{rib-id}}</rib-id>\r\n  <openconfig-provider xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp-openconfig-spi\">x:bgp-openconfig-provider</type>\r\n    <name>openconfig-bgp</name>\r\n  </openconfig-provider>\r\n    <bgp-dispatcher xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-dispatcher</type>\r\n    <name>global-bgp-dispatcher</name>\r\n  </bgp-dispatcher>\r\n</module>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer</type>\r\n <name>{{bgp-peer-name}}</name>\r\n <host xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{XRv-mgmt-ip}}</host>\r\n <holdtimer xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">180</holdtimer>\r\n <peer-role xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">ibgp</peer-role>\r\n <rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </rib>\r\n  <peer-registry xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer-registry</type>\r\n   <name>global-bgp-peer-registry</name>\r\n  </peer-registry>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>linkstate</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>labeled-unicast</name>\r\n  </advertized-table>\r\n </module>\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Application Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-application-peer</type>\r\n <name>{{bgp-app-peer-name}}</name>\r\n <bgp-peer-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-rib-id}}</bgp-peer-id>\r\n <target-rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n  <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </target-rib>\r\n <application-rib-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-app-rib-name}}</application-rib-id>\r\n <data-broker xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n  <type xmlns:sal=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom\">sal:dom-async-data-broker</type>\r\n  <name>pingpong-broker</name>\r\n </data-broker>\r\n</module>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Application Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jolokia",
+			"description": "",
+			"item": [
+				{
+					"name": "Jolokia Status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/jolokia",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Jolokia List",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/jolokia/list",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Render Stats",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/jolokia/read/org.opendaylight.controller:instanceName={{bgp-rib-name}},type=RuntimeBean,moduleFactoryName=rib-impl",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer Stats",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/jolokia/read/org.opendaylight.controller:instanceName={{bgp-peer-name}},type=RuntimeBean,moduleFactoryName=bgp-peer",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Reset BGP Peer Stats",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/jolokia/exec/org.opendaylight.controller:instanceName={{bgp-peer-name}},type=RuntimeBean,moduleFactoryName=bgp-peer/resetStats",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Reset BGP Peer Session",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/jolokia/exec/org.opendaylight.controller:instanceName={{bgp-peer-name}},type=RuntimeBean,moduleFactoryName=bgp-peer/resetSession",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PCEP Stats",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/jolokia/read/org.opendaylight.controller:ListenerState=*,instanceName={{pcep-topology-id}},type=RuntimeBean,moduleFactoryName=pcep-topology-provider",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OpenConfig",
+			"description": "",
+			"item": [
+				{
+					"name": "BGP config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PCEP",
+			"description": "",
+			"item": [
+				{
+					"name": "PCEP Topology",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/{{pcep-topology-id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create PCEP Tunnel",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:add-lsp",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\n <node>pcc://{{XRv-mgmt-ip}}</node>\n <name>{{pcep-tunnel-name}}</name>\n <arguments>\n  <lsp xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:ietf:stateful\">\n   <delegate>true</delegate>\n   <administrative>true</administrative>\n  </lsp>\n  <endpoints-obj>\n   <ipv4>\n    <source-ipv4-address>{{pcep-tunnel-src-ip}}</source-ipv4-address>\n    <destination-ipv4-address>{{pcep-tunnel-dst-ip}}</destination-ipv4-address>\n   </ipv4>\n  </endpoints-obj>\n  <ero>\n     <subobject>\n        <loose>false</loose>\n        <ip-prefix>\n           <ip-prefix>{{pcep-tunnel-hop-1}}</ip-prefix>\n        </ip-prefix>\n     </subobject>\n     <subobject>\n        <loose>false</loose>\n        <ip-prefix>\n           <ip-prefix>{{pcep-tunnel-hop-2}}</ip-prefix>\n        </ip-prefix>\n     </subobject>\n  </ero>\n </arguments>\n <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update PCEP Tunnel",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:update-lsp",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n   <node>pcc://{{XRv-mgmt-ip}}</node>\r\n   <name>{{pcep-tunnel-name}}</name>\r\n   <arguments>\r\n      <lsp xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:ietf:stateful\">\r\n         <delegate>true</delegate>\r\n         <administrative>true</administrative>\r\n      </lsp>\r\n      <ero>\r\n         <subobject>\r\n            <loose>false</loose>\r\n            <ip-prefix>\r\n               <ip-prefix>{{pcep-tunnel-hop-1}}</ip-prefix>\r\n            </ip-prefix>\r\n         </subobject>\r\n         <subobject>\r\n            <loose>false</loose>\r\n            <ip-prefix>\r\n               <ip-prefix>{{pcep-tunnel-hop-2}}</ip-prefix>\r\n            </ip-prefix>\r\n         </subobject>\r\n      </ero>\r\n   </arguments>\r\n   <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove PCEP Tunnel ",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:remove-lsp",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n <node>pcc://{{XRv-mgmt-ip}}</node>\r\n <name>{{pcep-tunnel-name}}</name>\r\n <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Ensure PCEP LSP Operational",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:ensure-lsp-operational",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n <node>pcc://{{XRv-mgmt-ip}}</node>\r\n <name>{{pcep-tunnel-name}}</name>\r\n <arguments/>\r\n <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create PCEP Datachange Sub",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/sal-remote:create-data-change-event-subscription",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:remote\">\n     <path xmlns:a=\"urn:TBD:params:xml:ns:yang:network-topology\">/a:network-topology/a:topology[a:topology-id='{{pcep-topology-id}}']</path>\n     <datastore xmlns=\"urn:sal:restconf:event:subscription\">OPERATIONAL</datastore>\n     <scope xmlns=\"urn:sal:restconf:event:subscription\">SUBTREE</scope>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribe to PCEP DataTree Change",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/streams/stream/network-topology:network-topology/network-topology:topology/{{pcep-topology-id}}/datastore=OPERATIONAL/scope=SUBTREE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:remote\">\n     <path xmlns:a=\"urn:TBD:params:xml:ns:yang:network-topology\">/a:network-topology/a:topology[a:topology-id='{{pcep-topology-id}}']</path>\n     <datastore xmlns=\"urn:sal:restconf:event:subscription\">OPERATIONAL</datastore>\n     <scope xmlns=\"urn:sal:restconf:event:subscription\">SUBTREE</scope>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RIB",
+			"description": "",
+			"item": [
+				{
+					"name": "BGP RIB",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Linkstate Topology",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/{{link-state-topology}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Unicast",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/ipv4-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Unicast",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/ipv6-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Flowspec",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Flowspec",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv6-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-ipv6-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Flowspec L3VPN",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-l3vpn-subsequent-address-family/bgp-flowspec:flowspec-l3vpn-ipv4-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Flowspec L3VPN",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-l3vpn-subsequent-address-family/bgp-flowspec:flowspec-l3vpn-ipv6-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Linkstate",
+					"request": {
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-linkstate:linkstate-address-family/bgp-linkstate:linkstate-subsequent-address-family/linkstate-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": " IPv4 Labeled-Unicast",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-labeled-unicast:labeled-unicast-subsequent-address-family/bgp-labeled-unicast:labeled-unicast-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"description": "",
+			"item": [
+				{
+					"name": "IPv4 Unicast - Display Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv4-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Unicast - Insert Route",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv4-routes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n  <ipv4-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-inet\">\n   <prefix>1.1.1.1/32</prefix>\n   <path-id>0</path-id>\n   <attributes>\n    <ipv4-next-hop>\n     <global>199.20.160.41</global>\n    </ipv4-next-hop><as-path/>\n    <multi-exit-disc>\n     <med>0</med>\n    </multi-exit-disc>\n    <local-pref>\n     <pref>100</pref>\n    </local-pref>\n    <originator-id>\n     <originator>41.41.41.41</originator>\n    </originator-id>\n    <origin>\n     <value>igp</value>\n    </origin>\n    <cluster-id>\n     <cluster>40.40.40.40</cluster>\n    </cluster-id>\n   </attributes>\n  </ipv4-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Unicast - Delete All Route",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv4-routes",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Unicast - Route Refresh",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/bgp-peer-rpc:route-refresh-request",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<input xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-peer-rpc\">\n    <afi xmlns:types=\"urn:opendaylight:params:xml:ns:yang:bgp-types\">types:ipv4-address-family</afi>\n    <safi xmlns:types=\"urn:opendaylight:params:xml:ns:yang:bgp-types\">types:unicast-subsequent-address-family</safi>\n    <peer-ref xmlns:rib=\"urn:opendaylight:params:xml:ns:yang:bgp-rib\">/rib:bgp-rib/rib:rib[rib:id=\"{{rib-id}}\"]/rib:peer[rib:peer-id=\"bgp://{{XRv-mgmt-ip}}\"]</peer-ref>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Unicast - Display Route",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv6-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n  <ipv6-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-inet\">\r\n   <prefix>2001:db8:30::3/128</prefix>\r\n   <path-id>0</path-id>\r\n   <attributes>\r\n    <ipv6-next-hop>\r\n     <global>2001:db8:1::6</global>\r\n    </ipv6-next-hop>\r\n    <as-path/>\r\n    <origin>\r\n     <value>egp</value>\r\n    </origin>\r\n   </attributes>\r\n  </ipv6-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Unicast - Insert Route",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv6-routes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n  <ipv6-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-inet\">\r\n   <prefix>2001:db8:30::3/128</prefix>\r\n   <path-id>0</path-id>\r\n   <attributes>\r\n    <ipv6-next-hop>\r\n     <global>2001:db8:1::6</global>\r\n    </ipv6-next-hop>\r\n    <as-path/>\r\n    <origin>\r\n     <value>egp</value>\r\n    </origin>\r\n   </attributes>\r\n  </ipv6-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Unicast - Delete All Route",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv6-routes",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "L3VPN IPv4 - Display Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:mpls-labeled-vpn-subsequent-address-family/bgp-vpn-ipv4:vpn-ipv4-routes/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<vpn-ipv4-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-vpn-ipv4\">\n  <route-key>vpn1</route-key>\n  <label-stack>\n    <label-value>123</label-value>\n  </label-stack>\n  <route-distinguisher>429496729:1</route-distinguisher>\n  <prefix>2.2.2.2/32</prefix>\n  <attributes>\n    <ipv4-next-hop>\n     <global>199.20.166.41</global>\n    </ipv4-next-hop><as-path/>\n    <origin>\n     <value>igp</value>\n    </origin>\n   </attributes>\n</vpn-ipv4-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "L3VPN IPv4 - Insert Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:mpls-labeled-vpn-subsequent-address-family/bgp-vpn-ipv4:vpn-ipv4-routes/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<vpn-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-vpn-ipv4\">\n  <route-key>vpn1</route-key>\n  <label-stack>\n    <label-value>123</label-value>\n  </label-stack>\n  <route-distinguisher>429496729:1</route-distinguisher>\n  <prefix>2.2.2.2/32</prefix>\n  <attributes>\n    <ipv4-next-hop>\n     <global>199.20.166.41</global>\n    </ipv4-next-hop><as-path/>\n    <origin>\n     <value>igp</value>\n    </origin>\n   </attributes>\n</vpn-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "L3VPN IPv4 - Delete All Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:mpls-labeled-vpn-subsequent-address-family/bgp-vpn-ipv4:vpn-ipv4-routes/",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "L3VPN IPv6 - Display Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:mpls-labeled-vpn-subsequent-address-family/bgp-vpn-ipv6:vpn-ipv6-routes/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<vpn-ipv4-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-vpn-ipv4\">\n  <route-key>vpn1</route-key>\n  <label-stack>\n    <label-value>123</label-value>\n  </label-stack>\n  <route-distinguisher>429496729:1</route-distinguisher>\n  <prefix>2.2.2.2/32</prefix>\n  <attributes>\n    <ipv4-next-hop>\n     <global>199.20.166.41</global>\n    </ipv4-next-hop><as-path/>\n    <origin>\n     <value>igp</value>\n    </origin>\n   </attributes>\n</vpn-ipv4-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "L3VPN IPv6 - Insert Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:mpls-labeled-vpn-subsequent-address-family/bgp-vpn-ipv6:vpn-ipv6-routes/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<vpn-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-vpn-ipv6\">\n  <route-key>vpn1</route-key>\n  <label-stack>\n    <label-value>123</label-value>\n  </label-stack>\n  <route-distinguisher>1.2.3.4:5678</route-distinguisher>\n  <prefix>2001:2:3::/64</prefix>\n  <attributes>\n    <ipv6-next-hop>\n     <global>2003:4:5:6::7</global>\n    </ipv6-next-hop><as-path/>\n    <origin>\n     <value>igp</value>\n    </origin>\n   </attributes>\n</vpn-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "L3VPN IPv6 - Delete All Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:mpls-labeled-vpn-subsequent-address-family/bgp-vpn-ipv6:vpn-ipv6-routes/",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "EVPN - Display Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/odl-bgp-evpn:l2vpn-address-family/odl-bgp-evpn:evpn-subsequent-address-family/odl-bgp-evpn:evpn-routes/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<vpn-ipv4-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-vpn-ipv4\">\n  <route-key>vpn1</route-key>\n  <label-stack>\n    <label-value>123</label-value>\n  </label-stack>\n  <route-distinguisher>429496729:1</route-distinguisher>\n  <prefix>2.2.2.2/32</prefix>\n  <attributes>\n    <ipv4-next-hop>\n     <global>199.20.166.41</global>\n    </ipv4-next-hop><as-path/>\n    <origin>\n     <value>igp</value>\n    </origin>\n   </attributes>\n</vpn-ipv4-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "EVPN - Insert Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/odl-bgp-evpn:l2vpn-address-family/odl-bgp-evpn:evpn-subsequent-address-family/odl-bgp-evpn:evpn-routes/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<evpn-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-evpn\">\n\t<route-key>evpn1</route-key>\n\t<route-distinguisher>429496729:1</route-distinguisher>\n\t<ethernet-a-d-route>\n\t\t<mpls-label>24001</mpls-label>\n\t\t<ethernet-tag-id>\n\t\t    <vlan-id>10</vlan-id>\n\t\t</ethernet-tag-id>\n\t\t<lacp-auto-generated>\n\t\t    <ce-lacp-mac-address>f2:0c:dd:80:9f:f7</ce-lacp-mac-address>\n\t\t    <ce-lacp-port-key>22</ce-lacp-port-key>\n\t\t</lacp-auto-generated>\n\t</ethernet-a-d-route>\n\t<attributes>\n\t\t<ipv4-next-hop>\n\t\t\t<global>199.20.166.41</global>\n\t\t</ipv4-next-hop><as-path/>\n\t\t<origin>\n\t\t\t<value>igp</value>\n\t\t</origin>\n\t\t<extended-communities>\n\t\t    <transitive>false</transitive>\n\t\t    <layer-2-attributes-extended-community>\n\t\t        <primary-pe>true</primary-pe>\n\t\t        <backup-pe>true</backup-pe>\n\t\t        <control-word >true</control-word>\n\t\t        <l2-mtu>200</l2-mtu>\n\t\t    </layer-2-attributes-extended-community>\n\t\t</extended-communities>\n\t</attributes>\n</evpn-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "EVPN - Delete All Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/odl-bgp-evpn:l2vpn-address-family/odl-bgp-evpn:evpn-subsequent-address-family/odl-bgp-evpn:evpn-routes/",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"description": "",
+			"item": [
+				{
+					"name": "BGP Peer State",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/config:module/odl-bgp-rib-impl-cfg:bgp-peer/{{bgp-peer-name}}/bgp-peer-state",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Session State",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/config:module/odl-bgp-rib-impl-cfg:bgp-peer/{{bgp-peer-name}}/bgp-session-state",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Reset BGP Stats",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/odl-bgp-rib-impl-cfg:reset-stats",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\n    <context-instance xmlns:config=\"urn:opendaylight:params:xml:ns:yang:controller:config\">/config:modules/config:module[config:name='{{bgp-peer-name}}'][config:type='bgp-peer']</context-instance>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Reset BGP Session",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/odl-bgp-rib-impl-cfg:reset-session",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\n    <context-instance xmlns:config=\"urn:opendaylight:params:xml:ns:yang:controller:config\">/config:modules/config:module[config:name='{{bgp-peer-name}}'][config:type='bgp-peer']</context-instance>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "PCEP Topology",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/config:module/odl-pcep-topology-provider-cfg:pcep-topology-provider/pcep-topology",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Reset PCE Stats",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/odl-pcep-topology-provider-cfg:reset-stats",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:pcep:topology:provider\">\n<context-instance xmlns:a=\"urn:opendaylight:params:xml:ns:yang:controller:config\" xmlns:b=\"urn:opendaylight:params:xml:ns:yang:controller:pcep:topology:provider\">\n  /a:modules/a:module[a:type='pcep-topology-provider'][a:name='pcep-topology']/b:listener-state[b:peer-id='43.43.43.43']</context-instance>\n</input>\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Close PCE Session",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operations/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/odl-pcep-topology-provider-cfg:tear-down-session",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:pcep:topology:provider\">\n<context-instance xmlns:a=\"urn:opendaylight:params:xml:ns:yang:controller:config\" xmlns:b=\"urn:opendaylight:params:xml:ns:yang:controller:pcep:topology:provider\">\n  /a:modules/a:module[a:type='pcep-topology-provider'][a:name='pcep-topology']/b:listener-state[b:peer-id='43.43.43.43']</context-instance>\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Topology",
+			"description": "",
+			"item": [
+				{
+					"name": "Network Topology",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Linkstate Topology",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/{{link-state-topology}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Topology",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/{{ipv4-topology}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Topology",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/{{ipv6-topology}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
