@@ -1,11 +1,13 @@
 # Configure BGP on ODL
+This part of the tutorial we will introduce how to use ODL to set up BGP session with a router.
+
 ## Install BGP Feature on ODL
 
-To install BGP feature, you need to enter karaf client first, then run the following command:
+To install BGP feature, you need to enter karaf client with command `bin/karaf-client` first, then run the following command:
 
 `feature:install odl-bgpcep-bgp`
 
-If you are using the default *parameters* files provided by this project, the *odl-bgpcep-bgp* feature will be installed by default.
+> If you are using the default *parameters* files provided by this project, the *odl-bgpcep-bgp* feature will be installed by default.
 
 ## Verify BGP Feature
 After installing BGP feature, you should be able to see the bgp feature listed in the "installed feature" list.  You can simply verify it with command:
@@ -25,7 +27,9 @@ To add/edit BGP peers, you will need to change a few BGP configuration files.  T
  
 ### Change 41-bgp-config-example.xml
 
-`etc/opendaylight/karaf/41-bgp-example.xml`
+The BGP peer configuration is located in file `etc/opendaylight/karaf/41-bgp-example.xml`.
+
+To edit the configuration file, use the following command in your bash shell:
 
 `gedit distribution/odl/etc/opendaylight/karaf/41-bgp-example.xml >/dev/null 2>&1 &`
 
@@ -41,6 +45,7 @@ To let ODL reload the config xml files, you will have to restart OpenDayLight.  
 ./bin/start-odl
 ```
 ### Debug
+Optionally, you can turn on the DEBUG option in karaf console to see more detailed karaf log output with BGP debug information:
 
 ```
 log:set DEBUG org.opendaylight.bgpcep.bgp

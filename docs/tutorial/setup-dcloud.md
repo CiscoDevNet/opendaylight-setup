@@ -10,7 +10,7 @@ computing environment connected to Cisco Virtual Internet Routing Lab
 (VIRL) based network simulation running in Cisco dCloud environment,
 over Anyconnect VPN
 
-![Network Topology](./images/image1.png)
+![Network Topology](./images/dcloud/topology.png)
 
 ![Componets](./images/image2.png)
 
@@ -46,7 +46,7 @@ Follow below steps to launch the network simulation
 
 	![](./images/dcloud/dcloud-catalog.png)
 	
-4.  Click on **Now** button. By default, the scheduled duration will be 4 hours. Adjust the end time for the desired duration **(min. 5 hours recommended)**. Go to bottom of page and click on **Next**
+4.  Click on **Now** button. By default, the scheduled duration will be 4 hours. Adjust the end time for the desired duration **(min. 5 hours recommended. The max. time your can schedule is 5 days)**. Go to bottom of page and click on **Next**
 
 	![](./images/dcloud/dcloud-schedule.png)
 
