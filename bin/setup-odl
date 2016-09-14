@@ -4,5 +4,5 @@ PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
 $APP_ROOT/bin/setup-env
-$APP_ROOT/bin/download-distro release -f
+$APP_ROOT/bin/download-distro release
 $APP_ROOT/bin/unpack-odl

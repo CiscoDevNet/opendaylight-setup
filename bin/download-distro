@@ -3,29 +3,28 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
-if [[ "$2" != "-f" ]]; then
-while true; do
-    read -p "Existing distros under $DISTRO_IMG folder will be removed before downloading new distro. Please backup the existing distro if you want to. Do you want to continue? " yn
-    case $yn in
-        [Yy]* ) make install; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-fi
-
 if [[ $? == 0 || "$1" == "release" ]]; then
+	filename="release.tar.gz"
 	version="$DISTRIBUTION_RELEASE_DOWNLOAD_URL"
 elif [ "$1" == "snapshot" ]; then
+	filename="snapshot.tar.gz"
 	version="$DISTROBUTION_SNAPSHOT_DOWNLOAD_URL"
 else
-	echo "Usage: $0 snapshot|release"
+	echo "Usage: $0 snapshot|release [-f]"
+	echo "Specify -f means you will overwrite existing downloaded file if there is one"
 	exit 1
 fi
 
-rm -rf "$DISTRO_IMG"
+if [[ "$2" == "-f" ]]; then
+        rm -f "$DISTRO_IMG/$filename" 2>/dev/null
+fi
+
+if [ -f "$DISTRO_IMG/$filename" ]; then
+	echo "File $DISTRO_IMG/$filename already exists. Skip downloading."
+	exit 0
+fi
 
 echo "Downloading ODL distro from $version .."
 echo "Please wait patiently, it may take a while"
-wget -nv -P "$DISTRO_IMG" "$version"
+wget -nv -P "$DISTRO_IMG" -O $filename "$version"
 echo "ODL distro downloaded!"

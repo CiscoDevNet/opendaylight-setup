@@ -23,6 +23,8 @@ log:set DEBUG org.opendaylight.bgpcep.cep
 log:set DEBUG org.opendaylight.protocol.pcep
 ```
 
+You can monitor the karaf log either by running command `log:tail` in karaf console, or run the script provided `bin/tail-log`.
+
 ### Configure Cisco XRv in dCloud Lab
 To peer a Cisco XRv with local controller, you will need to login to the console of that specific XRv.  You can find a list of IPs by looking at the [nodes](../../nodes) file.
 

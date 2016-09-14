@@ -20,24 +20,192 @@ You should be able to see all the BGP related modules get installed.
 
 Besides, you can also verify if BGP feature is functioning properly by accessing the BGP RESTCONF interface.  Simply checking if BGP RIB is returning the correct topology will be enough.
 
+> You can find the corresponding RESTCONF request in provided Postman collection.
+
 ![Verify BGP via RESTCONF](./images/bgp/verify-bgp-restconf.png) 
 
 ## Change BGP Configurations
+
 To add/edit BGP peers, you will need to change a few BGP configuration files.  These files are managed by the config subsystem of ODL.  They are loaded when the ODL is started.
+
+A much detailed guide exists in [OpenDayLight BGPCEP project wiki](https://wiki.opendaylight.org/view/BGP_LS_PCEP:Main).  Read the **User Guide** of the corresponding ODL version which you are using.
+
+In this tutorial, we are playing with the Beryllium version of ODL.  So you should be looking at the [Beryllium User Guide](https://wiki.opendaylight.org/view/BGP_LS_PCEP:Beryllium_User_Guide).
  
 ### Change 41-bgp-config-example.xml
 
-The BGP peer configuration is located in file `etc/opendaylight/karaf/41-bgp-example.xml`.
+The BGP peer configuration is located in file `etc/opendaylight/karaf/41-bgp-example.xml` under ODL directory.
+
+> In this turotial, we are installing ODL under directory `distribution/odl`. So the complete file path should be `distribution/odl/etc/opendaylight/karaf/41-bgp-example.xml`
 
 To edit the configuration file, use the following command in your bash shell:
 
 `gedit distribution/odl/etc/opendaylight/karaf/41-bgp-example.xml >/dev/null 2>&1 &`
 
+#### Update BGP RIB
+
+Find the following section in the 41-bgp-example.xml:
+
+```
+                <module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:rib-impl</type>
+                    ...
+                </module>
+```
+
+Change the related fields to fit your need.  In this tutorial, we need to change **local-as** field to **65504**.  You should change **bgp-rib-id** to the real IP of your local controller (which you can find with script `bin/check-vpn-status`).
+
+A sample configuration is displayed as follows:
+
+```
+                <module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:rib-impl</type>
+                    <name>example-bgp-rib</name>
+                    <rib-id>example-bgp-rib</rib-id>
+                    <local-as>65504</local-as>
+                    <bgp-rib-id>127.0.0.1</bgp-rib-id>
+                    <!-- if cluster-id is not present, it's value is the same as bgp-id -->
+                    <!-- <cluster-id>192.0.2.3</cluster-id> -->
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-unicast</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-unicast</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>linkstate</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-flowspec</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-flowspec</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>labeled-unicast</name>
+                    </local-table>
+                    <extensions>
+                        <type xmlns:ribspi="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi">ribspi:extensions</type>
+                        <name>global-rib-extensions</name>
+                    </extensions>
+                    <bgp-dispatcher>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-dispatcher</type>
+                        <name>global-bgp-dispatcher</name>
+                    </bgp-dispatcher>
+                    <data-provider>
+                        <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-async-data-broker</type>
+                        <name>pingpong-binding-data-broker</name>
+                    </data-provider>
+                    <dom-data-provider>
+                        <type xmlns:sal="urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom">sal:dom-async-data-broker</type>
+                        <name>pingpong-broker</name>
+                    </dom-data-provider>
+                    <codec-tree-factory>
+                        <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-codec-tree-factory</type>
+                        <name>runtime-mapping-singleton</name>
+                    </codec-tree-factory>
+                    <session-reconnect-strategy>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
+                        <name>example-reconnect-strategy-factory</name>
+                    </session-reconnect-strategy>
+                    <tcp-reconnect-strategy>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
+                        <name>example-reconnect-strategy-factory</name>
+                    </tcp-reconnect-strategy>
+                    <openconfig-provider>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp-openconfig-spi">prefix:bgp-openconfig-provider</type>
+                        <name>openconfig-bgp</name>
+                    </openconfig-provider>
+                </module>
+```
+
 #### Update BGP Peer
+
+Find the following section in 41-bgp-example.xml:
+
+```
+                <module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer</type>
+                    ...
+                </module>
+```
+
+By default, the whole section is commentted out, so ODL is not expecting any BGP peer connecting to it.  We need to uncomment the whole section first, then change the BGP peer **host** IP in the section.  As we are peering with SJC router in dCloud, we are going to use its IP (198.18.1.37) here.
+An example is shown as follows:
+
+```
+                <module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer</type>
+                    <name>example-bgp-peer</name>
+                    <host>198.18.1.37</host>
+                    <holdtimer>180</holdtimer>
+                    <peer-role>ibgp</peer-role>
+                    <rib>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:rib-instance</type>
+                        <name>example-bgp-rib</name>
+                    </rib>
+                    <peer-registry>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer-registry</type>
+                        <name>global-bgp-peer-registry</name>
+                    </peer-registry>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-unicast</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-unicast</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>linkstate</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-flowspec</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-flowspec</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>labeled-unicast</name>
+                    </advertized-table>
+                </module>
+```
 
 #### Update BGP Application Peer
 
+The application peer configuration doesn't exist in the 41-bgp-example.xml file by default.  So you should add it after the BGP peer section.
+
+Remember to change the **bgp-peer-id** to your local controller's real IP.
+
+```
+                <module xmlns="urn:opendaylight:params:xml:ns:yang:controller:config">
+                    <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">x:bgp-application-peer</type>
+                    <name>example-bgp-peer-app</name>
+                    <bgp-peer-id xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">127.0.0.1</bgp-peer-id> 
+                    <target-rib xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">
+                        <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">x:rib-instance</type>
+                        <name>example-bgp-rib</name>
+                    </target-rib>
+                    <application-rib-id xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">example-app-rib</application-rib-id>
+                    <data-broker xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">
+                        <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom">x:dom-async-data-broker</type>
+                        <name>pingpong-broker</name>
+                    </data-broker>
+                </module>
+```
+
 ### Restart OpenDayLight
+
 To let ODL reload the config xml files, you will have to restart OpenDayLight.  You can restart ODL by running the two scripts provided by the project:
 
 ```
@@ -52,8 +220,13 @@ log:set DEBUG org.opendaylight.bgpcep.bgp
 log:set DEBUG org.opendaylight.protocol.bgp
 ```
 
-### Peer with XRv in dCloud Lab
+You can monitor the karaf log either by running command `log:tail` in karaf console, or run the script provided `bin/tail-log`.
 
+## Peer with XRv in dCloud Lab
+
+Now, after you finishing configuring the BGP peer, you need to configure the XRv in Cisco dCloud lab so that they can connect to each other.
+
+First, you need to telnet to the XRv in dCloud:
 
 ![Login to BGP Peer](./images/bgp/telnet-xrv.png)
 
@@ -72,7 +245,7 @@ log:set DEBUG org.opendaylight.protocol.bgp
  !
 ```
 
-198.18.1.80 is the IP of the OpenDayLight controller hosted in Cisco dCloud.  As we are using our own controller for the tutorial, we want to replace the IP with our own controller's IP.
+**198.18.1.80** is the IP of the OpenDayLight controller hosted in Cisco dCloud.  As we are using our own controller for the tutorial, we want to replace the IP with our own controller's IP.
 
 ```
 configure terminal
@@ -94,7 +267,7 @@ commit
 
 Replace the **1.2.3.4** with your local controller's IP (the VPN tunnel's IP)
 
-`./bin/check-vpn-status`
+Again, you can get your controller's real IP with script `./bin/check-vpn-status`
 
 ## Verify BGP RIB Information
 

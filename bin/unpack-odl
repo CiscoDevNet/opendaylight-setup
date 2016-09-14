@@ -5,14 +5,20 @@ source $PARENT_DIR/parameters
 
 bash $APP_ROOT/bin/delete-odl
 
-IMAGE_LOCATION="$DISTRO_IMG/*.tar.gz"
+if [[ $? == 0 || "$1" == "release" ]]; then
+        filename="release.tar.gz"
+elif [ "$1" == "snapshot" ]; then
+        filename="snapshot.tar.gz"
+fi
+
+IMAGE_LOCATION="$DISTRO_IMG/$filename"
 
 echo "Unpacking ODL.."
 
 IMAGE_FILE="$(ls $IMAGE_LOCATION 2>/dev/null)"
 
 if [ -z "$IMAGE_FILE" ]; then
-	echo "There is no distro exists under $DISTRO_IMG directory"
+	echo "File $IMAGE_FILE does not exist"
 	exit 1
 fi
 

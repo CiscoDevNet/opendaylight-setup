@@ -5,7 +5,7 @@ APP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source $APP_ROOT/nodes
 
 #Boron snapshot
-DISTRIBUTION_SNAPSHOT_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/opendaylight.snapshot/org/opendaylight/integration/distribution-karaf/0.5.0-SNAPSHOT/distribution-karaf-0.5.0-20160829.225921-4700.zip'
+DISTRIBUTION_SNAPSHOT_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/autorelease-1497/org/opendaylight/integration/distribution-karaf/0.5.0-Boron/distribution-karaf-0.5.0-Boron.tar.gz'
 DISTRIBUTION_RELEASE_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz'
 
 DISTRO_ROOT=$APP_ROOT/distribution
