@@ -1,7 +1,8 @@
 # Configure BGP on ODL
 This part of the tutorial we will introduce how to use ODL to set up BGP session with a router.
 
-## Install BGP Feature on ODL
+## Prerequisite
+### Install BGP Feature on ODL
 
 To install BGP feature, you need to enter karaf client with command `bin/karaf-client` first, then run the following command:
 
@@ -9,7 +10,7 @@ To install BGP feature, you need to enter karaf client with command `bin/karaf-c
 
 > If you are using the default *parameters* files provided by this project, the *odl-bgpcep-bgp* feature will be installed by default.
 
-## Verify BGP Feature
+### Verify BGP Feature
 After installing BGP feature, you should be able to see the bgp feature listed in the "installed feature" list.  You can simply verify it with command:
 
 `feature:list -i | grep odl-bgpcep-bgp`
@@ -23,6 +24,14 @@ Besides, you can also verify if BGP feature is functioning properly by accessing
 > You can find the corresponding RESTCONF request in provided Postman collection.
 
 ![Verify BGP via RESTCONF](./images/bgp/verify-bgp-restconf.png) 
+
+### Debug
+In case you want to observe the internals of BGP feature, you can turn on the DEBUG option in karaf console to see more detailed karaf log output with BGP debug information:
+
+```
+log:set DEBUG org.opendaylight.bgpcep.bgp
+log:set DEBUG org.opendaylight.protocol.bgp
+```
 
 ## Change BGP Configurations
 
@@ -212,13 +221,6 @@ To let ODL reload the config xml files, you will have to restart OpenDayLight.  
 ./bin/stop-odl
 ./bin/start-odl
 ```
-### Debug
-Optionally, you can turn on the DEBUG option in karaf console to see more detailed karaf log output with BGP debug information:
-
-```
-log:set DEBUG org.opendaylight.bgpcep.bgp
-log:set DEBUG org.opendaylight.protocol.bgp
-```
 
 You can monitor the karaf log either by running command `log:tail` in karaf console, or run the script provided `bin/tail-log`.
 
@@ -271,32 +273,39 @@ Again, you can get your controller's real IP with script `./bin/check-vpn-status
 
 ## Verify BGP RIB Information
 
-Karaf log:
+After peering with the routers in dCloud, you should be able to see BGP peer information in controller.  There are two ways you can check if the peering is successful.
 
-```
+1. You can check the karaf log of your controller. Simply use the script provided `bin/tail-log`:
+
+	```
 2016-09-10 00:16:38,109 | INFO  | oupCloseable-2-1 | StrictBGPPeerRegistry            | 236 - org.opendaylight.bgpcep.bgp-rib-impl - 0.5.3.Beryllium-SR3 | BGP Open message session parameters differ, session still accepted.
 2016-09-10 00:16:38,117 | INFO  | oupCloseable-2-1 | BGPSessionImpl                   | 236 - org.opendaylight.bgpcep.bgp-rib-impl - 0.5.3.Beryllium-SR3 | BGP HoldTimer new value: 180
 2016-09-10 00:16:38,152 | INFO  | oupCloseable-2-1 | BGPPeer                          | 236 - org.opendaylight.bgpcep.bgp-rib-impl - 0.5.3.Beryllium-SR3 | Session with peer 198.18.1.37 went up with tables: [BgpTableTypeImpl [getAfi()=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.types.rev130919.Ipv4AddressFamily, getSafi()=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.types.rev130919.UnicastSubsequentAddressFamily], BgpTableTypeImpl [getAfi()=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.linkstate.rev150210.LinkstateAddressFamily, getSafi()=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.linkstate.rev150210.LinkstateSubsequentAddressFamily]]
 2016-09-10 00:16:38,285 | INFO  | oupCloseable-2-1 | AbstractBGPSessionNegotiator     | 236 - org.opendaylight.bgpcep.bgp-rib-impl - 0.5.3.Beryllium-SR3 | BGP Session with peer [id: 0xfdcbed33, L:/10.16.22.180:37480 - R:/198.18.1.37:179] established successfully.
 2016-09-10 00:16:45,640 | INFO  | oupCloseable-2-1 | BGPSynchronization               | 236 - org.opendaylight.bgpcep.bgp-rib-impl - 0.5.3.Beryllium-SR3 | BGP Synchronization finished for table TablesKey [_afi=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.linkstate.rev150210.LinkstateAddressFamily, _safi=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.linkstate.rev150210.LinkstateSubsequentAddressFamily] 
 2016-09-10 00:16:46,041 | INFO  | oupCloseable-2-1 | BGPSynchronization               | 236 - org.opendaylight.bgpcep.bgp-rib-impl - 0.5.3.Beryllium-SR3 | BGP Synchronization finished for table TablesKey [_afi=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.types.rev130919.Ipv4AddressFamily, _safi=class org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.bgp.types.rev130919.UnicastSubsequentAddressFamily] 
-```
+	```
 
-Restconf response (the response could be big, so actual text response is not pasted here):
+2. Check through RESTCONF.  You can check if BGP RIB is showing the routes broadcasted by the remote router (the response could be big, so actual text response is not pasted here):
 
-![BGP RIB Restconf after Sync](./images/bgp/rib-after-sync.png)
+	![BGP RIB Restconf after Sync](./images/bgp/rib-after-sync.png)
 
 ## Inject Route
-### Inject Unicast Route
-* Inject IPv4 unicast routes
+
+With OpenDayLight, you can easily inject routes to remote BGP routers via RESTCONF.
+
+### Inject IPv4 unicast routes
 
 ![Inject IPv4 Unicast Route](./images/bgp/insert-ipv4-route.png)
 
 ![Display Injected IPv4 Unicast Route](./images/bgp/display-ipv4-route.png)
 
-* Inject IPv6 unicast routes
+### Inject IPv6 unicast routes
+
 ![Inject IPv6 Unicast Route](./images/bgp/insert-ipv6-route.png)
 
 ![Display Injected IPv6 Unicast Route](./images/bgp/display-ipv6-route.png)
 
 ### Delete Injected Route
+
+It is also possible to delete injected route via RESTCONF.  Please check the provided Postman collection.

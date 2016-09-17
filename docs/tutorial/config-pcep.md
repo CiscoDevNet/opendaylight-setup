@@ -1,7 +1,7 @@
 # Configure PCEP on ODL
 This part of the tutorial we will introduce how to use ODL to set up PCEP session with a router.
 
-## Prerequsite
+## Prerequisite
 ### Install PCEP Feature in ODL
 To install the PCEP feature in the controller, you will need to log into the karaf console.  Of course, you need to make sure the controller is installed and running.  You can use the provided script `bin/start-odl` to start controller.  After the controller is started, you can run `bin/karaf-client` to enter the karaf console.
 
