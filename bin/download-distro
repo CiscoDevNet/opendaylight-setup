@@ -3,15 +3,15 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
-if [[ "$1" == "release" ]]; then
-	filename="release.tar.gz"
-	version="$DISTRIBUTION_RELEASE_DOWNLOAD_URL"
-elif [ "$1" == "snapshot" ]; then
-	filename="snapshot.tar.gz"
-	version="$DISTROBUTION_SNAPSHOT_DOWNLOAD_URL"
+if [[ "$1" == "beryllium" ]]; then
+	filename="beryllium.tar.gz"
+	version="$DISTRIBUTION_BERYLLIUM_DOWNLOAD_URL"
+elif [ "$1" == "boron" ]; then
+	filename="boron.tar.gz"
+	version="$DISTROBUTION_BORON_DOWNLOAD_URL"
 else
-	echo "Usage: $0 snapshot|release [-f]"
-	echo "Specify -f means you will overwrite existing downloaded file if there is one"
+	echo "Usage: $0 beryllium|boron [-f]"
+	echo "Specify -f if you will overwrite existing downloaded file if there is one"
 	exit 1
 fi
 

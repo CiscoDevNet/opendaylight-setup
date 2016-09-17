@@ -26,23 +26,28 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
 
 1.  Download recommended ODL version:
 
-    * to download the latest release version (recommended):
-    `bin/download-distro release`
+    * to download ODL Beryllium:
+    `bin/download-distro beryllium`
 
-    * to download the lastest snapshot version:
-    `bin/download-distro snapshot`
+    * to download ODL Boron:
+    `bin/download-distro boron`
     
-    >Optionally, you can download the appropriate OpenDaylight distribution file (.tar.gz) from [OpenDayLight Download Page](https://www.opendaylight.org/downloads) (or other location) to images directory:
+	> Optionally, you can download the appropriate OpenDaylight distribution file (.tar.gz) from [OpenDayLight Download Page](https://www.opendaylight.org/downloads) (or other location) to images directory.
 
-  >Example: (Assumes you are downloading the "**Beryllium-SR3**" release.)
+	> Example: (Assumes you are downloading the "**Beryllium-SR3**" release)
 
-  >`wget -P distro-image https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz`
+	> wget -P distro-image https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz`
 
-3.  Unpack ODL using
+3.  Unpack downloaded ODL image with script provided.  The parameter you should give is the file name of the image you downloaded. **Note** `.tar.gz` will be added to the file name automatically.
 
-  `bin/unpack-odl`
+    * to unpack the downloaded Beryllium version:
+    `bin/unpack-odl beryllium`
 
-  ***NOTICE*** You should only have one distribution image under *images* directory before doing this step.
+    * to unpack the downloaded Boron version:
+    `bin/unpack-odl boron`
+	
+	> **NOTE** If you are downloading the image manually, you will need to unpack the image with the image name. For example:
+	> `bin/unpack-odl distribution-karaf-0.4.3-Beryllium-SR3`
   
 4. Continue [setting up ODL](#setup-odl)
 

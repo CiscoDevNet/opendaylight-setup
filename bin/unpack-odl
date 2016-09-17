@@ -5,13 +5,12 @@ source $PARENT_DIR/parameters
 
 bash $APP_ROOT/bin/delete-odl
 
-if [[ $# == 0 ]; then
-	filename="*.tar.gz"
-elif ["$1" == "release" ]; then
-        filename="release.tar.gz"
-elif [ "$1" == "snapshot" ]; then
-        filename="snapshot.tar.gz"
+if [[ $# -ne 1 ]]; then
+	echo "Usage: $0 filename              .tar.gz will be added to the filename by this script"
+	exit 1
 fi
+
+filename="$1.tar.gz"
 
 IMAGE_LOCATION="$DISTRO_IMG/$filename"
 
