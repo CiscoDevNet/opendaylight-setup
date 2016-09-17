@@ -27,4 +27,4 @@ FEATURES="odl-mdsal-apidocs"
 #Install BGP / PCEP feature
 FEATURES="${FEATURES},odl-bgpcep-bgp,odl-bgpcep-pcep"
 #Enable configuring via RESTCONF (not necessary unless you want to configure ODL config subsystem via RESTCONF)
-FEATURES="${FEATURES},odl-netconf-connector-all"
+#FEATURES="${FEATURES},odl-netconf-connector-all"

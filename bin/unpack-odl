@@ -5,7 +5,9 @@ source $PARENT_DIR/parameters
 
 bash $APP_ROOT/bin/delete-odl
 
-if [[ $? == 0 || "$1" == "release" ]]; then
+if [[ $# == 0 ]; then
+	filename="*.tar.gz"
+elif ["$1" == "release" ]; then
         filename="release.tar.gz"
 elif [ "$1" == "snapshot" ]; then
         filename="snapshot.tar.gz"
