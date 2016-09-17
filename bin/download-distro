@@ -3,7 +3,7 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
-if [[ $? == 0 || "$1" == "release" ]]; then
+if [[ "$1" == "release" ]]; then
 	filename="release.tar.gz"
 	version="$DISTRIBUTION_RELEASE_DOWNLOAD_URL"
 elif [ "$1" == "snapshot" ]; then
@@ -15,16 +15,19 @@ else
 	exit 1
 fi
 
+file="$DISTRO_IMG/$filename"
+
 if [[ "$2" == "-f" ]]; then
-        rm -f "$DISTRO_IMG/$filename" 2>/dev/null
+        rm -f "$file" 2>/dev/null
 fi
 
-if [ -f "$DISTRO_IMG/$filename" ]; then
-	echo "File $DISTRO_IMG/$filename already exists. Skip downloading."
+if [ -f "$file" ]; then
+	echo "File $file already exists. Skip downloading."
 	exit 0
 fi
 
-echo "Downloading ODL distro from $version .."
+echo "Downloading ODL distro from $version to $file.."
 echo "Please wait patiently, it may take a while"
-wget -nv -P "$DISTRO_IMG" -O $filename "$version"
+mkdir -p $DISTRO_IMG
+wget -nv -O $file "$version"
 echo "ODL distro downloaded!"

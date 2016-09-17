@@ -13,6 +13,8 @@ However, you may want to tweak a few scripts such as `bin/setup-env` to make the
 * Clone this repo to a working directory:
 
 	`git clone https://github.com/kevinxw/opendaylight-setup.git ODL`
+
+	> If you are using the provided Ubuntu image included in the USB stick, just cd into the `~/ODL` directory in terminal, then do a `git pull` to pull the latest content of this repository.
 	
 ##Installation Instructions
 ###Setup Environment with Script Provided
