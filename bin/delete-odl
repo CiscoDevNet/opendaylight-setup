@@ -8,3 +8,5 @@ bash $APP_ROOT/bin/stop-odl
 if [ ! -z "$DISTRO" ]; then
 	rm -rf $DISTRO
 fi
+
+echo "ODL is deleted"

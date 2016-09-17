@@ -8,10 +8,12 @@ cd ODL
 ./bin/setup-odl
 cd ..
 sudo apt-get install -y vim
+#sudo gpasswd -a vagrant wireshark
 chown -R vagrant:vagrant *
 # now create a shortcut to Desktop
 ln -s $HOME/ODL $HOME/Desktop/ODL
 # source parameters file
+sudo apt-get -y clean
 echo "source $HOME/ODL/parameters" >> ~/.bashrc
 echo "ready!"
 echo "please change parameters to reflect your setting ups"
