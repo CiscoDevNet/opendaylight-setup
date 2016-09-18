@@ -25,6 +25,8 @@ DCLOUD_VPN_PID='/var/run/dcloud-vpn.pid'
 #Install API docs 
 FEATURES="odl-mdsal-apidocs"
 #Install BGP / PCEP feature
-FEATURES="${FEATURES},odl-bgpcep-bgp-all,odl-bgpcep-pcep-all,odl-bgpcep-bmp"
+FEATURES="${FEATURES},odl-bgpcep-bgp-all,odl-bgpcep-pcep-all"
+#Install BMP
+#FEATURES="${FEATURES},odl-bgpcep-bmp"
 #Enable configuring via RESTCONF (not necessary unless you want to configure ODL config subsystem via RESTCONF)
 #FEATURES="${FEATURES},odl-netconf-connector-all"

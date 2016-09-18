@@ -15,8 +15,8 @@ fi
 echo "Stopping ODL."
 while true;
 do
-        up=$(/bin/ps -ef | grep karaf | wc -l)
-        if [ $up == 1 ]
+        up=$(pgrep -f karaf)
+        if [ ! -z "$up" ]
         then
 		echo "!"
                 echo "ODL has stopped"
