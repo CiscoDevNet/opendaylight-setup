@@ -11,14 +11,12 @@
     <required-capabilities>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:cfg?module=odl-bgp-rib-cfg&amp;revision=2013-07-01</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi?module=odl-bgp-rib-spi-cfg&amp;revision=2013-11-15</capability>
-        <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl?module=odl-bgp-rib-impl-cfg&amp;revision=2013-04-09</capability>
+        <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl?module=odl-bgp-rib-impl-cfg&amp;revision=2016-03-30</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:topology:provider?module=odl-bgp-topology-provider-cfg&amp;revision=2013-11-15</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:reachability:ipv6?module=odl-bgp-treachability-ipv6-cfg&amp;revision=2013-11-15</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp:reachability:ipv4?module=odl-bgp-treachability-ipv4-cfg&amp;revision=2013-11-15</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding?module=opendaylight-md-sal-binding&amp;revision=2013-10-28</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom?module=opendaylight-md-sal-dom&amp;revision=2013-10-28</capability>
-        <capability>urn:opendaylight:params:xml:ns:yang:controller:netty?module=netty&amp;revision=2013-11-19</capability>
-        <capability>urn:opendaylight:params:xml:ns:yang:controller:protocol:framework?module=protocol-framework&amp;revision=2014-03-13</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:topology?module=odl-topology-api-cfg&amp;revision=2013-11-15</capability>
         <capability>urn:opendaylight:params:xml:ns:yang:controller:bgp-openconfig-spi?module=odl-bgp-openconfig-spi-cfg&amp;revision=2015-09-25</capability>
     </required-capabilities>
@@ -26,19 +24,6 @@
 
         <data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
             <modules xmlns="urn:opendaylight:params:xml:ns:yang:controller:config">
-                <module>
-                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:timed-reconnect-strategy-factory</type>
-                    <name>example-reconnect-strategy-factory</name>
-                    <min-sleep>1000</min-sleep>
-                    <max-sleep>180000</max-sleep>
-                    <sleep-factor>2.00</sleep-factor>
-                    <connect-time>5000</connect-time>
-                    <timed-reconnect-executor>
-                        <type xmlns:netty="urn:opendaylight:params:xml:ns:yang:controller:netty">netty:netty-event-executor</type>
-                        <name>global-event-executor</name>
-                    </timed-reconnect-executor>
-                </module>
-
                 <module>
                     <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer-acceptor</type>
                     <name>bgp-peer-server</name>
@@ -57,8 +42,29 @@
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer-registry</type>
                         <name>global-bgp-peer-registry</name>
                     </accepting-peer-registry>
-
                 </module>
+
+                <!--<module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:path:selection:mode">prefix:advertise-n-paths</type>
+                    <name>n-paths</name>
+                    <n-best-paths>2</n-best-paths>
+                </module>-->
+                <!--<module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:path:selection:mode">prefix:advertise-all-paths</type>
+                    <name>all-paths</name>
+                </module>-->
+                <!--<module>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-psm-impl</type>
+                    <name>ipv4-unicast-path-selection-mode</name>
+                    <path-address-family>
+                        <type xmlns:ribimpl="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">ribimpl:bgp-table-type</type>
+                        <name>ipv4-unicast</name>
+                    </path-address-family>
+                    <path-selection-mode>
+                        <type xmlns:ribimpl="urn:opendaylight:params:xml:ns:yang:controller:bgp:path:selection:mode">ribimpl:path-selection-mode-factory</type>
+                        <name>n-paths</name>
+                    </path-selection-mode>
+                </module>-->
 
                 <!--
                      A single BGP peer. Note this section is deactivated because a misconfigured peer
@@ -76,6 +82,7 @@
                     <name>example-bgp-peer</name>
                     <host>198.18.1.37</host>
                     <holdtimer>180</holdtimer>
+                    <retrytimer>10</retrytimer>
                     <peer-role>ibgp</peer-role>
                     <rib>
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:rib-instance</type>
@@ -85,6 +92,10 @@
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer-registry</type>
                         <name>global-bgp-peer-registry</name>
                     </peer-registry>
+                    <rpc-registry>
+                        <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-rpc-registry</type>
+                        <name>binding-rpc-broker</name>
+                    </rpc-registry>
                     <advertized-table>
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
                         <name>ipv4-unicast</name>
@@ -107,8 +118,40 @@
                     </advertized-table>
                     <advertized-table>
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>labeled-unicast</name>
+                        <name>ipv4-flowspec-l3vpn</name>
                     </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-flowspec-l3vpn</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-labeled-unicast</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-labeled-unicast</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-l3vpn</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-l3vpn</name>
+                    </advertized-table>
+                    <advertized-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>evpn</name>
+                    </advertized-table>
+                    <add-path>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:add-path</type>
+                        <name>ipv4-unicast-both</name>
+                    </add-path>
+                    <add-path>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:add-path</type>
+                        <name>ipv6-unicast-both</name>
+                    </add-path>
                 </module>
 
                 <module>
@@ -116,7 +159,7 @@
                     <name>example-bgp-rib</name>
                     <rib-id>example-bgp-rib</rib-id>
                     <local-as>65504</local-as>
-                    <bgp-rib-id>127.0.0.1</bgp-rib-id>
+                    <bgp-rib-id>10.16.66.242</bgp-rib-id>
                     <!-- if cluster-id is not present, it's value is the same as bgp-id -->
                     <!-- <cluster-id>192.0.2.3</cluster-id> -->
                     <local-table>
@@ -141,8 +184,36 @@
                     </local-table>
                     <local-table>
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>labeled-unicast</name>
+                        <name>ipv4-flowspec-l3vpn</name>
                     </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-flowspec-l3vpn</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-labeled-unicast</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-labeled-unicast</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv4-l3vpn</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>ipv6-l3vpn</name>
+                    </local-table>
+                    <local-table>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
+                        <name>evpn</name>
+                    </local-table>
+                    <!--<rib-path-selection-mode>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-path-selection-mode</type>
+                        <name>ipv4-unicast-path-selection-mode</name>
+                    </rib-path-selection-mode>-->
                     <extensions>
                         <type xmlns:ribspi="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi">ribspi:extensions</type>
                         <name>global-rib-extensions</name>
@@ -163,25 +234,17 @@
                         <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-codec-tree-factory</type>
                         <name>runtime-mapping-singleton</name>
                     </codec-tree-factory>
-                    <session-reconnect-strategy>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
-                        <name>example-reconnect-strategy-factory</name>
-                    </session-reconnect-strategy>
-                    <tcp-reconnect-strategy>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
-                        <name>example-reconnect-strategy-factory</name>
-                    </tcp-reconnect-strategy>
                     <openconfig-provider>
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp-openconfig-spi">prefix:bgp-openconfig-provider</type>
                         <name>openconfig-bgp</name>
                     </openconfig-provider>
                 </module>
 
-                <!-- Application Peer -->
+                <!-- Application peer -->
                 <module>
                     <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">x:bgp-application-peer</type>
                     <name>example-bgp-peer-app</name>
-                    <bgp-peer-id>127.0.0.1</bgp-peer-id>
+                    <bgp-peer-id>10.16.66.242</bgp-peer-id>
                     <target-rib>
                         <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">x:rib-instance</type>
                         <name>example-bgp-rib</name>
@@ -191,6 +254,10 @@
                         <type xmlns:sal="urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom">sal:dom-async-data-broker</type>
                         <name>pingpong-broker</name>
                     </data-broker>
+                    <bgp-peer-registry>
+                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer-registry</type>
+                        <name>global-bgp-peer-registry</name>
+                    </bgp-peer-registry>
                 </module>
 
                 <module>
@@ -236,13 +303,6 @@
 
             <services xmlns="urn:opendaylight:params:xml:ns:yang:controller:config">
                 <service>
-                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
-                    <instance>
-                        <name>example-reconnect-strategy-factory</name>
-                        <provider>/config/modules/module[name='timed-reconnect-strategy-factory']/instance[name='example-reconnect-strategy-factory']</provider>
-                    </instance>
-                </service>
-                <service>
                     <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:topology">prefix:topology-reference</type>
                     <instance>
                         <name>example-ipv4-topology</name>
@@ -277,6 +337,27 @@
                         <provider>/config/modules/module[name='bgp-linkstate-topology']/instance[name='example-linkstate-topology']</provider>
                     </instance>
                 </service>
+                <!--<service>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:path:selection:mode">prefix:path-selection-mode-factory</type>
+                    <instance>
+                        <name>n-paths</name>
+                        <provider>/config/modules/module[name='advertise-n-paths']/instance[name='n-paths']</provider>
+                    </instance>
+                </service>-->
+                <!--<service>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:path:selection:mode">prefix:path-selection-mode-factory</type>
+                    <instance>
+                        <name>all-paths</name>
+                        <provider>/config/modules/module[name='advertise-all-paths']/instance[name='all-paths']</provider>
+                    </instance>
+                </service>-->
+                <!--<service>
+                    <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-path-selection-mode</type>
+                    <instance>
+                        <name>ipv4-unicast-path-selection-mode</name>
+                        <provider>/modules/module[type='bgp-psm-impl'][name='ipv4-unicast-path-selection-mode']</provider>
+                    </instance>
+                </service>-->
             </services>
         </data>
     </configuration>

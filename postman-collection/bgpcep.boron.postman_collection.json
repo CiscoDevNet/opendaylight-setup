@@ -40,8 +40,8 @@
 				{
 					"name": "BGP RIB",
 					"request": {
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/",
-						"method": "POST",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:rib-impl/{{bgp-rib-name}}",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -61,7 +61,115 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n  <name>{{bgp-rib-name}}</name>\r\n  <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-impl</type>\r\n  <codec-tree-factory xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">x:binding-codec-tree-factory</type>\r\n    <name>runtime-mapping-singleton</name>\r\n  </codec-tree-factory>\r\n  <dom-data-provider xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom\">x:dom-async-data-broker</type>\r\n    <name>inmemory-data-broker</name>\r\n  </dom-data-provider>\r\n  <extensions xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi\">x:extensions</type>\r\n    <name>global-rib-extensions</name>\r\n  </extensions>\r\n  <local-as xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-local-as}}</local-as>\r\n  <data-provider xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">x:binding-async-data-broker</type>\r\n    <name>pingpong-binding-data-broker</name>\r\n  </data-provider>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv4-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv6-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>linkstate</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv4-flowspec</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv6-flowspec</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv4-labeled-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-table-type</type>\r\n    <name>ipv6-labeled-unicast</name>\r\n  </local-table>\r\n  <local-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n     <type>bgp-table-type</type>\r\n     <name>ipv4-l3vpn</name>\r\n  </local-table>\r\n  <local-table>\r\n    <type xmlns:prefix=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">prefix:bgp-table-type</type>\r\n    <name>evpn</name>\r\n </local-table>\r\n  <!--\r\n  <rib-path-selection-mode xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:prefix=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">prefix:bgp-path-selection-mode</type>\r\n    <name>ipv4-unicast-path-selection-mode</name>\r\n   </rib-path-selection-mode>\r\n   -->\r\n  <bgp-rib-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-rib-id}}</bgp-rib-id>\r\n  <rib-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{rib-id}}</rib-id>\r\n  <openconfig-provider xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp-openconfig-spi\">x:bgp-openconfig-provider</type>\r\n    <name>openconfig-bgp</name>\r\n  </openconfig-provider>\r\n    <bgp-dispatcher xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n    <type>bgp-dispatcher</type>\r\n    <name>global-bgp-dispatcher</name>\r\n  </bgp-dispatcher>\r\n</module>"
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP RIB",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:rib-impl/{{bgp-rib-name}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<config:module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\" xmlns:config=\"urn:opendaylight:params:xml:ns:yang:controller:config\" xmlns:rib=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\n    <config:type>rib:rib-impl</config:type>\n    <config:name>{{bgp-rib-name}}</config:name>\n    <rib-id>{{rib-id}}</rib-id>\n    <local-as>{{bgp-local-as}}</local-as>\n    <bgp-rib-id>{{bgp-rib-id}}</bgp-rib-id>\n    <!-- if cluster-id is not present, it's value is the same as bgp-id -->\n    <!-- <cluster-id>192.0.2.3</cluster-id> -->\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-unicast</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-unicast</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>linkstate</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-flowspec</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-flowspec</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-flowspec-l3vpn</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-flowspec-l3vpn</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-labeled-unicast</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-labeled-unicast</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-l3vpn</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-l3vpn</name>\n    </local-table>\n    <local-table>\n        <type>rib:bgp-table-type</type>\n        <name>evpn</name>\n    </local-table>\n    <!--<rib-path-selection-mode>\n        <type>rib:bgp-path-selection-mode</type>\n        <name>ipv4-unicast-path-selection-mode</name>\n    </rib-path-selection-mode>-->\n    <extensions>\n        <type xmlns:ribspi=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi\">ribspi:extensions</type>\n        <name>global-rib-extensions</name>\n    </extensions>\n    <bgp-dispatcher>\n        <type>rib:bgp-dispatcher</type>\n        <name>global-bgp-dispatcher</name>\n    </bgp-dispatcher>\n    <data-provider>\n        <type xmlns:binding=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">binding:binding-async-data-broker</type>\n        <name>pingpong-binding-data-broker</name>\n    </data-provider>\n    <dom-data-provider>\n        <type xmlns:sal=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom\">sal:dom-async-data-broker</type>\n        <name>pingpong-broker</name>\n    </dom-data-provider>\n    <codec-tree-factory>\n        <type xmlns:binding=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">binding:binding-codec-tree-factory</type>\n        <name>runtime-mapping-singleton</name>\n    </codec-tree-factory>\n</config:module>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Linkstate",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-linkstate-cfg:bgp-linkstate/bgp-linkstate",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " <module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\n  <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:linkstate\">x:bgp-linkstate</type>\n  <name>bgp-linkstate</name>\n  <iana-linkstate-attribute-type xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:linkstate\">true</iana-linkstate-attribute-type>\n </module>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Linkstate",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/bgp-linkstate-app-config:bgp-linkstate-app-config/bgp-linkstate-app-config",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " <module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\n  <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:bgp-linkstate-app-config\">x:bgp-linkstate-app-config</type>\n  <name>bgp-linkstate</name>\n  <iana-linkstate-attribute-type xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:bgp-linkstate-app-config\">true</iana-linkstate-attribute-type>\n </module>"
 						},
 						"description": ""
 					},
@@ -70,7 +178,37 @@
 				{
 					"name": "BGP Peer",
 					"request": {
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-peer/{{bgp-peer-name}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer</type>\r\n <name>{{bgp-peer-name}}</name>\r\n <host xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-peer-ip}}</host>\r\n <holdtimer xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">180</holdtimer>\r\n <peer-role xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">ibgp</peer-role>\r\n <rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </rib>\r\n  <peer-registry xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer-registry</type>\r\n   <name>global-bgp-peer-registry</name>\r\n  </peer-registry>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>linkstate</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>labeled-unicast</name>\r\n  </advertized-table>\r\n </module>\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/",
 						"method": "POST",
 						"header": [
 							{
@@ -91,7 +229,37 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer</type>\r\n <name>{{bgp-peer-name}}</name>\r\n <host xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{XRv-mgmt-ip}}</host>\r\n <holdtimer xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">180</holdtimer>\r\n <peer-role xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">ibgp</peer-role>\r\n <rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </rib>\r\n  <peer-registry xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer-registry</type>\r\n   <name>global-bgp-peer-registry</name>\r\n  </peer-registry>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>linkstate</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>labeled-unicast</name>\r\n  </advertized-table>\r\n </module>\r\n"
+							"raw": "<config:module xmlns:config=\"urn:opendaylight:params:xml:ns:yang:controller:config\" xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\" xmlns:rib=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\n    <config:type>rib:bgp-peer</config:type>\n    <config:name>{{bgp-peer-name}}</config:name>\n    <host>{{bgp-peer-ip}}</host>\n    <holdtimer>180</holdtimer>\n    <retrytimer>10</retrytimer>\n    <peer-role>ibgp</peer-role>\n    <rib>\n        <type>rib:rib-instance</type>\n        <name>{{bgp-rib-name}}</name>\n    </rib>\n    <peer-registry>\n        <type>rib:bgp-peer-registry</type>\n        <name>global-bgp-peer-registry</name>\n    </peer-registry>\n    <rpc-registry>\n        <type xmlns:binding=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding\">binding:binding-rpc-registry</type>\n        <name>binding-rpc-broker</name>\n    </rpc-registry>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-unicast</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-unicast</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>linkstate</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-flowspec</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-flowspec</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-flowspec-l3vpn</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-flowspec-l3vpn</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-labeled-unicast</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-labeled-unicast</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv4-l3vpn</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>ipv6-l3vpn</name>\n    </advertized-table>\n    <advertized-table>\n        <type>rib:bgp-table-type</type>\n        <name>evpn</name>\n    </advertized-table>\n    <add-path>\n        <type>rib:add-path</type>\n        <name>ipv4-unicast-both</name>\n    </add-path>\n    <add-path>\n        <type>rib:add-path</type>\n        <name>ipv6-unicast-both</name>\n    </add-path>\n</config:module>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer ",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
 						},
 						"description": ""
 					},
@@ -100,7 +268,37 @@
 				{
 					"name": "BGP Application Peer",
 					"request": {
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-application-peer</type>\r\n <name>{{bgp-app-peer-name}}</name>\r\n <bgp-peer-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-rib-id}}</bgp-peer-id>\r\n <target-rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n  <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </target-rib>\r\n <application-rib-id xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-app-rib-name}}</application-rib-id>\r\n <data-broker xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n  <type xmlns:sal=\"urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom\">sal:dom-async-data-broker</type>\r\n  <name>pingpong-broker</name>\r\n </data-broker>\r\n</module>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Application Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
 						"method": "PUT",
 						"header": [
 							{
@@ -130,7 +328,7 @@
 				{
 					"name": "BGP Application Peer",
 					"request": {
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/opendaylight-inventory:nodes/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/network-topology:network-topology/topology/topology-netconf/node/controller-config/yang-ext:mount/config:modules/module/odl-bgp-rib-impl-cfg:bgp-application-peer/{{bgp-app-peer-name}}",
 						"method": "DELETE",
 						"header": [
 							{
@@ -339,11 +537,11 @@
 			]
 		},
 		{
-			"name": "OpenConfig",
+			"name": "OpenConfig - BGP",
 			"description": "",
 			"item": [
 				{
-					"name": "BGP config",
+					"name": "BGP Config",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -366,6 +564,210 @@
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP RIB",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/global/config",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<config xmlns=\"http://openconfig.net/yang/bgp\">\n  <router-id>{{bgp-rib-id}}</router-id>\n  <as>{{bgp-local-as}}</as>\n</config>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer List",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Peer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Application Peer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-app-peer-ip}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-app-peer-ip}}</neighbor-address>\n  <config>\n    <peer-group>application-peers</peer-group>\n  </config>\n</neighbor>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "BGP Application Peer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-app-peer-ip}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
 						},
 						"description": ""
 					},
@@ -521,7 +923,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n <node>pcc://{{XRv-mgmt-ip}}</node>\r\n <name>{{pcep-tunnel-name}}</name>\r\n <arguments/>\r\n <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n <node>pcc://{{pcep-node-id}}</node>\r\n <name>{{pcep-tunnel-name}}</name>\r\n <arguments/>\r\n <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
 						},
 						"description": ""
 					},
@@ -620,6 +1022,11 @@
 							{
 								"key": "Authorization",
 								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
 								"description": ""
 							}
 						],
@@ -943,7 +1350,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<input xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-peer-rpc\">\n    <afi xmlns:types=\"urn:opendaylight:params:xml:ns:yang:bgp-types\">types:ipv4-address-family</afi>\n    <safi xmlns:types=\"urn:opendaylight:params:xml:ns:yang:bgp-types\">types:unicast-subsequent-address-family</safi>\n    <peer-ref xmlns:rib=\"urn:opendaylight:params:xml:ns:yang:bgp-rib\">/rib:bgp-rib/rib:rib[rib:id=\"{{rib-id}}\"]/rib:peer[rib:peer-id=\"bgp://{{XRv-mgmt-ip}}\"]</peer-ref>\n</input>"
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<input xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-peer-rpc\">\n    <afi xmlns:types=\"urn:opendaylight:params:xml:ns:yang:bgp-types\">types:ipv4-address-family</afi>\n    <safi xmlns:types=\"urn:opendaylight:params:xml:ns:yang:bgp-types\">types:unicast-subsequent-address-family</safi>\n    <peer-ref xmlns:rib=\"urn:opendaylight:params:xml:ns:yang:bgp-rib\">/rib:bgp-rib/rib:rib[rib:id=\"{{rib-id}}\"]/rib:peer[rib:peer-id=\"bgp://{{bgp-peer-ip}}\"]</peer-ref>\n</input>"
 						},
 						"description": ""
 					},

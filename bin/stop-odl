@@ -15,7 +15,7 @@ fi
 echo "Stopping ODL."
 while true;
 do
-        up=$(pgrep -f karaf)
+        up=$(pgrep -f karaf.main)
         if [ ! -z "$up" ]
         then
 		echo "!"
