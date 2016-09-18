@@ -16,7 +16,7 @@ the one which is best suited for your environment
 1.  USB stick with preconfigured VM image are available. Please get it
     from one of the instructors or ask around
 
-2.  Mount the USB stick and copy the preconfigured VM image (name TBD)
+2.  Mount the USB stick and copy the preconfigured VM image **ODLSummit.ova**
 
 3.  Once the copy is done, unmount the stick and pass it around to
     others who need it
@@ -27,9 +27,11 @@ the one which is best suited for your environment
 	> instructors so that we can give it to people in different part of room
 	> or those who may come late. Thanks for your co-operation!
 
-1.  Extract the VM image to a local folder
+1.  Copy the VM image to a local folder
 
-2.  Import the image in Virtual Box or VMWare Player
+2.  Import the image in [Virtual Box](https://www.virtualbox.org/wiki/Downloads) or [VMWare Player](https://www.vmware.com/products/player/playerpro-evaluation.html) (recommended)
+
+	 > The VM image is exported from VMWare Fusion, so there are may be some settings not compatible with Virtual Box.  Double check your VM setting before you start it.
 
 3.  Boot-up the imported VM and login into it using below credentials:
 
@@ -37,38 +39,31 @@ the one which is best suited for your environment
 
     Password: `odlsummit`
 
-4.  ODL setup scripts are already available under */home/odlsummit/ODL*
-    directory
+4.  ODL setup scripts are already available under */home/odlsummit/ODL* directory. A shortcut is created on the desktop as well.  **NOTE** It is recommended to run `git pull` under the */home/odlsummit/ODL* directory, so that it will pull the latest scrpits and docs from GitHub.
 
-5.  OpenDaylight Controller (**Beryllium SR3** version) is installed
-    under */home/odlsummit/ODL/distribution-karaf-0.4.3-Beryllium-SR3*
-    directory
+5.  OpenDaylight Controller (**Beryllium SR3** version) is installed under */home/odlsummit/ODL/distribution* directory
 
-6.  Open file */home/odlsummit/ODL/README.md* and execute steps 8 through
-    10
+> All the required software are already installed.  You can start to configure and start the ODL immediately.
 
 ### <a name="vagrant_vm">Use Vagrant to launch pre-configured VM</a>
 
-1.  This method requires Vagrant and Virtual Box to be pre-installed on
-    your laptop. Install them if you don’t have them already
+1.  This method requires Vagrant and Virtual Box to be pre-installed on your laptop. Install them if you don’t have them already
 
 2.  Copy *vagrant* folder from [this repository](../../vagrant) to a local folder on your laptop
 
 3.  Open a terminal and cd to the local folder directory
 
-4.  Execute `vagrant up` command which will create a new VM under Virtual
-    Box and run basic configuration commands on it
+4.  Execute `vagrant up` command which will create a new VM under Virtual Box and run basic configuration commands on it
 
-5.  Connect to the VM using `vagrant ssh` command (include procedure to
-    access Desktop)
+5.  Connect to the VM using `vagrant ssh` command, or use the GUI directly
 
 6.  ODL setup scripts will be available under */home/odlsummit/ODL*
     directory and OpenDaylight Controller (default: Beryllium SR3 version) will be installed under
-    */home/odlsummit/ODL/distribution-karaf-0.4.3-Beryllium-SR3* directory
+    */home/odlsummit/ODL/distribution* directory
 
 ### <a name="vanilla_vm">Use any vanilla VM and configure manually</a>
 
-1.  You need to prepare Ubuntu 14.04 or CentOS 7 VM to host the ODL Controller.  
+1.  You need to prepare Ubuntu 14.04/16.04 or CentOS 7 VM to host the ODL Controller.  
    
     > * If you do not want to use Ubuntu or CentOS, remember ODL **may or may not** work properly with other versions of operating system, so try them at your own risk.
     
@@ -86,13 +81,13 @@ the one which is best suited for your environment
 
     `sudo yum install git`
 
-3.  Follow steps 1 through 10 listed in README.md file at
-    <https://github.com/kevinxw/opendaylight-setup> (final repo URL TBD)
-
+3.  Clone the repository at
+    <https://github.com/kevinxw/opendaylight-setup>
+    
 4.  ODL setup scripts will be available under */home/odlsummit/ODL*
     directory and OpenDaylight Controller (default: Beryllium
     SR3 version) will be installed under
-    */home/odlsummit/ODL/distribution-karaf-0.4.3-Beryllium-SR3* directory
+    */home/odlsummit/ODL/distribution* directory
 
 ## Setup Verification
 

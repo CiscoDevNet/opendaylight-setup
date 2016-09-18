@@ -5,7 +5,7 @@ APP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source $APP_ROOT/nodes
 
 #Boron snapshot
-DISTROBUTION_BORON_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/autorelease-1497/org/opendaylight/integration/distribution-karaf/0.5.0-Boron/distribution-karaf-0.5.0-Boron.tar.gz'
+DISTROBUTION_BORON_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/integration/distribution-karaf/0.5.0-Boron/distribution-karaf-0.5.0-Boron.tar.gz'
 DISTRIBUTION_BERYLLIUM_DOWNLOAD_URL='https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz'
 
 DISTRO_ROOT=$APP_ROOT/distribution
@@ -25,6 +25,6 @@ DCLOUD_VPN_PID='/var/run/dcloud-vpn.pid'
 #Install API docs 
 FEATURES="odl-mdsal-apidocs"
 #Install BGP / PCEP feature
-FEATURES="${FEATURES},odl-bgpcep-bgp,odl-bgpcep-pcep"
+FEATURES="${FEATURES},odl-bgpcep-bgp-all,odl-bgpcep-pcep-all,odl-bgpcep-bmp"
 #Enable configuring via RESTCONF (not necessary unless you want to configure ODL config subsystem via RESTCONF)
 #FEATURES="${FEATURES},odl-netconf-connector-all"

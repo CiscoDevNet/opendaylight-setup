@@ -3,6 +3,11 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
+if [[ "$1" != "beryllium" || "$1" != "boron" ]]; then
+	echo "Usage: $0 beryllium|boron"
+	exit 1
+fi
+
 $APP_ROOT/bin/setup-env
-$APP_ROOT/bin/download-distro beryllium
-$APP_ROOT/bin/unpack-odl beryllium
+$APP_ROOT/bin/download-distro "$1"
+$APP_ROOT/bin/unpack-odl "$1" 

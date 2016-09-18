@@ -20,12 +20,13 @@ while true;
 do
 	ready=$(curl http://${ODL_USER}:${ODL_PASS}@localhost:8181/restconf/operational/network-topology:network-topology/ 2>&1)
 	if echo $ready | grep -q "network-topology";
-	then
-		echo "ODL is ready!"
-		exit 0
-	else
-		echo ">> waiting for RESTCONF.."
-		sleep 5
-	fi
+        then
+                echo "!"
+                echo "ODL is ready."
+                exit 0
+        else
+                printf "."
+                sleep 1
+        fi
 done
 

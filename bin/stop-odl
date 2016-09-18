@@ -18,11 +18,12 @@ do
         up=$(/bin/ps -ef | grep karaf | wc -l)
         if [ $up == 1 ]
         then
+		echo "!"
                 echo "ODL has stopped"
                 exit 0
         else
                 printf "."
-		sleep 2
+		sleep 1
         fi
 done
 
