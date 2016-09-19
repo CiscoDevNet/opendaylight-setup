@@ -1,8 +1,8 @@
 # Opendaylight-Setup
 ## Intro
-This directory contains setup scripts for ODL, and is particularly designed to be work with [Cisco dCloud](https://dcloud.cisco.com).
+This directory contains setup scripts for ODL, and is particularly designed to be work with [Cisco dCloud](https://dcloud.cisco.com).  The goal of this repository is to provide handy scripts for the attendees of ODL Summit 2016 BGPCEP Tutorial.
 
-This project is forked from [CiscoDevNet](https://github.com/CiscoDevNet/opendaylight-setup).  However, netconf related scripts are removed for demo purpose.
+This project is forked from [CiscoDevNet](https://github.com/CiscoDevNet/opendaylight-setup).  However, some files are removed for demo purpose.
 
 ## Preparation
 * Start with a Linux host or VM with git installed (at a minimum).  Vim is also recommended for editing ODL config files, but it's up to your needs. 

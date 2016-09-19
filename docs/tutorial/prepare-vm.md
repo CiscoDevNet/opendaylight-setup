@@ -127,6 +127,6 @@ instructors to debug the issue, before proceeding further
     is connected
 
 2.  Ping IP address of SJC XRv router using command `source ./parameters
-    && ping $BGP_PEER` and it should return success
+    && ping $ROUTER_NODE_SJC` and it should return success
 
 	![](./images/image18.png)

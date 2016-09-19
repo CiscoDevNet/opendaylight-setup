@@ -15,10 +15,6 @@ DISTRO_IMG=$APP_ROOT/distro-image
 ODL_USER=admin
 ODL_PASS=admin
 
-BGP_PEER="$ROUTER_NODE_SJC"
-LOCAL_AS=65504
-REMOTE_AS=65504
-
 DCLOUD=YES
 DCLOUD_VPN_PID='/var/run/dcloud-vpn.pid'
 
@@ -27,6 +23,6 @@ FEATURES="odl-mdsal-apidocs"
 #Install BGP / PCEP feature
 FEATURES="${FEATURES},odl-bgpcep-bgp-all,odl-bgpcep-pcep-all"
 #Install BMP
-#FEATURES="${FEATURES},odl-bgpcep-bmp"
+FEATURES="${FEATURES},odl-bgpcep-bmp"
 #Enable configuring via RESTCONF (not necessary unless you want to configure ODL config subsystem via RESTCONF)
 #FEATURES="${FEATURES},odl-netconf-connector-all"
