@@ -8,6 +8,5 @@ if [[ "$1" != "beryllium" || "$1" != "boron" ]]; then
 	exit 1
 fi
 
-$APP_ROOT/bin/setup-env
 $APP_ROOT/bin/download-distro "$1"
 $APP_ROOT/bin/unpack-odl "$1" 
