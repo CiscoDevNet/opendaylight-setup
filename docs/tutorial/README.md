@@ -52,10 +52,6 @@ Assuming you have already got a VM with ODL distribution unpacked following the 
 
 [BGP](./config-bgp.md)
 
-### ExaBGP
-
-[ExaBGP](./use-exabgp.md)
-
 ### BMP
 
 [BMP](./config-bmp.md)
