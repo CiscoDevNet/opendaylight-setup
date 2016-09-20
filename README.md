@@ -10,7 +10,7 @@ To check the guide for BGP / PCEP Tutorial, you can browse the [tutorial directo
 
 ## Vagrant
  
-The repository also contains a subdirectory *vagrant* which contains a `Vagrantfile` and `bootstrap.sh` script.  Please read the [vagrant section](./docs/tutorial/prepare-vm.md#vagrant_vm) to learn more about it.
+The repository also contains a subdirectory *vagrant* which contains a `Vagrantfile` and `bootstrap.sh` script.  Please read the [vagrant section](./docs/tutorial/prepare-vm.md#use-vagrant-to-launch-pre-configured-vm) to learn more about it.
 
 If you have [Vagrant](https://www.vagrantup.com/downloads.html) and VirtualBox or VMWare Workstation/Fusion installed you can do a "vagrant up" from that directory and a VirtualBox VM will be created consisting of:
 

@@ -46,7 +46,7 @@ Assuming you have already got a VM with ODL distribution unpacked following the 
 
 	![Karaf process](./images/odl/karaf.png)
 
-3. Now you need to make sure the VPN to dCloud lab is already connected.  If it's not, you need to connect it following the [steps here](./setup-dcloud.md#vpn).
+3. Now you need to make sure the VPN to dCloud lab is already connected.  If it's not, you need to connect it following the [steps here](./setup-dcloud.md#connect-to-dcloud-lab).
 	
 ## BGP
 

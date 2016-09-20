@@ -10,11 +10,11 @@ the one which is best suited for your environment
   
 | Option | Pre-requisites | Pros | Cons |
 |--------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| [Preconfigured VM from USB stick](#preconfig_vm) | Hypervisor (e.g. Virtual Box) installed on your laptop | Controller and setup scripts are installed on this VM, so once you import and start the VM, you are good to go | <ul><li> USB stick availability </li><li> May take time to copy VM image from USB stick to laptop </li><li> Need free resources on laptop to start new VM </li></ul> |
-| [Vagrant to launch preconfigured VM](#vagrant_vm) | Vagrant and Hypervisor (e.g. Virtual Box) installed on your laptop | If you have the pre-requisites and are familiar,with using Vagrant, this option provides an easy way to get the Controller VM,ready | <ul><li>vagrant up may take time to download/config the VM and Controller </li><li> Need free resources on laptop to start new VM </li></ul> |
-| [Vanilla VM with manual configuration](#vanilla_vm) | Access to any recent version of Ubuntu or CentOS VM | Don’t need to spin-up a new VM, so no additional resources needed on laptop | <ul><li>May take time to download/config the VM and Controller </li><li> Environment may be different than reference VM causing some issues </li></ul> |
+| [Preconfigured VM from USB stick](#use-preconfigured-vm-from-usb-stick) | Hypervisor (e.g. Virtual Box) installed on your laptop | Controller and setup scripts are installed on this VM, so once you import and start the VM, you are good to go | <ul><li> USB stick availability </li><li> May take time to copy VM image from USB stick to laptop </li><li> Need free resources on laptop to start new VM </li></ul> |
+| [Vagrant to launch preconfigured VM](#use-vagrant-to-launch-pre-configured-vm) | Vagrant and Hypervisor (e.g. Virtual Box) installed on your laptop | If you have the pre-requisites and are familiar,with using Vagrant, this option provides an easy way to get the Controller VM,ready | <ul><li>vagrant up may take time to download/config the VM and Controller </li><li> Need free resources on laptop to start new VM </li></ul> |
+| [Vanilla VM with manual configuration](#use-any-vanilla-vm-and-configure-manually) | Access to any recent version of Ubuntu or CentOS VM | Don’t need to spin-up a new VM, so no additional resources needed on laptop | <ul><li>May take time to download/config the VM and Controller </li><li> Environment may be different than reference VM causing some issues </li></ul> |
 
-### <a name="preconfig_vm">Use preconfigured VM from USB stick</a>
+### <a name="use-preconfigured-vm-from-usb-stick">Use preconfigured VM from USB stick</a>
 
 1.  If you are physically attending the ODL Summit 2016 - BGPCEP tutorial session, a USB stick with preconfigured VM image are available. Please get it from one of the instructors or ask around
 
@@ -43,7 +43,7 @@ the one which is best suited for your environment
 
 4.  This repository has already been cloned to *~/ODL* directory in the VM. A shortcut is created on the desktop as well.
 	
-### <a name="vagrant_vm">Use Vagrant to launch pre-configured VM</a>
+### <a name="use-vagrant-to-launch-pre-configured-vm">Use Vagrant to launch pre-configured VM</a>
 
 1.  This method requires [Vagrant](https://www.vagrantup.com/downloads.html) and [Virtual Box](https://www.virtualbox.org/wiki/Downloads) to be pre-installed on your laptop. Install them if you don’t have them already
 
@@ -59,7 +59,7 @@ the one which is best suited for your environment
 
 7.  You will need to install Postman on your VM following the guide [here](./config-postman.md).
 
-### <a name="vanilla_vm">Use any vanilla VM and configure manually</a>
+### <a name="use-any-vanilla-vm-and-configure-manually">Use any vanilla VM and configure manually</a>
 
 1.  You need to prepare a Linux VM to host the ODL Controller.  **NOTE** The script provided by this repository are tested on **Ubuntu 14.04/16.04**.  It is not guaranteed that it will also works well on other distribution of Linux.
    

@@ -83,7 +83,7 @@ Follow below steps to launch the network simulation
 
 	![](./images/image16.png)
 	
-## <a name="vpn">Connect to dCloud Lab</a>
+## <a name="connect-to-dcloud-lab">Connect to dCloud Lab</a>
 
 To make sure you are able to use the routers in the dCloud lab, you can verify the VPN connection between your VM and dCloud lab use the following steps: 
 
