@@ -1,4 +1,7 @@
 # Prepare Your Controller
+
+This guide will is created to help you prepare a Linux environment that is ODL and tutorial ready.
+
 ## Setup Controller VM
 
 There are several options for creating the Controller VM. Please pick
@@ -9,12 +12,11 @@ the one which is best suited for your environment
 |--------------------------------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | [Preconfigured VM from USB stick](#preconfig_vm) | Hypervisor (e.g. Virtual Box) installed on your laptop | Controller and setup scripts are installed on this VM, so once you import and start the VM, you are good to go | <ul><li> USB stick availability </li><li> May take time to copy VM image from USB stick to laptop </li><li> Need free resources on laptop to start new VM </li></ul> |
 | [Vagrant to launch preconfigured VM](#vagrant_vm) | Vagrant and Hypervisor (e.g. Virtual Box) installed on your laptop | If you have the pre-requisites and are familiar,with using Vagrant, this option provides an easy way to get the Controller VM,ready | <ul><li>vagrant up may take time to download/config the VM and Controller </li><li> Need free resources on laptop to start new VM </li></ul> |
-| [Vanilla VM with manual configuration](#vanilla_vm) | Access to any recent version of Ubuntu or CentOS,VM | Don’t need to spin-up a new VM, so no additional,resources needed on laptop | <ul><li>May take time to download/config the VM and Controller </li><li> Environment may be different than reference VM causing some issues </li></ul> |
+| [Vanilla VM with manual configuration](#vanilla_vm) | Access to any recent version of Ubuntu or CentOS VM | Don’t need to spin-up a new VM, so no additional resources needed on laptop | <ul><li>May take time to download/config the VM and Controller </li><li> Environment may be different than reference VM causing some issues </li></ul> |
 
 ### <a name="preconfig_vm">Use preconfigured VM from USB stick</a>
 
-1.  USB stick with preconfigured VM image are available. Please get it
-    from one of the instructors or ask around
+1.  If you are physically attending the ODL Summit 2016 - BGPCEP tutorial session, a USB stick with preconfigured VM image are available. Please get it from one of the instructors or ask around
 
 2.  Mount the USB stick and copy the preconfigured VM image **ODLSummit.ova**
 
@@ -39,94 +41,69 @@ the one which is best suited for your environment
 
     Password: `odlsummit`
 
-4.  ODL setup scripts are already available under */home/odlsummit/ODL* directory. A shortcut is created on the desktop as well.  **NOTE** It is recommended to run `git pull` under the */home/odlsummit/ODL* directory, so that it will pull the latest scrpits and docs from GitHub.
-
-5.  OpenDaylight Controller (**Beryllium SR3** version) is installed under */home/odlsummit/ODL/distribution* directory
-
-> All the required software are already installed.  You can start to configure and start the ODL immediately.
-
+4.  This repository has already been cloned to *~/ODL* directory in the VM. A shortcut is created on the desktop as well.
+	
 ### <a name="vagrant_vm">Use Vagrant to launch pre-configured VM</a>
 
-1.  This method requires Vagrant and Virtual Box to be pre-installed on your laptop. Install them if you don’t have them already
+1.  This method requires [Vagrant](https://www.vagrantup.com/downloads.html) and [Virtual Box](https://www.virtualbox.org/wiki/Downloads) to be pre-installed on your laptop. Install them if you don’t have them already
 
 2.  Copy *vagrant* folder from [this repository](../../vagrant) to a local folder on your laptop
 
 3.  Open a terminal and cd to the local folder directory
 
-4.  Execute `vagrant up` command which will create a new VM under Virtual Box and run basic configuration commands on it
+4.  Execute `vagrant up` command which will create a new VM under Virtual Box and run basic configuration commands on it.  A Ubuntu 14.04 will be spinned up by default.
 
-5.  Connect to the VM using `vagrant ssh` command, or use the GUI directly
+5.  Connect to the VM using `vagrant ssh` command, or use the GUI directly.
 
-6.  ODL setup scripts will be available under */home/odlsummit/ODL*
-    directory and OpenDaylight Controller (default: Beryllium SR3 version) will be installed under
-    */home/odlsummit/ODL/distribution* directory
+4.  This repository has already been cloned to *~/ODL* directory in the VM. A shortcut is created on the desktop as well.
+
+7.  You will need to install Postman on your VM following the guide [here](./config-postman.md).
 
 ### <a name="vanilla_vm">Use any vanilla VM and configure manually</a>
 
-1.  You need to prepare Ubuntu 14.04/16.04 or CentOS 7 VM to host the ODL Controller.  
+1.  You need to prepare a Linux VM to host the ODL Controller.  **NOTE** The script provided by this repository are tested on **Ubuntu 14.04/16.04**.  It is not guaranteed that it will also works well on other distribution of Linux.
    
-    > * If you do not want to use Ubuntu or CentOS, remember ODL **may or may not** work properly with other versions of operating system, so try them at your own risk.
+    > * If you do not want to use Ubuntu, remember ODL **may or may not** work properly with other versions of operating system, so try them at your own risk.
     
-    > * Minimum specs are 2 CPU, 4 GB RAM and 20 GB of free
+    > * Minimum specs are 2 CPU cores, 4 GB RAM and 20 GB of free
     disk space
 
 2.  Login to your VM and install git package using appropriate commands
     for your platform
 
-    Ubuntu:
+    For Ubuntu, use:
 
     `sudo apt-get install git`
 
-    CentOS:
-
-    `sudo yum install git`
-
-3.  Clone the repository at
-    <https://github.com/kevinxw/opendaylight-setup>
+3.  Clone this repository to your workspace with command
+    `git clone https://github.com/kevinxw/opendaylight-setup ODL`
     
-4.  ODL setup scripts will be available under */home/odlsummit/ODL*
-    directory and OpenDaylight Controller (default: Beryllium
-    SR3 version) will be installed under
-    */home/odlsummit/ODL/distribution* directory
+4.  Switch to the repository directory with command `cd ODL`.
 
-## Setup Verification
+4.  Set up the environment with script `bin/setup-env`.
 
-Finally, use the below steps to ensure that your setup is configured
-properly. If any of the steps fail, please take help from any of the
-instructors to debug the issue, before proceeding further
+	> **NOTE** The script is using `apt-get` to install packages, so you will need to tweak the script if you are using CentOS VM.
+    
+5.  Run script `bin/download-distro beryllium` to fetch the Beryllium SR3, which will be used for this tutorial.
+	
+	> If you are physically attending the tutorial, you should be able to find the distribution package in the provided USB stick.  You can copy them to your VM directly in case the downloading speed is not ideal.
+	
+	> There will be one **beryllium.tar.gz** and one **boron.tar.gz** file in the USB stick.  Copy both of them to the `distro-image` directory under the repository which you just cloned.  If there is no `distro-image` directory, you can create one with command `mkdir distro-image`
+	
+	> By copying the distro image from USB stick directly, you do not need to run `bin/download-distro` anymore.
+	
+	> Optionally, you can run `bin/download-distro boron` in order to test Boron release.  But only one ODL release can be unpacked at one time.
+	
+6.  After the ODL distro is downloaded, you will need to run command `bin/unpack-odl beryllium` to unpack the ODL to `distribution` folder.
 
-### Verification of dCloud setup
+	> Optionally, you can run `bin/unpack-odl boron` if you have downloaded ODL Boron release instead.
 
-1.  Go to dCloud session details page and click on Workstation icon
+7.  You will need to install Postman on your VM following the guide [here](./config-postman.md).
 
-	![](./images/image14.png)
+## Pull The Latest Tutorial Guide
 
-2.  Use the listed IP address and credentials with a local RDP client,
-    or use the Remote Desktop web-client link provided to access the
-    Workstation desktop. Chrome browser should open automatically with 3
-    tabs, one of them being the status page with Launch Progress
+Before starting the tutorial, it is recommended pull the latest scrpits and docs from GitHub.
+	
+Go to the repository directory (if you are using provided VM or VM spinned up with Vagrant, the repository is cloned to `~/ODL`) and do a `git pull` to pull the latest scripts.
 
-	![](./images/image15.png)
-
-3.  Lab is fully initialized when steps 1 through 9 show up in
-    green color. It may take up to 30 minutes for this to happen
-
-	![](./images/image16.png)
-
-### Verification of Controller VM
-
-1.  In Controller VM terminal, execute command ps -ef |grep karaf. It
-    should display one entry showing the Controller process
-
-	![](./images/image17.png)
-
-### Verification of connectivity between dCloud network simulation and Controller VM
-
-1.  In a Controller VM terminal, cd to ODL directory and execute
-    command `bin/check_vpn_status`. It should show that Anyconnect VPN
-    is connected
-
-2.  Ping IP address of SJC XRv router using command `source ./parameters
-    && ping $ROUTER_NODE_SJC` and it should return success
-
-	![](./images/image18.png)
+You will also want to re-import the Postman collection following the guide [here](./config-postman.md).

@@ -65,3 +65,55 @@ Follow below steps to launch the network simulation
 8.  Click on **Details** tab and note down the Anyconnect details, which will be used when connecting Controller VM to the dCloud environment
 
 	![](./images/image13.png)
+
+## Verification of dCloud setup
+
+1.  Go to dCloud session details page and click on Workstation icon
+
+	![](./images/image14.png)
+
+2.  Use the **Remote Desktop** web-client link provided to access the
+    Workstation desktop. Chrome browser should open automatically with 3
+    tabs, one of them being the status page with Launch Progress
+
+	![](./images/image15.png)
+
+3.  Lab is fully initialized when steps 1 through 9 show up in
+    green color. It may take up to 30 minutes for this to happen
+
+	![](./images/image16.png)
+	
+## <a name="vpn">Connect to dCloud Lab</a>
+
+To make sure you are able to use the routers in the dCloud lab, you can verify the VPN connection between your VM and dCloud lab use the following steps: 
+
+0. Change *vpn\_credential* file to reflect your dCloud credential
+
+   * There is a [vpn_credential.example](../../vpn_credential.example) file in root directory. Copy that file with command `cp vpn_credential.example vpn_credential` and then change the parameters in *vpn_credential* file.
+	
+	* *DCLOUD\_VPN\_SITE* is one of *rtp*, *lon*, *sng* or *chi*. For North America, by default the site is *rtp*.
+
+	* You can find your dCloud credential under the **Session Details** of the dCloud dashboard.  Click on the **Workstation** icon to reveal it.
+
+	![Session Details](./images/dcloud/session-details.png)
+
+	> **NOTE** your unix account will need sudo privileges to start the VPN connection
+
+1.  Run `bin/start-vpn` to start the VPN session
+
+1.  Execute command `bin/check_vpn_status`. It should show that Anyconnect VPN is connected.
+
+	> An interface named `dcloud-tun` should be displayed if the VPN is connected properly.  The `inet addr` shows the VPN tunnel IP address that is assigned to you.  **This VPN IP will be used as your controller's IP in later configuration.**
+	
+	> **NOTE** Everytime you disconnect and reconnect to the VPN, you may get a different VPN IP.  Remember to change the corresponding controller configuration or XRv configuration wherever the IP is used.
+	
+	![VPN Tunnel IP](./images/dcloud/check-vpn-status.png)
+	
+3.  After connecting to VPN, you can reach the router by using the command
+
+  ```
+  source ./parameters
+  telnet $ROUTER_NODE_SJC
+  ```
+
+  You can find a list of all other routers avaiable in the [nodes](./nodes) file

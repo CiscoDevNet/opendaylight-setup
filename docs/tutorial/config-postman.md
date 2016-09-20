@@ -1,4 +1,3 @@
-
 # Configure Postman
 Postman is a free tool helping user generate HTTP requests. This guide introduces the basic steps to set up the Postman for accessing ODL Restconf.
 
@@ -24,9 +23,13 @@ To import the files, click on the **Import** button on the top-left corner of Po
 
 ![Import button](./images/postman/import.png) 
 
+You can **Import Folder** to import all three files at one time.  If you have already get the Postman collection imported before, you will need to choose **Replace** when prompted for overwriting your local copy.
+
 After importing, you should be able to see a collection of BGP/PCEP HTTP requests listed (name may vary).
 
 ![After Import](./images/postman/after-import.png)
+
+You should also be able to find a Postman environment variable collection named "**BGP/PCEP dCloud**" imported.
 
 ## Change Postman Environment Variables
 To start to use the provided Postman BGP/PCEP collection, you will need to change the environment variables first.

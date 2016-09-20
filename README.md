@@ -1,117 +1,37 @@
 # Opendaylight-Setup
 ## Intro
-This directory contains setup scripts for ODL, and is particularly designed to be work with [Cisco dCloud](https://dcloud.cisco.com).  The goal of this repository is to provide handy scripts for the attendees of ODL Summit 2016 BGPCEP Tutorial.
+This directory contains setup scripts for ODL, and is particularly designed to be work with [Cisco dCloud](https://dcloud.cisco.com).  The goal of this repository is to provide handy scripts and detailed guide for the attendees of ODL Summit 2016 BGPCEP Tutorial.
 
 This project is forked from [CiscoDevNet](https://github.com/CiscoDevNet/opendaylight-setup).  However, some files are removed for demo purpose.
 
-## Preparation
-* Start with a Linux host or VM with git installed (at a minimum).  Vim is also recommended for editing ODL config files, but it's up to your needs. 
+## BGP / PCEP Tutorial for ODL Summit 2016
 
- > **Ubuntu 14.04** is recommended, as it has been well tested on.  You can also choose to use other version of Linux if you wish.
-However, you may want to tweak a few scripts such as `bin/setup-env` to make them work on your version of Linux.  OpenDayLight **may not may** not work properly on other Linux distribution.
-
-* Clone this repo to a working directory:
-
-	`git clone https://github.com/kevinxw/opendaylight-setup.git ODL`
-
-	> If you are using the provided Ubuntu image included in the USB stick, just cd into the `~/ODL` directory in terminal, then do a `git pull` to pull the latest content of this repository.
-	
-##Installation Instructions
-###Setup Environment with Script Provided
-1. Run `bin/setup-odl` to setup your environment, download and unpack ODL release distro
-2. Go to [Setup ODL](#setup-odl) and following the steps.
-
-###Manually Setup Environment
-0. Install environment requirement: *OpenConnect*, *OpenJDK 8* etc.
-
-1.  Download recommended ODL version:
-
-    * to download ODL Beryllium:
-    `bin/download-distro beryllium`
-
-    * to download ODL Boron:
-    `bin/download-distro boron`
-    
-	> Optionally, you can download the appropriate OpenDaylight distribution file (.tar.gz) from [OpenDayLight Download Page](https://www.opendaylight.org/downloads) (or other location) to images directory.
-
-	> Example: (Assumes you are downloading the "**Beryllium-SR3**" release)
-
-	> wget -P distro-image https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/distribution-karaf/0.4.3-Beryllium-SR3/distribution-karaf-0.4.3-Beryllium-SR3.tar.gz`
-
-3.  Unpack downloaded ODL image with script provided.  The parameter you should give is the file name of the image you downloaded. **Note** `.tar.gz` will be added to the file name automatically.
-
-    * to unpack the downloaded Beryllium version:
-    `bin/unpack-odl beryllium`
-
-    * to unpack the downloaded Boron version:
-    `bin/unpack-odl boron`
-	
-	> **NOTE** If you are downloading the image manually, you will need to unpack the image with the image name. For example:
-	> `bin/unpack-odl distribution-karaf-0.4.3-Beryllium-SR3`
-  
-4. Continue [setting up ODL](#setup-odl)
-
-### <a name="setup-odl">Setup ODL</a>
-4.  **Optionally** edit the *parameters* file to change the set of features installed at ODL startup.
-
-5.  **Optionally** edit the *log4j.conf* file to change the set of additional logging activated at ODL startup.
- 
-6.  Set up ODL using (this loads key features and logging configs)
-
-  `bin/config-odl`
-
-  You want to do this step everytime you changed the *parameters* file or *log4j.conf* file.
-   
-7. Change *vpn\_credential* file to reflect your dCloud credential
-
-   * There is a *vpn_credential.example* file in root directory. You should copy that file with command `cp vpn_credential.example vpn_credential` and then change the parameters in *vpn_credential* file.
-	
-	* *DCLOUD\_VPN\_SITE* is one of *rtp*, *lon*, *sng* or *chi*. For North America, by default the site is *rtp*.
-	* username and password can be found in your dCloud session details
-	* You can find your dCloud credential under the **Session Details** of the dCloud dashboard.  Click on the **Workstation** icon to reveal it.
-
-	![Session Details](docs/tutorial/images/dcloud/session-details.png)
-
-	(note that your unix account will need sudo privileges)
-
-  Then run `bin/start_vpn` to start the VPN session
-
-13. Start ODL using
-
-  `bin/start-odl`
-
-14.  You can use `bin/check_vpn_status` to get the VPN tunnel interface information. Use the IP of the tunnel to configure your router.
-  
-  After connecting to VPN, you can reach the router by using the command
-
-  ```
-  source ./parameters
-  telnet $BGP_PEER
-  ```
-
-  You can find a list of all other routers avaiable in the *nodes* file
+To check the guide for BGP / PCEP Tutorial, you can browse the [tutorial directory](./docs/tutorial).  The tutorial are written with Markdown.  You can read the tutorials on GitHub directly, or open the markdown files locally with a Markdown reader.
 
 ## Vagrant
  
-The repository also contains a subdirectory *vagrant* which contains a Vagrantfile and bootstrap.sh script.
+The repository also contains a subdirectory *vagrant* which contains a `Vagrantfile` and `bootstrap.sh` script.  Please read the [vagrant section](./docs/tutorial/prepare-vm.md#vagrant_vm) to learn more about it.
 
 If you have [Vagrant](https://www.vagrantup.com/downloads.html) and VirtualBox or VMWare Workstation/Fusion installed you can do a "vagrant up" from that directory and a VirtualBox VM will be created consisting of:
 
 * Ubuntu 14.04
 * git
 * vim
-* all required software mentioned above
+* wireshark
+* all other required software mentioned above
 * this repository
 
-Note that the Vagrantfile is currently configured to allocate 2 vCPUs and 8GB of RAM to the VM.   If your machine only has 8GB of RAM then you may wish to allocate 4GB of RAM.  Likewise if you only have 2 CPU cores you may wish to allocate 1 vCPU.   Equally if you want to use a different hypervisor you will need to edit the Vagrantfile.
+> **NOTE** The Vagrantfile is currently configured to allocate 2 vCPUs and 4GB of RAM to the VM.   If your machine only has 4GB of RAM then you may wish to allocate 2GB of RAM.  Likewise if you only have 2 CPU cores you may wish to allocate 1 vCPU.   Equally if you want to use a different hypervisor you will need to edit the Vagrantfile.
 
 ## Scripts Included
 
 **config-odl** sets up logging/features for ODL
 
+**download-odl** download ODL distro file from OpenDayLight office site.  If the distro file is already downloaded, it will skip
+
 **unpack-odl** unpacks the .tar.gz file.  Creates a new subdirectory for the ODL distro.
 
-**setup-odl** automatically install release ODL distro. It stops before *config-odl*
+**setup-odl** automatically install release ODL distro. It's a combination of *download-odl* and *unpack-odl*
 
 **start-vpn** connects to dCloud VPN.  Takes *vpn\_crendential* to read required credential.  
 
@@ -121,9 +41,7 @@ Note that the Vagrantfile is currently configured to allocate 2 vCPUs and 8GB of
 
 **stop-odl** stops ODL
 
-**config-odl** sets up NETCONF nodes, BGP etc. - uses scripts from the python subdirectory (plus in the dCloud case REST calls to dCloud APIs)
-
-**delete-odl** deletes the ODL distribution
+**delete-odl** deletes the ODL distribution; it will stop the ODL if it is running
 
 **tail-log** shortcut to access karaf log
 
@@ -136,12 +54,8 @@ Note that the Vagrantfile is currently configured to allocate 2 vCPUs and 8GB of
 **parameters** parameters - encoded as environment vars:
 
 * DISTRO (name of ODL distribution)
-* BGP_PEER (IP address of default BGP peer)
-* LOCAL_AS
-* REMOTE_AS
 * ODL_USER
 * ODL_PASS
-* DCLOUD (YES or NO)
 * FEATURES (list of features to add to ODL's default set)
 
 **log4j.conf** log4j configuration, used to override ODL's default log4j config
