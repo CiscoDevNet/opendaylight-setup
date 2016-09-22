@@ -415,3 +415,51 @@ After returning the delegation, you should check the tunnel status in XRv:
 You should see the **PCE Delegation** is not there anymore.
 
 Now pull the PCEP topology via RESTCONF again, you may not see the LSP information again, though it still exist on XRv.
+
+## Segment Routing
+
+### Enable Segment Routing
+First, we need to enable segment routing in PCEP configuration in XRv.
+
+```
+mpls traffic-eng
+ interface GigabitEthernet0/0/0/0
+ !
+ interface GigabitEthernet0/0/0/1
+ !
+ interface GigabitEthernet0/0/0/2
+ !
+ interface GigabitEthernet0/0/0/3
+ !
+ interface GigabitEthernet0/0/0/4
+ !
+ pce
+  peer ipv4 198.18.1.80
+  !
+  peer ipv4 10.16.49.227
+  !
+  segment-routing
+  stateful-client
+   instantiation
+  !
+ !
+ auto-tunnel pcc
+  tunnel-id min 1 max 99
+ !
+ reoptimize timers delay installation 0
+!
+```
+
+We can submit a **Create PCEP Tunnel** request to controller.  The request can be found in the Postman collection provided. 
+
+![Segment Routing PCEP Topology](./images/pcep/pcep-topology-segment-routing.png)
+
+![Segment Routing Tunnel](./images/pcep/xrv-segment-routing.png)
+
+```
+explicit-path name ABCD1_Nodes
+ index 10 next-address strict ipv4 unicast 198.19.1.21
+ index 20 next-address strict ipv4 unicast 198.19.1.24
+ index 30 next-address strict ipv4 unicast 198.19.1.28
+!
+```

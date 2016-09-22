@@ -52,10 +52,10 @@ Assuming you have already got a VM with ODL distribution unpacked following the 
 
 [BGP](./config-bgp.md)
 
-### BMP
-
-[BMP](./config-bmp.md)
-
 ## PCEP
 
 [PCEP](./config-pcep.md)
+
+## BMP
+
+[BMP](./config-bmp.md)
