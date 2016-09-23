@@ -23,10 +23,9 @@ if [ -z "$IMAGE_FILE" ]; then
 	exit 1
 fi
 
-tar -xzf "$IMAGE_FILE" -C $DISTRO_ROOT
-
 if [ ! -z "$DISTRO_ROOT" ]; then
 	# in case we move the / when DISTRO_ROOT is empty
 	mkdir -p $DISTRO_ROOT
+	tar -xzf "$IMAGE_FILE" -C $DISTRO_ROOT
 	mv -f $DISTRO_ROOT/* $DISTRO
 fi

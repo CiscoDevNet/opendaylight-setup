@@ -5,8 +5,8 @@ source $PARENT_DIR/parameters
 
 bash $APP_ROOT/bin/stop-odl
 
-if [ ! -z "$DISTRO" ]; then
-	rm -rf $DISTRO
+if [ ! -z "$DISTRO_ROOT" ]; then
+	rm -rf $DISTRO_ROOT
 fi
 
 echo "ODL is deleted"
