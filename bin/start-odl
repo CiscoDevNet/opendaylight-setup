@@ -9,6 +9,15 @@ if [ ! -z "$up" ]; then
 	exit 2
 fi
 
+ENV="$DISTRO/bin/setenv"
+
+if [ -f "$ENV" ]; then
+	source $ENV
+else
+        echo "ODL hasn't been unpacked."
+        exit 1
+fi
+
 rm -rf $DISTRO/data
 rm -rf $DISTRO/etc/opendaylight/current
 rm -rf $DISTRO/cache
@@ -16,7 +25,6 @@ rm -rf $DISTRO/journal
 rm -rf $DISTRO/snapshots
 rm -rf $DISTRO/instances
 
-source $DISTRO/bin/setenv
 export KARAF_OPTS=-Dorg.apache.sshd.registerBouncyCastle=false
 $DISTRO/bin/start
 

@@ -1,7 +1,11 @@
 #!/bin/bash
 
 APP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-
+# We do not allow running the script as root
+if [ "$EUID" -eq 0 ]; then
+  echo "Please do not run the script as root"
+  exit 3
+fi
 source $APP_ROOT/nodes
 
 #Boron Release
