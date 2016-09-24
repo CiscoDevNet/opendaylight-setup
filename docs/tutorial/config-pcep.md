@@ -19,7 +19,7 @@ After installing the *odl-bgpcep-pcep* feature, you can logout the karaf console
 Optionally, you can turn on the DEBUG option in karaf console to see more detailed karaf log output with PCEP debug information:
 
 ```
-log:set DEBUG org.opendaylight.bgpcep.cep
+log:set DEBUG org.opendaylight.bgpcep.pcep
 log:set DEBUG org.opendaylight.protocol.pcep
 ```
 
@@ -32,15 +32,22 @@ In this tutorial, we are going to establish a LSP between SJC site and POR site.
 
 > You can also choose to establish a LSP between other sites.  All the XRv routers in Cisco dCloud lab has PCEP capability.  The steps to peer them with the controller will be similiar.
 
-1. First, you need to telnet to the XRv console.  As we are picking SJC XRv in this tutorial, you can reach to the XRv with the following command:
+1. Before configuring anything, you need to telnet to the XRv console.  As we are picking SJC XRv in this tutorial, you can reach to the XRv with the following command:
 
 	```
-	source ./nodes
 	telnet $ROUTER_NODE_SJC
 	```
 	The usename and password of the XRv is default to **cisco** / **cisco** .
 	
-2. After login to the console, you can see the existing running config with command `show running-config`.  At the bottom of the configuration, you should be able to see a section of **mpls traffic-eng** configuration (shown as following).
+2. After login to the console, you can see the existing running config with command `show running-config`.
+
+2. RSVP is need to hold the LSP tunnel.  Configure the RSVP before configuring PCEP.  An example of RSVP configuration is shown below:
+
+	![Configure RSVP](./images/pcep/config-rsvp.png)
+	
+	> **NOTE** The XRv routers in dCloud lab has RSVP configured already.  You can skip this step.
+
+3. At the bottom of the configuration, you should be able to see a section of **mpls traffic-eng** configuration (shown as following).
 	
 	![Configure PCEP](./images/pcep/config-pcep.png)
 
@@ -106,6 +113,11 @@ In this tutorial, we are going to establish a LSP between SJC site and POR site.
 	 reoptimize timers delay installation 0
 	!
 	```
+4. You can also verify it by check PCE peer status in XRv:
+
+	Use command `show mpls traffic-eng pce peer`. Similiar output should be displayed:
+	
+	![Show PCE Peer](./images/pcep/xrv-pce-peer.png)
 
 ### Verify PCC is Connected to Controller
 After you configure the router, the controller should have been peered with your router.  You can look at the karaf log of your controller with command `bin/tail-log`, which will show the last a few lines of karaf log.
@@ -126,9 +138,9 @@ If you pull the PCEP topology via RESTCONF, you should be able to see a result l
 
 ![PCEP Topology](./images/pcep/pcep-topology.png)
 
-> Note the **node-id** will be shown as **192.19.1.30**, which is the Loopback0 address of the XRv.  You can configure XRv to overwrite the node-id with command: `mpls traffic-eng pce peer source ipv4 198.18.1.37`, where **198.18.1.37** is the IP of SJC router.
+> Note the **node-id** will be shown as **192.19.1.30**, which is the **Loopback0** address of the XRv.  If you want to have better knowledge of which node the PCC in PCEP topology is, you can configure XRv to overwrite the node-id with command: `mpls traffic-eng pce peer source ipv4 198.18.1.37`, where **198.18.1.37** is the management IP of SJC router.
 
-## Establish LSP
+## <a name="#establish-lsp">Establish LSP</a>
 
 The topology in the dCloud lab is shown as the following picture:
 
@@ -146,7 +158,9 @@ To create a PCE-initiated LSP, you can simply submit a RESTCONF request through 
 
 ![Create PCE-init LSP](./images/pcep/create-pce-init-lsp.png)
 
-> The path and other fields in the request body are pre-filled.  You should check the Postman environment to check/change the exact value.
+> * The path and other fields in the request body are pre-filled.  You should check the Postman environment to check/change the exact value.
+> * By default, we are using the SJC -> SFC -> POR path in the environment.
+> * By default, we are setting the PCEP tunnel name to **foo**.  This will be the **signaled name** of the LSP tunnel.  If you do not specify the name, by default XRv will automatically assign a tunnel name like **ios_t1**.
 
 After the RESTCONF request is submitted, you are suppose to see a 200 OK response at the bottom.  Also, to make sure the LSP is truely created, you should do a GET request on the PCEP topology from controller:
 
@@ -206,13 +220,42 @@ You can see from the **Auto PCC** section, this tunnel is **Delegated to** and *
 
 You should also pay attention to the **Status** at the top.  A properly created LSP should have a **valid** path and **connected** signalling, which means the path is usable.
 
-## Verify Tunnel Connectivity
+## Update LSP Information
 
-`mpls traffic-eng auto-bw collect frequency 1`
+After the LSP is created, we can update the LSP information form controller.  As we were using   **Hop0: 56.0.0.29** and **Hop1: 54.0.0.26** in previous creation LSP step, we are going to use different hops throught SEA site in update LSP request.
 
-`ping 198.19.1.26 source 198.19.1.30 count 10000 size 18024`
+Use the **Update PCEP Tunnel** request from Postman, replace the path with SEA's IP.
 
-![Verify Connectivity](./images/pcep/verify-connectivity.png)
+![Update PCEP Tunnel](./images/pcep/update-lsp-pce-inited.png)
+
+If you check the LSP path information in XRv, you shouldsee the path get updated:
+
+![Update PCEP Tunnel - XRv](./images/pcep/update-lsp-pce-inited-xrv.png)
+
+## Primary Path Down
+Now as we have seen what the router shows when the path is valid, let's see what can happen when we break the tunnel.
+
+From the [topology](#establish-lsp) we can see SJC site is going to SFC site through **interface 0/4**.  So to make the path invalid, we can simply turn down the **interface 0/4** (we are manually turning down the interface here, but imagine in real life the link could goes down due to different reasons).
+
+Turn down the interface with command:
+
+```
+interface gig 0/0/4
+shutdown
+```
+
+`commit` the change.
+
+Then again check the topology status on the router.  You should see a path-down output like this: 
+
+![Path Down](./images/pcep/lsp-path-down.png)
+
+Remember to bring back the interface after you finish this step.
+
+```
+interface gig 0/0/4
+no shutdown
+```
 
 ## Remove PCE-initiated LSP
 To remove a PCE-initiated LSP, simply submit a DELETE request via RESTCONF.  You can find relate HTTP request from Postman collection provided:
@@ -384,9 +427,9 @@ Optionally, you can verify the PCEP topology on the controller via RESTCONF.
 
 ![PCC init LSP](./images/pcep/pcep-topology-pcc-init-1.png)
 
-### Update LSP Information
+### Optional: Update Delegated LSP Information
 
-When the LSP is delegated, we can update the path via controller.  Since in the above PCC-inited LSP, PCE selected the path **56.0.0.29** -> **54.0.0.26**, we can update the LSP to use the alternate path **55.0.0.28** -> **53.0.0.26** in the update request.
+When the LSP is delegated, we can update the path via controller.  The step and payload is exactly the same as updating a PCE-initialized LSP.  Since in the above PCC-inited LSP, PCE selected the path **56.0.0.29** -> **54.0.0.26**, we can update the LSP to use the alternate path **55.0.0.28** -> **53.0.0.26** in the update request.
 > PCE may select a different path for you due to different runtime condition. To experiment with the update LSP request, you should choose to update LSP with a different path.
 > **Note** Remember to change the **node** id in the request if you did not announce `pce peer source ipv4 address` in the previous configuration.
 
@@ -401,6 +444,33 @@ After submit the request, you can check the status on XRv:
 Also, verify the PCEP topology is successfully updated on the controller as well.
 
 ![Update LSP](./images/pcep/pcep-topology-update-lsp-after.png)
+
+### Update LSP Information with Bandwidth
+
+In the update LSP request, we can also send the bandwidth information to XRv.
+
+Here we are updating the LSP to set the bandwidth to 400kbps.
+
+![Update LSP Bandwidth](./images/pcep/update-lsp-bandwidth.png)
+
+After the update, you should be able to see the bandwidth get changed on XRv:
+
+![Update LSP Bandwidth](./images/pcep/update-lsp-bandwidth-xrv.png)
+
+> The bandwidth value is encoded in base64. According to RFC5440: Bandwidth (32 bits): The requested bandwidth is encoded in 32 bits in IEEE 754 floating point format (see [IEEE.754.1985]), expressed in bytes per second.
+
+> * First step is to convert kbps to Bps.
+
+> 400kbps -> 50000Bps      [conversion tool](http://www.sengpielaudio.com/calculator-transferrate.htm)
+
+> * Second conversion is to IEEE 754 in hexadecimal.
+
+> 50000Bps -> 0x474350000      [conversion tool](http://www.h-schmidt.net/FloatConverter/IEEE754.html)
+
+> * Last conversion is to base64 encoding.
+
+> 0x474350000 -> R0NQAA==     [conversion tool](http://tomeko.net/online_tools/hex_to_base64.php?lang=en)
+
 
 ### Revoke LSP Delegation
 

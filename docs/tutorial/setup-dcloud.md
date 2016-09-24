@@ -79,7 +79,8 @@ Follow below steps to launch the network simulation
 	![](./images/image15.png)
 
 3.  Lab is fully initialized when steps 1 through 9 show up in
-    green color. It may take up to 30 minutes for this to happen
+    green color. It may take up to 30 minutes for this to happen.
+    **However, it is not necessary to wait all 9 steps turning to green in the tutorial.  We are not using the controller provided in dCloud in this case.**
 
 	![](./images/image16.png)
 	

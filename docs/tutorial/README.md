@@ -18,6 +18,10 @@ Following [this guide](./setup-dcloud.md) to set up your dCloud lab.  You will b
 
 ## OpenDayLight
 
+### Source The parameter Environment File
+
+To simplify the 
+
 ### Setup ODL
 
 Assuming you have already got a VM with ODL distribution unpacked following the guides provided above, you need to configure the ODL before starting it.  Please use the following step to configure ODL:

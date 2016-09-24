@@ -41,7 +41,9 @@ the one which is best suited for your environment
 
     Password: `odlsummit`
 
-4.  This repository has already been cloned to *~/ODL* directory in the VM. A shortcut is created on the desktop as well.
+4.  This repository has already been cloned to `~/ODL` directory in the VM. A shortcut is created on the desktop as well.
+
+5.  Update the `~/ODL` following the [guide here](#pull-the-latest-tutorial-guide).
 	
 ### <a name="use-vagrant-to-launch-pre-configured-vm">Use Vagrant to launch pre-configured VM</a>
 
@@ -100,7 +102,7 @@ the one which is best suited for your environment
 
 7.  You will need to install Postman on your VM following the guide [here](./config-postman.md).
 
-## Pull The Latest Tutorial Guide
+## <a name="#pull-the-latest-tutorial-guide">Pull The Latest Tutorial Guide</a>
 
 Before starting the tutorial, it is recommended pull the latest scrpits and docs from GitHub.
 	
