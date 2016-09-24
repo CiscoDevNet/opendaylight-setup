@@ -232,30 +232,31 @@ If you check the LSP path information in XRv, you shouldsee the path get updated
 
 ![Update PCEP Tunnel - XRv](./images/pcep/update-lsp-pce-inited-xrv.png)
 
-## Primary Path Down
-Now as we have seen what the router shows when the path is valid, let's see what can happen when we break the tunnel.
+### Update LSP Information with Bandwidth
 
-From the [topology](#establish-lsp) we can see SJC site is going to SFC site through **interface 0/4**.  So to make the path invalid, we can simply turn down the **interface 0/4** (we are manually turning down the interface here, but imagine in real life the link could goes down due to different reasons).
+In the update LSP request, we can also send the bandwidth information to XRv.
 
-Turn down the interface with command:
+Here we are updating the LSP to set the bandwidth to 400kbps.
 
-```
-interface gig 0/0/4
-shutdown
-```
+![Update LSP Bandwidth](./images/pcep/update-lsp-bandwidth.png)
 
-`commit` the change.
+After the update, you should be able to see the bandwidth get changed on XRv:
 
-Then again check the topology status on the router.  You should see a path-down output like this: 
+![Update LSP Bandwidth](./images/pcep/update-lsp-bandwidth-xrv.png)
 
-![Path Down](./images/pcep/lsp-path-down.png)
+> The bandwidth value is encoded in base64. According to RFC5440: Bandwidth (32 bits): The requested bandwidth is encoded in 32 bits in IEEE 754 floating point format (see [IEEE.754.1985]), expressed in bytes per second.
 
-Remember to bring back the interface after you finish this step.
+> * First step is to convert kbps to Bps. [conversion tool](http://www.sengpielaudio.com/calculator-transferrate.htm)
+> 
+> 	400kbps -> 50000Bps
 
-```
-interface gig 0/0/4
-no shutdown
-```
+> * Second conversion is to IEEE 754 in hexadecimal. [conversion tool](http://www.h-schmidt.net/FloatConverter/IEEE754.html)
+> 
+> 	50000Bps -> 0x474350000      
+
+> * Last conversion is to base64 encoding. [conversion tool](http://tomeko.net/online_tools/hex_to_base64.php?lang=en)
+> 
+> 	0x474350000 -> R0NQAA==     
 
 ## Remove PCE-initiated LSP
 To remove a PCE-initiated LSP, simply submit a DELETE request via RESTCONF.  You can find relate HTTP request from Postman collection provided:
@@ -444,33 +445,6 @@ After submit the request, you can check the status on XRv:
 Also, verify the PCEP topology is successfully updated on the controller as well.
 
 ![Update LSP](./images/pcep/pcep-topology-update-lsp-after.png)
-
-### Update LSP Information with Bandwidth
-
-In the update LSP request, we can also send the bandwidth information to XRv.
-
-Here we are updating the LSP to set the bandwidth to 400kbps.
-
-![Update LSP Bandwidth](./images/pcep/update-lsp-bandwidth.png)
-
-After the update, you should be able to see the bandwidth get changed on XRv:
-
-![Update LSP Bandwidth](./images/pcep/update-lsp-bandwidth-xrv.png)
-
-> The bandwidth value is encoded in base64. According to RFC5440: Bandwidth (32 bits): The requested bandwidth is encoded in 32 bits in IEEE 754 floating point format (see [IEEE.754.1985]), expressed in bytes per second.
-
-> * First step is to convert kbps to Bps.
-
-> 400kbps -> 50000Bps      [conversion tool](http://www.sengpielaudio.com/calculator-transferrate.htm)
-
-> * Second conversion is to IEEE 754 in hexadecimal.
-
-> 50000Bps -> 0x474350000      [conversion tool](http://www.h-schmidt.net/FloatConverter/IEEE754.html)
-
-> * Last conversion is to base64 encoding.
-
-> 0x474350000 -> R0NQAA==     [conversion tool](http://tomeko.net/online_tools/hex_to_base64.php?lang=en)
-
 
 ### Revoke LSP Delegation
 
