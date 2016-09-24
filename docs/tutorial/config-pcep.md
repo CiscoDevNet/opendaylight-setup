@@ -467,32 +467,11 @@ First, we need to enable segment routing in PCEP configuration in XRv.
 
 ```
 mpls traffic-eng
- interface GigabitEthernet0/0/0/0
- !
- interface GigabitEthernet0/0/0/1
- !
- interface GigabitEthernet0/0/0/2
- !
- interface GigabitEthernet0/0/0/3
- !
- interface GigabitEthernet0/0/0/4
- !
  pce
-  peer ipv4 198.18.1.80
-  !
-  peer ipv4 10.16.49.227
-  !
   segment-routing
-  stateful-client
-   instantiation
-  !
- !
- auto-tunnel pcc
-  tunnel-id min 1 max 99
- !
- reoptimize timers delay installation 0
-!
 ```
+
+> The segment 
 
 We can submit a **Create PCEP Tunnel** request to controller.  The request can be found in the Postman collection provided. 
 
