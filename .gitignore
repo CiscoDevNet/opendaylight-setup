@@ -2,6 +2,7 @@
 distro-image
 distribution
 vpn_credential
+~*
 *.log
 *.swp
 !.gitignore
