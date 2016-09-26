@@ -98,7 +98,7 @@ To make sure you are able to use the routers in the dCloud lab, you can verify t
 
 	![Session Details](./images/dcloud/session-details.png)
 
-	> **NOTE** your unix account will need sudo privileges to start the VPN connection
+	> **NOTE** Your unix account will need sudo privileges to start the VPN connection
 
 1.  Run `bin/start-vpn` to start the VPN session
 
@@ -110,6 +110,12 @@ To make sure you are able to use the routers in the dCloud lab, you can verify t
 	
 	![VPN Tunnel IP](./images/dcloud/check-vpn-status.png)
 	
+	> If an error message shows up as following:
+	
+	> `dcloud-tun: error fetching interface information: Device not found`
+	
+	> Please double check your VPN credential.  You can also check `logs/vpn.log	` for more details about the error.
+	
 3.  After connecting to VPN, you can reach the router by using the command
 
   ```
@@ -118,3 +124,5 @@ To make sure you are able to use the routers in the dCloud lab, you can verify t
   ```
 
   You can find a list of all other routers avaiable in the [nodes](./nodes) file
+  
+  > `./parameters` is sourced in terminal by default in the VM we provided.  So you not need to source it in this step. 

@@ -462,7 +462,7 @@ Now pull the PCEP topology via RESTCONF again, you may not see the LSP informati
 
 ## Segment Routing
 
-### Enable Segment Routing
+### Enable Segment Routing in Router
 First, we need to enable segment routing in PCEP configuration in XRv.
 
 ```
@@ -471,18 +471,21 @@ mpls traffic-eng
   segment-routing
 ```
 
-> The segment 
+> **segment routing** is already configured in dCloud XRv routers. You can skip step if you are using dCloud routers.
+
+### Create LSP Tunnel with Segment Routing
 
 We can submit a **Create PCEP Tunnel** request to controller.  The request can be found in the Postman collection provided. 
 
 ![Segment Routing PCEP Topology](./images/pcep/pcep-topology-segment-routing.png)
 
+You should find **(Segment-Routing)** in the tunnel status page.
+
 ![Segment Routing Tunnel](./images/pcep/xrv-segment-routing.png)
 
-```
-explicit-path name ABCD1_Nodes
- index 10 next-address strict ipv4 unicast 198.19.1.21
- index 20 next-address strict ipv4 unicast 198.19.1.24
- index 30 next-address strict ipv4 unicast 198.19.1.28
-!
-```
+Now, if you disable RSVP, the tunnel should still stay up.
+
+Use the `no rsvp` and `commit` to disable RSVP.  Then do `show running-config rsvp` to confirm RSVP is removed. 
+
+Again, run `show mpls traffic-eng tunnels` to check the tunnel, you should find the tunnel's status is still up.
+

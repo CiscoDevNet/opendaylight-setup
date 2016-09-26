@@ -2,7 +2,7 @@
 
 ## Prerequisite
 
-### Prepare Your Environment
+### <a name="#prepare-your-environment">Prepare Your Environment</a>
 
 Before starting to experiment with anything, please prepare your environment following [this guide](./prepare-vm.md).
 
@@ -20,11 +20,17 @@ Following [this guide](./setup-dcloud.md) to set up your dCloud lab.  You will b
 
 ### Source The parameter Environment File
 
-To simplify the 
+To help you using the resource in dCloud, you can source the `parameters` file in order to use the IP more conveniently.
+
+`source ./parameters`
+
+> `./parameters` is sourced in the terminal by default in the VM we provided.
 
 ### Setup ODL
 
-Assuming you have already got a VM with ODL distribution unpacked following the guides provided above, you need to configure the ODL before starting it.  Please use the following step to configure ODL:
+Assuming you have already got **a VM with ODL distribution unpacked** following the guides provided above, you need to configure the ODL before starting it.  If you haven't got such a VM with proper environment setting, please follow the [steps here](#prepare-your-environment) to create one first.
+
+Please use the following step to configure ODL:
 
 1.  Open a terminal and switch to directory where you checked out this repository.  If you are using the preconfigured VM image we provided, or a VM spinned up with the Vagrant file in this repository, the directory should be at `~/ODL`.
 

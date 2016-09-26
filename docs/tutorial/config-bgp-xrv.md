@@ -1,5 +1,7 @@
 # Configure BGP with XRv in Cisco dCloud Lab
 
+**NOTE** We are assuming you are starting this part of tutorial with a fresh installed controller.  You have changed the 41-bgp-example.xml configuration a bit following the other part of tutorial (e.g. following the exaBGP tutorial), you may see a different initial configuration.  However, that should not affect your exercise.
+
 ## Change BGP Configurations
 
 To add/edit BGP peers, you will need to change a few BGP configuration files.  These files are managed by the config subsystem of ODL.  They are loaded when the ODL is started.
@@ -39,67 +41,14 @@ A sample configuration is displayed as follows:
                     <name>example-bgp-rib</name>
                     <rib-id>example-bgp-rib</rib-id>
                     <local-as>65504</local-as>
-                    <bgp-rib-id>127.0.0.1</bgp-rib-id>
+                    <bgp-rib-id>10.16.90.49</bgp-rib-id>
                     <!-- if cluster-id is not present, it's value is the same as bgp-id -->
                     <!-- <cluster-id>192.0.2.3</cluster-id> -->
-                    <local-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv4-unicast</name>
-                    </local-table>
-                    <local-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv6-unicast</name>
-                    </local-table>
-                    <local-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>linkstate</name>
-                    </local-table>
-                    <local-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv4-flowspec</name>
-                    </local-table>
-                    <local-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv6-flowspec</name>
-                    </local-table>
-                    <local-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>labeled-unicast</name>
-                    </local-table>
-                    <extensions>
-                        <type xmlns:ribspi="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:spi">ribspi:extensions</type>
-                        <name>global-rib-extensions</name>
-                    </extensions>
-                    <bgp-dispatcher>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-dispatcher</type>
-                        <name>global-bgp-dispatcher</name>
-                    </bgp-dispatcher>
-                    <data-provider>
-                        <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-async-data-broker</type>
-                        <name>pingpong-binding-data-broker</name>
-                    </data-provider>
-                    <dom-data-provider>
-                        <type xmlns:sal="urn:opendaylight:params:xml:ns:yang:controller:md:sal:dom">sal:dom-async-data-broker</type>
-                        <name>pingpong-broker</name>
-                    </dom-data-provider>
-                    <codec-tree-factory>
-                        <type xmlns:binding="urn:opendaylight:params:xml:ns:yang:controller:md:sal:binding">binding:binding-codec-tree-factory</type>
-                        <name>runtime-mapping-singleton</name>
-                    </codec-tree-factory>
-                    <session-reconnect-strategy>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
-                        <name>example-reconnect-strategy-factory</name>
-                    </session-reconnect-strategy>
-                    <tcp-reconnect-strategy>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:protocol:framework">prefix:reconnect-strategy-factory</type>
-                        <name>example-reconnect-strategy-factory</name>
-                    </tcp-reconnect-strategy>
-                    <openconfig-provider>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp-openconfig-spi">prefix:bgp-openconfig-provider</type>
-                        <name>openconfig-bgp</name>
-                    </openconfig-provider>
+                    ...
                 </module>
 ```
+
+> Assuming **10.16.90.49** the real IP of your controller here.
 
 #### Update BGP Peer
 
@@ -126,34 +75,7 @@ An example is shown as follows:
                         <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:rib-instance</type>
                         <name>example-bgp-rib</name>
                     </rib>
-                    <peer-registry>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-peer-registry</type>
-                        <name>global-bgp-peer-registry</name>
-                    </peer-registry>
-                    <advertized-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv4-unicast</name>
-                    </advertized-table>
-                    <advertized-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv6-unicast</name>
-                    </advertized-table>
-                    <advertized-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>linkstate</name>
-                    </advertized-table>
-                    <advertized-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv4-flowspec</name>
-                    </advertized-table>
-                    <advertized-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>ipv6-flowspec</name>
-                    </advertized-table>
-                    <advertized-table>
-                        <type xmlns:prefix="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">prefix:bgp-table-type</type>
-                        <name>labeled-unicast</name>
-                    </advertized-table>
+                    ...
                 </module>
 ```
 
@@ -175,6 +97,8 @@ Now, after you finishing configuring the BGP peer, you need to configure the XRv
 First, you need to telnet to the XRv in dCloud:
 
 ![Login to BGP Peer](./images/bgp/telnet-xrv.png)
+
+You can find the existing BGP configuration with command `show running-config router bgp`
 
 ![Change XRv Config](./images/bgp/change-xrv-config.png)
 
@@ -198,7 +122,7 @@ configure terminal
 router bgp 65504
  no neighbor 198.18.1.80
  
- neighbor 1.2.3.4
+ neighbor 10.16.90.49
   remote-as 65504
   update-source MgmtEth0/0/CPU0/0
   address-family ipv4 unicast
@@ -211,9 +135,9 @@ router bgp 65504
 commit
 ```
 
-Replace the **1.2.3.4** with your local controller's IP (the VPN tunnel's IP)
+> Replace the **10.16.90.49** with your local controller's IP (the VPN tunnel's IP)
 
-Again, you can get your controller's real IP with script `./bin/check-vpn-status`
+> Again, you can get your controller's real IP with script `./bin/check-vpn-status`
 
 ## Verify BGP RIB Information
 
@@ -244,13 +168,13 @@ To inject routes, an BGP application peer must be configured first.
 
 Open `41-bgp-example.xml` file in your controller VM.  The application peer configuration doesn't exist in the `41-bgp-example.xml` file by default.  So you should add it after the BGP peer section.
 
-> **NOTE** Remember to change the **bgp-peer-id** to your local controller's real IP.
+> **NOTE** Remember to change the **bgp-peer-id** (**10.16.90.49** in this example) to your local controller's real IP.
 
 ```
                 <module xmlns="urn:opendaylight:params:xml:ns:yang:controller:config">
                     <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">x:bgp-application-peer</type>
                     <name>example-bgp-peer-app</name>
-                    <bgp-peer-id xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">127.0.0.1</bgp-peer-id> 
+                    <bgp-peer-id xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">10.16.90.49</bgp-peer-id> 
                     <target-rib xmlns="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">
                         <type xmlns:x="urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl">x:rib-instance</type>
                         <name>example-bgp-rib</name>
@@ -265,17 +189,101 @@ Open `41-bgp-example.xml` file in your controller VM.  The application peer conf
 
 After BGP application peer configuration is added to the `41-bgp-example.xml` file, you will need to restart the controller to reload it.
 
-### Inject IPv4 unicast routes
+### Inject IPv4 Unicast Routes
+
+We can try injecting some IPv4 unicast routes to our BGP peers.  You can find the RESTCONF request available in the Postman collection provided.
+
+Before injecting the routes, you can check if there is any routes exist in the XRv from the controller.  Type command `show bgp neighbor 10.16.90.49 route` in XRv console.  You should see no output returned.
+
+> Replace **10.16.90.49** with your controller's IP.
+
+Now let's inject some routes and check the XRv route again.
 
 ![Inject IPv4 Unicast Route](./images/bgp/insert-ipv4-route.png)
 
+The XRv should display the inject routes:
+
+![Display Injected IPv4 Unicast Route - XRv](./images/bgp/insert-ipv4-route-xrv.png)
+
+You should also be able to see injected routes in ODL's operational data via RESTCONF:
+
 ![Display Injected IPv4 Unicast Route](./images/bgp/display-ipv4-route.png)
 
-### Inject IPv6 unicast routes
+### Inject IPv6 Unicast Routes
+
+IPv6 unicast route injection is also supported since Beryllium.  It is exactly like injecting IPv4 routes.  The only difference is to use IPv6 address in this case.
+
+To inject IPv6 unicast address to XRv, you will need to configure XRv to accept IPv6 unicast address family first.
+
+Enable it with the following command:
+
+```
+router bgp 65504
+  address-family ipv6 unicast
+  !
+  neighbor 10.16.90.49
+    update-source MgmtEth0/0/CPU0/0
+    address-family ipv6 unicast
+ ```
+ 
+> Replace **10.16.90.49** with your controller's IP.
+
+As the **update-source** currently configured for BGP neighbor **10.16.90.49** is MgmtEth0/0/CPU0/0, we need to configure it to have a vaid IPv6 address.
+
+```
+interface MgmtEth0/0/CPU0/0
+	ipv6 address 2001::1:2:3:4/32
+```
+
+> You should use a real IPv6 address instead of **2001::1:2:3:4/32** in real network environment.
 
 ![Inject IPv6 Unicast Route](./images/bgp/insert-ipv6-route.png)
 
+The XRv should display the inject routes with command
+`show bgp ipv6 unicast`:
+
+![Display Injected IPv6 Unicast Route - XRv](./images/bgp/insert-ipv6-route-xrv.png)
+
 ![Display Injected IPv6 Unicast Route](./images/bgp/display-ipv6-route.png)
+
+### Inject IPv4 Flowspec Routes
+
+IPv4/IPv6 Flowspec route injection is also supported since Beryllium.
+
+To inject IPv4/IPv6 Flowspec address to XRv, you will need to configure XRv to accept IPv4/IPv6 Flowspec address family first.
+
+Enable it with the following command:
+
+```
+router bgp 65504
+  address-family ipv4 flowspec
+  address-family ipv4 flowspec
+  !
+  neighbor 10.16.90.49
+    update-source MgmtEth0/0/CPU0/0
+    address-family ipv4 flowspec
+    address-family ipv6 flowsepc
+ ```
+ 
+> Replace **10.16.90.49** with your controller's IP.
+
+> Again, if you are using IPv6 flowspec, as the **update-source** currently configured for BGP neighbor **10.16.90.49** is MgmtEth0/0/CPU0/0, we need to configure it to have a vaid IPv6 address.
+
+```
+interface MgmtEth0/0/CPU0/0
+	ipv6 address 2001::1:2:3:4/32
+```
+
+> You should use a real IPv6 address instead of **2001::1:2:3:4/32** in real network environment.
+
+You can use the HTTP request in provided Postman collection.
+
+The XRv should display the inject routes with command
+`show bgp ipv4 flowspec`:
+
+![Display Injected IPv4 Flowspec Route - XRv](./images/bgp/insert-ipv4-flowspec-route-xrv.png)
+
+![Display Injected IPv4 Flowspec Route - XRv](./images/bgp/insert-ipv4-flowspec-route.png)
 
 ### Delete Injected Route
 

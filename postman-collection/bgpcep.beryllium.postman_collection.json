@@ -91,7 +91,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer</type>\r\n <name>{{bgp-peer-name}}</name>\r\n <host xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{bgp-peer-ip}}</host>\r\n <holdtimer xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">180</holdtimer>\r\n <peer-role xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">ibgp</peer-role>\r\n <rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </rib>\r\n  <peer-registry xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer-registry</type>\r\n   <name>global-bgp-peer-registry</name>\r\n  </peer-registry>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>linkstate</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>labeled-unicast</name>\r\n  </advertized-table>\r\n </module>\r\n"
+							"raw": "<module xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:config\">\r\n <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer</type>\r\n <name>{{bgp-peer-name}}</name>\r\n <host xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">{{XRv-mgmt-ip}}</host>\r\n <holdtimer xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">180</holdtimer>\r\n <peer-role xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">ibgp</peer-role>\r\n <rib xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:rib-instance</type>\r\n  <name>{{bgp-rib-name}}</name>\r\n </rib>\r\n  <peer-registry xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-peer-registry</type>\r\n   <name>global-bgp-peer-registry</name>\r\n  </peer-registry>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-unicast</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>linkstate</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv4-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>ipv6-flowspec</name>\r\n  </advertized-table>\r\n  <advertized-table xmlns=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">\r\n   <type xmlns:x=\"urn:opendaylight:params:xml:ns:yang:controller:bgp:rib:impl\">x:bgp-table-type</type>\r\n   <name>labeled-unicast</name>\r\n  </advertized-table>\r\n </module>\r\n"
 						},
 						"description": ""
 					},
@@ -423,7 +423,7 @@
 							}
 						},
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -438,7 +438,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
+							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:linkstate</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:ipv4-flow</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:ipv6-flow</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
 						},
 						"description": ""
 					},
@@ -457,7 +457,7 @@
 							}
 						},
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -472,7 +472,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
+							"raw": ""
 						},
 						"description": ""
 					},
@@ -613,7 +613,67 @@
 					"response": []
 				},
 				{
+					"name": "Create PCEP Tunnel - Segment Routing",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:add-lsp",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n <node>pcc://{{pcep-node-id}}</node>\r\n <name>{{pcep-tunnel-name}}</name>\r\n <arguments>\r\n  <lsp xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:ietf:stateful\">\r\n   <delegate>true</delegate>\r\n   <administrative>true</administrative>\r\n  </lsp>\r\n  <endpoints-obj>\r\n   <ipv4>\r\n    <source-ipv4-address>{{pcep-tunnel-src-ip}}</source-ipv4-address>\r\n    <destination-ipv4-address>{{pcep-tunnel-dst-ip}}</destination-ipv4-address>\r\n   </ipv4>\r\n  </endpoints-obj>\r\n   <path-setup-type xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:ietf:stateful\">\r\n    <pst>1</pst>\r\n   </path-setup-type>\r\n   <ero>\r\n     <subobject>\r\n       <loose>false</loose>\r\n       <sid-type xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:segment:routing\">ipv4-node-id</sid-type>\r\n       <m-flag xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:segment:routing\">true</m-flag>\r\n       <sid xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:segment:routing\">12</sid>\r\n       <ip-address xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:segment:routing\">198.19.1.29</ip-address>\r\n     </subobject>\r\n   </ero>\r\n </arguments>\r\n <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Update PCEP Tunnel",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:update-lsp",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<input xmlns=\"urn:opendaylight:params:xml:ns:yang:topology:pcep\">\r\n   <node>pcc://{{pcep-node-id}}</node>\r\n   <name>{{pcep-tunnel-name}}</name>\r\n   <arguments>\r\n      <lsp xmlns=\"urn:opendaylight:params:xml:ns:yang:pcep:ietf:stateful\">\r\n         <delegate>true</delegate>\r\n         <administrative>true</administrative>\r\n      </lsp>\r\n      <ero>\r\n         <subobject>\r\n            <loose>false</loose>\r\n            <ip-prefix>\r\n               <ip-prefix>{{pcep-tunnel-hop-1}}</ip-prefix>\r\n            </ip-prefix>\r\n         </subobject>\r\n         <subobject>\r\n            <loose>false</loose>\r\n            <ip-prefix>\r\n               <ip-prefix>{{pcep-tunnel-hop-2}}</ip-prefix>\r\n            </ip-prefix>\r\n         </subobject>\r\n      </ero>\r\n   </arguments>\r\n   <network-topology-ref xmlns:topo=\"urn:TBD:params:xml:ns:yang:network-topology\">/topo:network-topology/topo:topology[topo:topology-id=\"{{pcep-topology-id}}\"]</network-topology-ref>\r\n</input>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update PCEP Tunnel - Bandwidth",
 					"request": {
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operations/network-topology-pcep:update-lsp",
 						"method": "POST",
@@ -807,6 +867,20 @@
 					"response": []
 				},
 				{
+					"name": "BGP Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/peer/bgp:%2F%2F{{bgp-peer-ip}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Linkstate Topology",
 					"request": {
 						"auth": {
@@ -819,86 +893,6 @@
 							}
 						},
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/network-topology:network-topology/topology/{{link-state-topology}}",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "IPv4 Unicast",
-					"request": {
-						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/ipv4-routes",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "IPv6 Unicast",
-					"request": {
-						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/ipv6-routes",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "IPv4 Flowspec",
-					"request": {
-						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-routes",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "IPv6 Flowspec",
-					"request": {
-						"url": " http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/loc-rib/tables/bgp-types:ipv6-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-ipv6-routes",
 						"method": "GET",
 						"header": [
 							{
@@ -962,7 +956,7 @@
 			"description": "",
 			"item": [
 				{
-					"name": "IPv4 - Display Route",
+					"name": "IPv4 Unicast - Display Route",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -1001,7 +995,7 @@
 					"response": []
 				},
 				{
-					"name": "IPv4 - Insert Route",
+					"name": "IPv4 Unicast - Insert Route",
 					"request": {
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv4-routes",
 						"method": "POST",
@@ -1031,7 +1025,7 @@
 					"response": []
 				},
 				{
-					"name": "IPv4 - Delete All Route",
+					"name": "IPv4 Unicast - Delete All Route",
 					"request": {
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv4-routes",
 						"method": "DELETE",
@@ -1051,7 +1045,7 @@
 					"response": []
 				},
 				{
-					"name": "IPv6 - Display Route",
+					"name": "IPv6 Unicast - Display Route",
 					"request": {
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv6-routes",
 						"method": "GET",
@@ -1081,7 +1075,7 @@
 					"response": []
 				},
 				{
-					"name": "IPv6 - Insert Route",
+					"name": "IPv6 Unicast - Insert Route",
 					"request": {
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv6-routes",
 						"method": "POST",
@@ -1104,14 +1098,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n  <ipv6-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-inet\">\r\n   <prefix>2001:db8:30::3/128</prefix>\r\n   <attributes>\r\n    <ipv6-next-hop>\r\n     <global>2001:db8:1::6</global>\r\n    </ipv6-next-hop>\r\n    <as-path/>\r\n    <origin>\r\n     <value>egp</value>\r\n    </origin>\r\n   </attributes>\r\n  </ipv6-route>"
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n  <ipv6-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-inet\">\r\n   <prefix>2001:db8:30::3/128</prefix>\r\n   <attributes>\r\n    <ipv6-next-hop>\r\n     <global>2001:db8:1::6</global>\r\n    </ipv6-next-hop>\r\n    <as-path/>\r\n    <local-pref>\r\n     <pref>100</pref>\r\n    </local-pref>\r\n    <origin>\r\n     <value>egp</value>\r\n    </origin>\r\n   </attributes>\r\n  </ipv6-route>"
 						},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "IPv6 - Delete All Route",
+					"name": "IPv6 Unicast - Delete All Route",
 					"request": {
 						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-types:unicast-subsequent-address-family/bgp-inet:ipv6-routes",
 						"method": "DELETE",
@@ -1123,6 +1117,210 @@
 							},
 							{
 								"key": "Accept",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Flowspec - Display Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/example-app-rib/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Flowspec - Insert Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-routes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <flowspec-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-flowspec\">\n      <route-key>flow-v4</route-key>\n      <flowspec>\n        <destination-prefix>192.168.0.1/32</destination-prefix>\n      </flowspec>\n      <flowspec>\n        <source-prefix>10.0.0.1/32</source-prefix>\n      </flowspec>\n      <flowspec>\n        <protocol-ips>\n          <op>equals end-of-list</op>\n          <value>6</value>              \n        </protocol-ips>\n      </flowspec>\n      <flowspec>\n        <ports>\n          <op>equals end-of-list</op>\n          <value>80</value>\n        </ports>\n      </flowspec>\n      <flowspec>\n        <destination-ports>\n          <op>greater-than</op>\n          <value>8080</value>\n        </destination-ports>\n        <destination-ports>\n          <op>and-bit less-than end-of-list</op>\n          <value>8088</value>\n        </destination-ports>\n      </flowspec>\n      <flowspec>\n        <source-ports>\n          <op>greater-than end-of-list</op>\n          <value>1024</value>\n        </source-ports>\n      </flowspec>\n      <flowspec>\n        <types>\n          <op>equals end-of-list</op>\n          <value>0</value>\n        </types>\n      </flowspec>\n      <flowspec>\n        <codes>\n          <op>equals end-of-list</op>\n          <value>0</value>\n        </codes>\n      </flowspec>\n      <flowspec>\n        <tcp-flags>\n          <op>match end-of-list</op>\n          <value>32</value>\n        </tcp-flags>\n      </flowspec>\n      <flowspec>\n        <packet-lengths>\n          <op>greater-than</op>\n          <value>400</value>\n        </packet-lengths>\n        <packet-lengths>\n          <op>and-bit less-than end-of-list</op>\n           <value>500</value>\n        </packet-lengths>\n      </flowspec>\n      <flowspec>\n        <dscps>\n          <op>equals end-of-list</op>\n          <value>20</value>\n        </dscps>\n      </flowspec>\n      <flowspec>\n        <fragments>\n          <op>match end-of-list</op>\n          <value>first</value>\n        </fragments>\n      </flowspec>\n      <attributes>\n        <origin>\n          <value>igp</value>\n        </origin>\n        <as-path/>\n        <local-pref>\n          <pref>100</pref>\n        </local-pref>\n        <extended-communities>\n\t\t    <transitive>true</transitive>\n\t\t    <redirect-ipv4>\n\t\t      <global-administrator>192.168.0.1</global-administrator>\n\t\t      <local-administrator>12345</local-administrator>\n\t\t    </redirect-ipv4>\n        </extended-communities>\n      </attributes>\n    </flowspec-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv4 Flowspec - Delete Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv4-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-routes",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Flowspec - Display Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/example-app-rib/tables/bgp-types:ipv6-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-ipv6-routes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Flowspec - Insert Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-ipv6-routes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    <flowspec-route xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp-flowspec\">\n      <route-key>flow-v6</route-key>\n      <flowspec>\n        <destination-prefix>2001:db8:30::3/128</destination-prefix>\n      </flowspec>\n      <flowspec>\n        <source-prefix>2001:db8:31::3/128</source-prefix>\n      </flowspec>\n      <flowspec>\n        <flow-label>\n          <op>equals end-of-list</op>\n          <value>1</value>              \n        </flow-label>\n      </flowspec>\n      <attributes>\n        <extended-communities>\n          <redirect-ipv6>\n            <global-administrator>2001:db8:1::6</global-administrator>\n            <local-administrator>12345</local-administrator>\n          </redirect-ipv6>\n        </extended-communities>\n        <origin>\n          <value>igp</value>\n        </origin>\n        <as-path/>\n        <local-pref>\n          <pref>100</pref>\n        </local-pref>\n      </attributes>\n    </flowspec-route>"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "IPv6 Flowspec - Delete Route",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/bgp-rib:application-rib/{{bgp-app-rib-name}}/tables/bgp-types:ipv6-address-family/bgp-flowspec:flowspec-subsequent-address-family/bgp-flowspec:flowspec-ipv6-routes",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
 								"value": "application/xml",
 								"description": ""
 							},

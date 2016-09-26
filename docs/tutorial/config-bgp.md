@@ -39,3 +39,5 @@ Now that BGP feature installed in ODL, we can start to play with it.
 * [Exercise with ExaBGP](./config-bgp-exabgp.md)
 
 * [Exercise with XRv in Cisco dCloud Lab](./config-bgp-xrv.md)
+
+* **Optional**: [Configuring BGP with OpenConfig](./config-bgp-openconfig.md)

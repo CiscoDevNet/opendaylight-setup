@@ -44,6 +44,10 @@ the one which is best suited for your environment
 4.  This repository has already been cloned to `~/ODL` directory in the VM. A shortcut is created on the desktop as well.
 
 5.  Update the `~/ODL` following the [guide here](#pull-the-latest-tutorial-guide).
+
+6.  Open `~/ODL` folder in terminal and unpack ODL distribution with command `bin/unpack-odl beryllium`.
+
+	> **Optionally** You can use Boron version with command `bin/unpack-odl boron` if you want to test Boron.  In the tutorial, we are mainly playing with Beryllium. 
 	
 ### <a name="use-vagrant-to-launch-pre-configured-vm">Use Vagrant to launch pre-configured VM</a>
 

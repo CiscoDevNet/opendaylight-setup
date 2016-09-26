@@ -54,15 +54,15 @@ commented by default. Uncomment it and make the following changes:
 	![](./images/exabgp/image2.png)
 
 Restart ODL for the new configuration to take effect by running commands
-bin/stop-odl followed by bin/start-odl from the ODL project directory.
+`bin/stop-odl` followed by `bin/start-odl` from the ODL project directory.
 After restart, ODL will read the new config and be ready for incoming
 BGP connection from ExaBGP.
 
 For ExaBGP instance configuration, create a file named exabgp-conf1.ini
 and copy the below contents in it. This configuration creates a ExaBGP
 instance with ODL configured as its peer and when the connection is
-established, advertises route for prefix 10.0.1.0/24 with next-hop
-10.10.1.1.
+established, advertises route for prefix **10.0.1.0/24** with next-hop
+**10.10.1.1**.
 
 ```
 group exabgp1 {
@@ -105,13 +105,13 @@ appropriate message should be displayed in ExaBGP log.
 Stop the Wireshark packet capture. Analyze the BGP messages (e.g. OPEN,
 UPDATE, KEEPALIVE) exchanged between ODL and ExaBGP and verify that
 their values are as expected. ExaBGP should have advertise prefix
-10.0.1.0/24 in its UPDATE message.
+**10.0.1.0/24** in its UPDATE message.
 
 ![](./images/exabgp/image6.png)
 
 Open Postman REST Client and go to **BGP/PCEP – Beryllium -&gt; RIB**
 folder. Execute GET request “BGP RIB” which will return operational
-state of ODL BGP RIB. Verify that prefix 10.0.1.0/24 is present in
+state of ODL BGP RIB. Verify that prefix **10.0.1.0/24** is present in
 ExaBGP{ peer’s Adj-RIB-In and Effectice-RIB-IN, and in the Loc-RIB.
 
 ![](./images/exabgp/image7.png)
@@ -173,7 +173,7 @@ Then check the logs to confirm that BGP connection with ODL is established in bo
 cases.
 
 Fetch operational state of BGP RIB through RESTCONF request and verify
-that prefixes 10.0.1.0/24 and 10.0.2.0/24 advertised by the two ExaBGP
+that prefixes **10.0.1.0/24** and **10.0.2.0/24** advertised by the two ExaBGP
 instances respectively are present.
 
 ![](./images/exabgp/image10.png)
@@ -192,7 +192,7 @@ learnt from one IBGP peer to be re-advertised to another IBGP peer.
 
 The ExaBGP peers can be configured as Route Reflector client by
 configuring &lt;peer-role&gt; attribute in bgp-peer module of
-`etc/opendaylight/karaf/41-bgp-example.xml` to value “rr-client”. Make
+`etc/opendaylight/karaf/41-bgp-example.xml` to value **rr-client**. Make
 this change and re-execute steps in previous exercise.
 
 ![](./images/exabgp/image12.png)
