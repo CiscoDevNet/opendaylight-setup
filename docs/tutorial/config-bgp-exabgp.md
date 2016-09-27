@@ -58,7 +58,7 @@ Restart ODL for the new configuration to take effect by running commands
 After restart, ODL will read the new config and be ready for incoming
 BGP connection from ExaBGP.
 
-For ExaBGP instance configuration, create a file named exabgp-conf1.ini
+For ExaBGP instance configuration, create a file named exabgp-conf1.cfg
 and copy the below contents in it. This configuration creates a ExaBGP
 instance with ODL configured as its peer and when the connection is
 established, advertises route for prefix **10.0.1.0/24** with next-hop
