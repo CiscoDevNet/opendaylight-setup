@@ -7,8 +7,12 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
 sudo apt-get update
 sudo apt-get install -y vim
-sudo apt-get install -y wireshark
-sudo gpasswd -a vagrant wireshark
+sudo groupadd wireshark
+sudo usermod -a -G wireshark $USER
+#wireshark must be manually installed as it need to be configured
+#sudo apt-get install -y wireshark
+#sudo gpasswd -a $USER wireshark
+sudo dpkg-reconfigure wireshark-common
 sudo apt-get -qq -y install exabgp openconnect
 sudo apt-get -qq -y install openjdk-8-jre
 sudo apt-get -qq -y install google-chrome-stable

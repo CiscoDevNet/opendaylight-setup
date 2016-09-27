@@ -7,6 +7,10 @@ STOP_CMD="$DISTRO/bin/stop"
 
 if [ -f "$STOP_CMD" ]; then
         $STOP_CMD
+	if [ $? -ne 0 ]; then
+		echo "Failed to stop ODL"
+		exit 2
+	fi
 else
         echo "ODL hasn't been unpacked."
         exit 1
@@ -15,7 +19,7 @@ fi
 echo "Stopping ODL."
 while true;
 do
-        up=$(pgrep -f karaf.main)
+        up=`ps aux|grep [k]araf.main`
         if [ ! -z "$up" ]
         then
 		echo "!"

@@ -3,12 +3,12 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
-bash $APP_ROOT/bin/delete-odl
-
 if [[ $# -ne 1 ]]; then
 	echo "Usage: $0 filename              .tar.gz will be added to the filename by this script"
 	exit 1
 fi
+
+bash $APP_ROOT/bin/delete-odl
 
 filename="$1.tar.gz"
 

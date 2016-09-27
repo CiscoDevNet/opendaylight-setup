@@ -3,9 +3,9 @@
 PARENT_DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)")"
 source $PARENT_DIR/parameters
 
-up=$(pgrep -f karaf.main)
+up=`ps aux|grep [k]araf.main`
 if [ ! -z "$up" ]; then
-	echo "ODL is already running! pid=$up"
+	echo "ODL is already running!"
 	exit 2
 fi
 
