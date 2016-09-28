@@ -438,6 +438,11 @@
 								"key": "Authorization",
 								"value": "Basic YWRtaW46YWRtaW4=",
 								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
 							}
 						],
 						"body": {
@@ -537,246 +542,7 @@
 			]
 		},
 		{
-			"name": "OpenConfig - BGP",
-			"description": "",
-			"item": [
-				{
-					"name": "BGP Config",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP RIB ",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/global/config",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<config xmlns=\"http://openconfig.net/yang/bgp\">\n  <router-id>{{bgp-rib-id}}</router-id>\n  <as>{{bgp-local-as}}</as>\n</config>"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP Peer List",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP Peer",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n  <afi-safis>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV4-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:IPV6-LABELLED-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV4-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L3VPN-IPV6-UNICAST</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"http://openconfig.net/yang/bgp-types\">x:L2VPN-EVPN</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:LINKSTATE</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV4-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n    <afi-safi>\n      <afi-safi-name xmlns:x=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">x:IPV6-L3VPN-FLOW</afi-safi-name>\n    </afi-safi>\n  </afi-safis>\n  <route-reflector>\n    <config>\n      <route-reflector-client>false</route-reflector-client>\n    </config>\n  </route-reflector>\n  <timers>\n    <config>\n      <hold-time>180</hold-time>\n    </config>\n  </timers>\n  <transport>\n    <config>\n      <passive-mode>false</passive-mode>\n    </config>\n  </transport>\n  <config>\n    <peer-type>INTERNAL</peer-type>\n    <peer-as>{{bgp-peer-as}}</peer-as>\n  </config>\n</neighbor>"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP Peer",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP Application Peer",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-app-peer-ip}}",
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<neighbor xmlns=\"http://openconfig.net/yang/bgp\">\n  <neighbor-address>{{bgp-app-peer-ip}}</neighbor-address>\n  <config>\n    <peer-group>application-peers</peer-group>\n  </config>\n</neighbor>"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP Application Peer",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-app-peer-ip}}",
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "OpenConfig - BGP - New",
+			"name": "OpenConfig - BGP ",
 			"description": "",
 			"item": [
 				{
@@ -791,7 +557,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp",
 						"method": "GET",
 						"header": [
 							{
@@ -820,7 +586,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}",
 						"method": "GET",
 						"header": [
 							{
@@ -849,7 +615,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}",
 						"method": "PUT",
 						"header": [
 							{
@@ -872,6 +638,35 @@
 					"response": []
 				},
 				{
+					"name": "BGP RIB",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"username": "admin",
+								"password": "admin",
+								"saveHelperData": true,
+								"showPassword": false
+							}
+						},
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4=",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "BGP Peer List",
 					"request": {
 						"auth": {
@@ -883,7 +678,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors",
 						"method": "GET",
 						"header": [
 							{
@@ -906,6 +701,20 @@
 					"response": []
 				},
 				{
+					"name": "Delete All BGP Peer",
+					"request": {
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "BGP Peer",
 					"request": {
 						"auth": {
@@ -917,7 +726,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/peer/bgp:%2F%2F{{bgp-peer-ip}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors/neighbor/{{bgp-peer-ip}}",
 						"method": "GET",
 						"header": [
 							{
@@ -935,7 +744,7 @@
 					"response": []
 				},
 				{
-					"name": "BGP Peer  - INTERNAL",
+					"name": "BGP Peer ",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -946,8 +755,8 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors",
-						"method": "POST",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors/neighbor/{{bgp-peer-ip}}",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -962,41 +771,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<neighbor xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">\n    <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n    <timers>\n        <config>\n            <hold-time>90</hold-time>\n            <connect-retry>10</connect-retry>\n        </config>\n    </timers>\n    <transport>\n        <config>\n            <remote-port>179</remote-port>\n            <passive-mode>false</passive-mode>\n        </config>\n    </transport>\n    <config>\n        <peer-type>INTERNAL</peer-type>\n    </config>\n    <route-reflector>\n        <config>\n            <route-reflector-client>false</route-reflector-client>\n        </config>\n    </route-reflector>\n</neighbor>"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "BGP Peer  - EXTERNAL",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": {
-								"username": "admin",
-								"password": "admin",
-								"saveHelperData": true,
-								"showPassword": false
-							}
-						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"description": ""
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4=",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<neighbor xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">\n    <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n    <timers>\n        <config>\n            <hold-time>90</hold-time>\n            <connect-retry>10</connect-retry>\n        </config>\n    </timers>\n    <transport>\n        <config>\n            <remote-port>179</remote-port>\n            <passive-mode>false</passive-mode>\n        </config>\n    </transport>\n    <config>\n        <peer-type>EXTERNAL</peer-type>\n    \t<peer-as>{{bgp-peer-as}}</peer-as>\n    </config>\n    <route-reflector>\n        <config>\n            <route-reflector-client>false</route-reflector-client>\n        </config>\n    </route-reflector>\n</neighbor>"
+							"raw": "<neighbor xmlns=\"urn:opendaylight:params:xml:ns:yang:bgp:openconfig-extensions\">\n    <neighbor-address>{{bgp-peer-ip}}</neighbor-address>\n    <timers>\n        <config>\n            <hold-time>90</hold-time>\n            <connect-retry>10</connect-retry>\n        </config>\n    </timers>\n    <transport>\n        <config>\n            <remote-port>179</remote-port>\n            <passive-mode>false</passive-mode>\n        </config>\n    </transport>\n    <!-- uncomment this block to configure bgp peer to be external -->\n    <!--\n    <config>\n        <peer-type>EXTERNAL</peer-type>\n    \t<peer-as>{{bgp-peer-as}}</peer-as>\n    </config>\n    -->\n    <config>\n        <peer-type>INTERNAL</peer-type>\n    </config>\n    <route-reflector>\n        <config>\n            <route-reflector-client>false</route-reflector-client>\n        </config>\n    </route-reflector>\n</neighbor>"
 						},
 						"description": ""
 					},
@@ -1014,7 +789,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-peer-ip}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors/neighbor/{{bgp-peer-ip}}",
 						"method": "DELETE",
 						"header": [
 							{
@@ -1048,7 +823,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/operational/bgp-rib:bgp-rib/rib/{{rib-id}}/peer/bgp:%2F%2F{{bgp-app-peer-ip}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors/neighbor/{{bgp-app-peer-ip}}",
 						"method": "GET",
 						"header": [
 							{
@@ -1077,8 +852,8 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors",
-						"method": "POST",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors/neighbor/{{bgp-app-peer-ip}}",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1111,7 +886,7 @@
 								"showPassword": false
 							}
 						},
-						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-bgp:bgp/openconfig-bgp:neighbors/neighbor/{{bgp-app-peer-ip}}",
+						"url": "http://{{controller-ip}}:{{restconf-port}}/restconf/config/openconfig-network-instance:network-instances/network-instance/global-bgp/openconfig-network-instance:protocols/protocol/openconfig-policy-types:BGP/{{rib-id}}/bgp/neighbors/neighbor/{{bgp-app-peer-ip}}",
 						"method": "DELETE",
 						"header": [
 							{
